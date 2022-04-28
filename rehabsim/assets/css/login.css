@@ -1,0 +1,42 @@
+.loginC{
+    padding-top: 250px !important;
+    justify-content:center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.infoLogin{
+    padding-right: 10px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+.h4-login{
+    color: #f24f16;
+    padding-bottom: 20px;
+    font-size: 35px !important;
+}
+
+.LogButton{
+    padding-top: 20px;
+}
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 7px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.loginC h4{
+    font-size: 35px !important;
+
+}
