@@ -26,7 +26,7 @@ https://templatemo.com/tm-570-chain-app-dev
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/templatemo-chain-app-dev.css">
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/pag.css">
     <link rel="stylesheet" href="assets/css/animated.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 </head>
@@ -39,7 +39,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
               <img src="assets/images/logo_name_small.png" alt="RehabSIM logo">
             </a>
             <!-- ***** Logo End ***** -->
@@ -50,7 +50,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="#about">About</a></li>
               <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
               <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
-              <li><div class="gradient-button"><a href="login.html"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+              <li><div class="gradient-button"><a href="login.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
             </ul>        
             <a class='menu-trigger'>
                 <span>Menu</span>
@@ -63,46 +63,43 @@ https://templatemo.com/tm-570-chain-app-dev
   </header>
   <!-- ***** Header Area End ***** -->
 
-  <div class="loginC">
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="infoLogin">
-          <h4 class="h4-login">Login</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem.</p>
-        </div>
+  <div class="containerInfo">
+    <div class="text">
+      <h4>Terapeuta</h4>
+      <h1>Daniel Jorge</h1>
+    </div>
+    <div class="containerBlocks">
+      <div class="profile">
+        <h4>Informação do Utilizador</h4>
+          <div class="row">
+            <div class="column c1">
+              <input type="text" placeholder="Username">
+              <input type="text" placeholder="Nome">
+              <input type="password" placeholder="Password">
+            </div>
+            <div class="column c2">
+              <input type="text" placeholder="Morada">
+              <input type="email" placeholder="Email">
+              <input type="number" placeholder="Telemovel">
+            </div>
+            <div class="column c3">
+              <label for="img">Imagem de Perfil</label>
+              <input type="file" id="img" name="img" accept="image/*">
+              <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
+            </div>
+          </div>
       </div>
-      <div class="col-lg-3">
-        <div class="service-item">
-          <h4>Admin</h4>
-          <form class="login">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <div class="gradient-button LogButton"><a href="login.html">Sign In</a></div>
-          </form>
-        </div>
+      <div class="pac">
+        <h4>Registo de Paciente</h4>
+        <div class="formPaciente">
+        <p>Nome:<input type="text" placeholder="Username"></p>
       </div>
-      <div class="col-lg-3">
-        <div class="service-item">
-          <h4>Terapeuta</h4>
-          <form class="login">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <div class="gradient-button LogButton"><a href="pag_terapeuta.html">Sign In</a></div>
-          </form>
-        </div>
       </div>
-      <div class="col-lg-3">
-        <div class="service-item">
-          <h4>Cuidador</h4>
-          <form class="login">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <div class="gradient-button LogButton"><a href="login.html">Sign In</a></div>
-          </form>
-        </div>
-      </div>
+      <div class="pl"></div>
     </div>
   </div>
+
+
     <!-- Scripts -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
