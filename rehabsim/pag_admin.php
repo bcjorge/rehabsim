@@ -51,7 +51,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
               <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
               <li><div class="gradient-button"><a href="login.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
-            </ul>        
+            </ul>
             <a class='menu-trigger'>
                 <span>Menu</span>
             </a>
@@ -65,8 +65,8 @@ https://templatemo.com/tm-570-chain-app-dev
 
   <div class="containerInfo">
     <div class="text">
-      <h4>Terapeuta</h4>
-      <h1>Daniel Jorge</h1>
+      <h4>Administrador</h4>
+      <h1>Eugénio Andrade</h1>
     </div>
     <div class="containerBlocks">
       <div class="profile">
@@ -90,30 +90,26 @@ https://templatemo.com/tm-570-chain-app-dev
           </div>
       </div>
       <div class="pac">
-        <h4>Registo de Paciente</h4>
+        <h4>Registo Novo Utilizador</h4>
         <div class="formPaciente">
         <p>Nome:<input type="text" placeholder="Nome"></p>
         <p>Morada:<input type="text" placeholder="Morada"></p>
-        <p>Localidade:<input type="text" placeholder="Localidade"></p>
-        <p>Distrito:<input type="text" placeholder="Distrito"></p>
         <p>Contactos:<input type="text" placeholder="Contactos"></p>
         <p>Email:<input type="text" placeholder="email"></p>
-        <p>Data de nascimento:<input type="text" placeholder="Data de nascimento"></p>
-        <p>Sexo:<input type="text" placeholder="Sexo"></p>
-        <p>NIF:<input type="text" placeholder="Número de identificação fiscal"></p>
-        <p>Número de Utente:<input type="text" placeholder="Nº de utente"></p>
-        <p>lista de alergias:<input type="text" placeholder="Lista de Alergias"></p>
+        <p>Username:<input type="text" placeholder="username"></p>
+        <p>Password:<input type="text" placeholder="password"></p>
         <label for="img">Imagem de Perfil: </label>
         <input type="file" id="img" name="img" accept="image/*">
-        <div class="gradient-button savButton"><a href="login.php">Guardar Paciente</a></div>
+        <div class="gradient-button savButton"><a href="login.php"> Guardar Novo Utilizador</a></div>
 
       </div>
       </div>
       <div class="pl">
-          <h4> Procurar Paciente existente</h4>
+          <h4> Procurar Utilizador existente</h4>
           <div class="formPaciente">
-              <input type="text" placeholder="Número de utente"></p>
-              <div  class="gradient-button savButton"  ><a href="login.php">Procurar</a></div>
+              <input type="text" placeholder="ID utilizador"></p>
+              <div  class="gradient-button savButton"  > <a href="login.php">Procurar</a>
+          </div>
 
       </div>
     </div>
