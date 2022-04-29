@@ -16,6 +16,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="28RXVKrIfbu097t1p4tx46w2ohA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -26,7 +27,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SIM" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../bin/php/php5.6.40/php.exe" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -39,6 +40,7 @@
       <updated>1651180394416</updated>
       <workItem from="1651180397127" duration="1551000" />
       <workItem from="1651222118779" duration="1604000" />
+      <workItem from="1651224734487" duration="1762000" />
     </task>
     <servers />
   </component>

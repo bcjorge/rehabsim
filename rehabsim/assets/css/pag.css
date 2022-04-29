@@ -15,8 +15,8 @@
 .containerBlocks {  
     padding-top: 40px;
     display: grid;
-    grid-template-columns: 1.5fr 2fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 2fr 1.5fr;
+    grid-template-rows: 0.5fr 1fr;
     gap: 20px 20px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -66,7 +66,7 @@
 }
 
 input{
-    width: 80%;
+    width: 70%;
     padding: 12px 20px;
     margin: 7px 0;
     display: inline-block;
