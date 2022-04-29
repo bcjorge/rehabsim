@@ -82,3 +82,7 @@ textarea:focus, input:focus{
 .formPaciente{
     padding-top: 10px;
 }
+
+.searchbutton{
+    width: 20px;
+}
