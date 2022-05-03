@@ -96,6 +96,7 @@ https://templatemo.com/tm-570-chain-app-dev
         <p>Morada:<input type="text" placeholder="Morada"></p>
         <p>Contactos:<input type="text" placeholder="Contactos"></p>
         <p>Email:<input type="text" placeholder="email"></p>
+        <p>Tipo de Utilizador:<input type="text" placeholder="Admin/ cuidador/terapeuta"></p>
         <p>Username:<input type="text" placeholder="username"></p>
         <p>Password:<input type="text" placeholder="password"></p>
         <label for="img">Imagem de Perfil: </label>
