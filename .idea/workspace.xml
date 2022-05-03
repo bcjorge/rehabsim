@@ -13,6 +13,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -39,8 +47,12 @@
       <option name="presentableId" value="Default" />
       <updated>1651180394416</updated>
       <workItem from="1651180397127" duration="1551000" />
+<<<<<<< Updated upstream
       <workItem from="1651222118779" duration="1604000" />
       <workItem from="1651224734487" duration="1762000" />
+=======
+      <workItem from="1651222118779" duration="4610000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

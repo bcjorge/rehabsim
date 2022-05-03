@@ -112,8 +112,8 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pl">
           <h4> Procurar Paciente existente</h4>
           <div class="formPaciente">
-              <input type="text" placeholder="Número de utente"></p>
-              <div  class="gradient-button savButton"  ><a href="login.php">Procurar</a></div>
+              <input type="text" placeholder="Número de utente">
+              <h5 class="gradient-button savButton"><a href="login.php">Procurar</a></h5>
 
       </div>
     </div>

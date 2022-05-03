@@ -67,6 +67,7 @@
 
 input{
     width: 70%;
+    height: 50px;
     padding: 12px 20px;
     margin: 7px 0;
     display: inline-block;
