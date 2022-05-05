@@ -68,32 +68,12 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="col-lg-3">
         <div class="infoLogin">
           <h4 class="h4-login">Login</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem.</p>
+          <p>Login de utilizador: Administrador/ Terapeuta/ Cuidador</p>
         </div>
       </div>
       <div class="col-lg-3">
         <div class="service-item">
-          <h4>Admin</h4>
-          <form class="login">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <div class="gradient-button LogButton"><a href="login.php">Sign In</a></div>
-          </form>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="service-item">
-          <h4>Terapeuta</h4>
-          <form class="login">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <div class="gradient-button LogButton"><a href="pag_terapeuta.php">Sign In</a></div>
-          </form>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="service-item">
-          <h4>Cuidador</h4>
+          <h4>Utilizador</h4>
           <form class="login">
             <input type="text" placeholder="Username">
             <input type="password" placeholder="Password">
