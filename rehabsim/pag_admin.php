@@ -92,17 +92,28 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pac">
         <h4>Registo Novo Utilizador</h4>
         <div class="formPaciente">
-        <p>Nome:<input type="text" placeholder="Nome"></p>
-        <p>Morada:<input type="text" placeholder="Morada"></p>
-        <p>Contactos:<input type="text" placeholder="Contactos"></p>
-        <p>Email:<input type="text" placeholder="email"></p>
-        <p>Tipo de Utilizador:<input type="text" placeholder="Admin/ cuidador/terapeuta"></p>
-        <p>Username:<input type="text" placeholder="username"></p>
-        <p>Password:<input type="text" placeholder="password"></p>
-        <label for="img">Imagem de Perfil: </label>
-        <input type="file" id="img" name="img" accept="image/*">
-        <div class="gradient-button savButton"><a href="login.php"> Guardar Novo Utilizador</a></div>
-
+            <div class="column c1">
+                <input type="text" placeholder="Nome"></p>
+                <input type="text" placeholder="Morada"></p>
+                <input type="text" placeholder="Telemovel"></p>
+                <input type="number" placeholder="Email">
+            </div>
+            <div class="column c2">
+                <p><label>Tipo de Utilizador:</label></p>
+                <select class="funcaoInput" name="funcao" id="funcao">
+                    <option hidden disabled selected value> -- selecione uma opção -- </option>
+                    <option value="Admin">Administrador</option>
+                    <option value="Te">Terapeuta</option>
+                    <option value="Cg">Cuidador</option>
+                </select>
+                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Password">
+            </div>
+            <div class="column c3">
+                <label for="img">Imagem de Perfil</label>
+                <input type="file" id="img" name="img" accept="image/*">
+                <div class="gradient-button savButton"><a href="login.html">Registar Paciente</a></div>
+            </div>
       </div>
       </div>
       <div class="pl">

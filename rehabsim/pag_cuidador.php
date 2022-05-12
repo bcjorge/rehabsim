@@ -90,10 +90,7 @@
             </div>
         </div>
         <div class="pac">
-            <h4>Registo de Paciente</h4>
-            <div class="formPaciente">
-
-            </div>
+            <h4>Lista de Pacientes</h4>
         </div>
         <div class="pl">
             <h4> Procurar Paciente</h4>

@@ -69,7 +69,7 @@
         <h4>Perfil de Paciente</h4>
         <h1>Bonifácio Bonzão</h1>
     </div>
-    <div class="containerBlocks">
+    <div class="containerBlocks2">
         <div class="profile">
             <h4>Informação do Utilizador</h4>
             <div class="row">
@@ -91,27 +91,38 @@
             </div>
         </div>
         <div class="pac">
-            <h4>Registo Novo Utilizador</h4>
-            <div class="formPaciente">
-                <p>Nome:<input type="text" placeholder="Nome"></p>
-                <p>Morada:<input type="text" placeholder="Morada"></p>
-                <p>Contactos:<input type="text" placeholder="Contactos"></p>
-                <p>Email:<input type="text" placeholder="email"></p>
-                <p>Tipo de Utilizador:<input type="text" placeholder="Admin/ cuidador/terapeuta"></p>
-                <p>Username:<input type="text" placeholder="username"></p>
-                <p>Password:<input type="text" placeholder="password"></p>
-                <label for="img">Imagem de Perfil: </label>
-                <input type="file" id="img" name="img" accept="image/*">
-                <div class="gradient-button savButton"><a href="login.php"> Guardar Novo Utilizador</a></div>
-
+            <h4>Resultados da Sessão</h4>
+                <div class="row">
+                    <div class="column c1">
+                       <h5> Exercícios Receitados </h5>
+                        <br>
+                        <h5> N </h5> <p> Nível:</p>
+                        <h5> C </h5> <p> Nível:</p>
+                        <h5> F </h5> <p> Nível:</p>
+                        <h5> R </h5> <p> Nível:</p>
+                        <br>
+                        <div class="gradient-button sessionButton"><a href="login.php">Salvar Resultados</a></div>
+                    </div>
+                    <div class="column c2">
+                        <br>
+                        <input type="number" placeholder="Resultado N">
+                        <input type="number" placeholder="Resultado C">
+                        <input type="number" placeholder="Resultado F">
+                        <input type="number" placeholder="Resultado R">
+                    </div>
+                    <div class="column c3">
+                        <br>
+                        <h4>Nível Atual:</h4>
+                        <div class="gradient-button sessionButton"><a href="login.php">Histórico de sessões</a></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="pl">
             <h4> Procurar Utilizador existente</h4>
             <div class="formPaciente">
                 <input type="text" placeholder="ID utilizador">
-                <h5  class="gradient-button savButton"  > <a href="login.php">Procurar</a></h5>
-
+                <h5  class="gradient-button sessionButton" > <a href="login.php">Procurar</a></h5>
             </div>
         </div>
     </div>

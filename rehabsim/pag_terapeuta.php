@@ -92,21 +92,32 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pac">
         <h4>Registo de Paciente</h4>
         <div class="formPaciente">
-        <p>Nome:<input type="text" placeholder="Nome"></p>
-        <p>Morada:<input type="text" placeholder="Morada"></p>
-        <p>Localidade:<input type="text" placeholder="Localidade"></p>
-        <p>Distrito:<input type="text" placeholder="Distrito"></p>
-        <p>Contactos:<input type="text" placeholder="Contactos"></p>
-        <p>Email:<input type="text" placeholder="email"></p>
-        <p>Data de nascimento:<input type="text" placeholder="Data de nascimento"></p>
-        <p>Sexo:<input type="text" placeholder="Sexo"></p>
-        <p>NIF:<input type="text" placeholder="Número de identificação fiscal"></p>
-        <p>Número de Utente:<input type="text" placeholder="Nº de utente"></p>
-        <p>lista de alergias:<input type="text" placeholder="Lista de Alergias"></p>
-        <label for="img">Imagem de Perfil: </label>
-        <input type="file" id="img" name="img" accept="image/*">
-        <div class="gradient-button savButton"><a href="login.php">Guardar Paciente</a></div>
-
+            <div class="column c1">
+                <input type="text" placeholder="Nome"></p>
+                <input type="text" placeholder="Data de Nacimento"></p>
+                <input type="text" placeholder="Nº de Utente"></p>
+                <input type="number" placeholder="NIF">
+                <p><label>Género:</label></p>
+                <select class="sexoInput" name="sexo" id="sexo">
+                    <option hidden disabled selected value> -- selecione uma opção -- </option>
+                    <option value="m">M</option>
+                    <option value="f">F</option>
+                    <option value="o">Outro</option>
+                </select>
+            </div>
+            <div class="column c2">
+                <input type="text" placeholder="Morada">
+                <input type="text" placeholder="Distrito">
+                <input type="email" placeholder="Email">
+                <input type="number" placeholder="Telemovel">
+            </div>
+            <div class="column c3">
+                <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
+                <textarea id="alergias" name="alergias" rows="3" cols="40"></textarea><br>
+                <label for="img">Imagem de Perfil</label>
+                <input type="file" id="img" name="img" accept="image/*">
+                <div class="gradient-button savButton"><a href="login.html">Registar Paciente</a></div>
+            </div>
       </div>
       </div>
       <div class="pl">
