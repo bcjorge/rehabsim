@@ -71,7 +71,7 @@
     </div>
     <div class="containerBlocks2">
         <div class="profile">
-            <h4>Informação do Utilizador</h4>
+            <h4>Informação do Paciente</h4>
             <div class="row">
                 <div class="column c1">
                     <input type="text" placeholder="Nome">
