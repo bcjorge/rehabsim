@@ -73,6 +73,7 @@ https://templatemo.com/tm-570-chain-app-dev
           </form>
       </div>
   </div>
+  </div>
     <!-- Scripts -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
