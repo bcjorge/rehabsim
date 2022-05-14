@@ -69,7 +69,7 @@
         <h4>Perfil de Paciente</h4>
         <h1>Bonifácio Bonzão</h1>
     </div>
-    <div class="containerBlocks2">
+    <div class="containerBlocks">
         <div class="profile">
             <h4>Informação do Paciente</h4>
             <div class="row">
@@ -101,28 +101,32 @@
                         <h5> F </h5> <p> Nível:</p>
                         <h5> R </h5> <p> Nível:</p>
                         <br>
-                        <div class="gradient-button sessionButton"><a href="login.php">Salvar Resultados</a></div>
+                        <h5> Dificuldade Sentida </h5>
                     </div>
                     <div class="column c2">
+                        <br> <br>
+                        <input class="inputresult" type="number" placeholder="Resultado N">
                         <br>
-                        <input type="number" placeholder="Resultado N">
-                        <input type="number" placeholder="Resultado C">
-                        <input type="number" placeholder="Resultado F">
-                        <input type="number" placeholder="Resultado R">
+                        <input class="inputresult" type="number" placeholder="Resultado C">
+                        <br>
+                        <input class="inputresult" type="number" placeholder="Resultado F">
+                        <br>
+                        <input class="inputresult" type="number" placeholder="Resultado R">
+                        <br> <br>
+                        <input class="inputresult" type="number" placeholder="Dificuldade 1-5">
+                        <br>
+                        <div class="gradient-button sessionButton"><a href="login.php">Salvar Resultados</a></div>
                     </div>
                     <div class="column c3">
+                        <h4> Informação Patológica</h4>
                         <br>
-                        <h4>Nível Atual:</h4>
-                        <div class="gradient-button sessionButton"><a href="login.php">Histórico de sessões</a></div>
+                        <h5>Tipo de Afasia: </h5>
+                        <br>
+                        <h5>Nível Atual:</h5>
+                        <br>
+                        <div class="gradient-button sessionButton"><a href="historico.php">Histórico de sessões</a></div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="pl">
-            <h4> Procurar Utilizador existente</h4>
-            <div class="formPaciente">
-                <input type="text" placeholder="ID utilizador">
-                <h5  class="gradient-button sessionButton" > <a href="login.php">Procurar</a></h5>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang=”en”>
 <head>
@@ -65,41 +66,17 @@
 
 <div class="containerInfo">
     <div class="text">
-        <h4>Cuidador</h4>
-        <h1>Fernando Fernandes</h1>
+        <h4>Histórico do Paciente</h4>
+        <h1>Bonifácio Bonzão</h1>
     </div>
     <div class="containerBlocks">
         <div class="profile">
-            <h4>Informação do Utilizador</h4>
+            <h4>Informação de sessões anteriores</h4>
             <div class="row">
-                <div class="column c1">
-                    <input type="text" placeholder="Username">
-                    <input type="text" placeholder="Nome">
-                    <input type="password" placeholder="Password">
-                </div>
-                <div class="column c2">
-                    <input type="text" placeholder="Morada">
-                    <input type="email" placeholder="Email">
-                    <input type="number" placeholder="Telemovel">
-                </div>
-                <div class="column c3">
-                    <label for="img">Imagem de Perfil</label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                    <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
-                </div>
             </div>
         </div>
-        <div class="pac">
-            <h4>Lista de Pacientes</h4>
-        </div>
-        <div class="pl">
-            <h4> Procurar Paciente</h4>
-            <div class="formPaciente">
-                <input type="text" placeholder="Número de utente"></p>
-                <div  class="gradient-button savButton"  ><a href="login.php">Procurar</a></div>
+                </div>
             </div>
-        </div>
-    </div>
 
 
     <!-- Scripts -->
@@ -111,3 +88,4 @@
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
+
