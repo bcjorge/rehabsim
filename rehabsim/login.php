@@ -69,7 +69,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <form class="login">
               <input type="text" placeholder="Username">
               <input type="password" placeholder="Password">
-              <div class="gradient-button LogButton"><a href="pag_terapeuta.html">Sign In</a></div>
+              <div class="gradient-button LogButton"><a href="pag_terapeuta.php">Sign In</a></div>
           </form>
       </div>
   </div>

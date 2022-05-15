@@ -1,4 +1,36 @@
+<?php
+session_start();
+if(isset($_GET["action"])) {
+    /*$action=$_GET["action"];*/
+    switch ($_GET["action"]) {
+        case "verifylogin":
+            $pass = $_POST['pass'];
+            $user = $_POST['user'];
+           /* $connect = mysqli_connect('localhost', 'root', '', 'Sim')
+            or die('Error connecting to the server: ' . mysqli_error($connect));
+            $sql = 'SELECT NAME FROM USERS WHERE USERNAME = "' . $user . '" AND PASSWORD =  "' . hash("sha256", $pass) . '"';
+            $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+           */ $number = mysqli_num_rows($result);
+            /*if (($_POST['user'] == 'admin') && ($_POST['pass'] == '12345')) {
+                $_SESSION['authuser'] = 1;
+                $_SESSION['Username'] = $_POST['user'];
+                include("verifylogin.php");*/
+            if ($number == 1) {
+                $_SESSION['authuser'] = 1;
+                $_SESSION['username'] = $user;
+                break;
+            } else {
+                $_SESSION['authuser'] = 0;
+                break;
+            }
+        case "logout":
+            session_unset();
+            header("Location: index.php");
+            break;
 
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,7 +198,27 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </div>
   </div>
-
+  <?php
+/*
+  if(isset($_GET["action"])){
+      $action=$_GET["action"];
+  }
+  else  $action="homepage";
+  switch ($action) {
+      case "login":
+          include("login.php");
+          break;
+      case "verifylogin":
+          include("verifylogin.php");
+          break;
+      case "index":
+          include("index.php");
+          break;
+      default:
+          include("index.php");
+          break;
+  }*/
+  ?>
 
   <footer id="newsletter">
     <div class="container">
