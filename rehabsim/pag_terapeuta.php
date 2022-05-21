@@ -1,3 +1,34 @@
+<?php
+if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
+    //if()
+    if(isset($_POST["perfil_paciente"])) {
+        $nome = $_POST['nome'];
+        $data = $_POST['data_nascimento'];
+        $nutente = $_POST['n_utente'];
+        $nif = $_POST['NIF'];
+        $sexo = $_POST['sexo'];
+        $morada = $_POST['morada'];
+        $distrito = $_POST['distrito'];
+        $email = $_POST['email'];
+        $telemovel = $_POST['telemovel'];
+        $alergias = $_POST['alergias'];
+        $tipo_afasia=$_POST['tipo_afasia'];
+    //$imagem=$_POST['img'];
+        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+        $sql = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nutente.'","'.$telemovel.'","'.$email.'",
+        "'.$alergias.'","'.$tipo_afasia.'")';
+        $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+    }
+    else
+        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+        $sql1= 'SELECT * FROM paciente WHERE (nome="'.$_POST['pesquisa'].'" )';
+        $result1 = mysqli_query($connect, $sql1) or die('The query failed: ' . mysqli_error($connect));
+        while($rows=mysqli_fetch_array($result1)){
+            echo $rows['nome'];
+            echo "<br>";
+        }
+}
+?>
 <!DOCTYPE html>
 <html lang=”en”>
 <head>
@@ -92,11 +123,12 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pac">
         <h4>Registo de Paciente</h4>
         <div class="formPaciente">
+          <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
             <div class="column c1">
-                <input type="text" placeholder="Nome"></p>
-                <input type="text" placeholder="Data de Nacimento"></p>
-                <input type="text" placeholder="Nº de Utente"></p>
-                <input type="number" placeholder="NIF">
+                <input type="text" name= "nome" placeholder="Nome"></p>
+                <input type="text" name= "data_nascimento"placeholder="Data de Nacimento"></p>
+                <input type="text" name= "n_utente" placeholder="Nº de Utente"></p>
+                <input type="number" name= "NIF" placeholder="NIF">
                 <p><label>Género:</label></p>
                 <select class="sexoInput" name="sexo" id="sexo">
                     <option hidden disabled selected value> -- selecione uma opção -- </option>
@@ -106,25 +138,29 @@ https://templatemo.com/tm-570-chain-app-dev
                 </select>
             </div>
             <div class="column c2">
-                <input type="text" placeholder="Morada">
-                <input type="text" placeholder="Distrito">
-                <input type="email" placeholder="Email">
-                <input type="number" placeholder="Telemovel">
+                <input type="text" name= "morada" placeholder="Morada">
+                <input type="text" name="distrito" placeholder="Distrito">
+                <input type="email" name= "email" placeholder="Email">
+                <input type="number" name= "telemovel" placeholder="Telemovel">
+                <input type="text" name= "tipo_afasia" placeholder="tipo_de_afasia">
             </div>
             <div class="column c3">
                 <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
                 <textarea id="alergias" name="alergias" rows="3" cols="40"></textarea><br>
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
-                <div class="gradient-button savButton"><a href="login.html">Registar Paciente</a></div>
+                <div class="gradient-button savButton"><a href="perfil_paciente.php">Registar Paciente</a></div>
             </div>
+            </form>
       </div>
       </div>
       <div class="pl">
           <h4> Procurar Paciente existente</h4>
           <div class="formPaciente">
-              <input type="text" placeholder="Número de utente">
+              <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
+              <input type="text" name= "pesquisa" placeholder="Número de utente">
               <h5 class="gradient-button savButton"><a href="login.php">Procurar</a></h5>
+              </form>
 
       </div>
     </div>
