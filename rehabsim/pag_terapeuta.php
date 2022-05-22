@@ -19,14 +19,22 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
         "'.$alergias.'","'.$tipo_afasia.'")';
         $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
     }
-    else
+    else if (isset($_POST["submit"])) {
         $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-        $sql1= 'SELECT * FROM paciente WHERE (nome="'.$_POST['pesquisa'].'" )';
+        $sql1 = 'SELECT * FROM paciente WHERE (nome="' . $_POST['pesquisa'] . '" )';
         $result1 = mysqli_query($connect, $sql1) or die('The query failed: ' . mysqli_error($connect));
-        while($rows=mysqli_fetch_array($result1)){
+        $num_results = mysqli_num_rows($result1);
+        while ($rows = mysqli_fetch_array($result1)) {
             echo $rows['nome'];
             echo "<br>";
         }
+        if ($num_results == 0) {
+            echo "<br>O paciente que procura não existe. Adicione o novo paciente.";
+        }
+        else if ($num_results == 1) {
+            header("Location: perfil_paciente.php");
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -157,9 +165,9 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pl">
           <h4> Procurar Paciente existente</h4>
           <div class="formPaciente">
-              <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
+              <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
               <input type="text" name= "pesquisa" placeholder="Número de utente">
-              <h5 class="gradient-button savButton"><a href="login.php">Procurar</a></h5>
+              <input class="gradient-button savButton" type="submit" value="Submit" name="submit">
               </form>
 
       </div>
