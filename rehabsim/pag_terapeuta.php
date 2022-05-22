@@ -1,7 +1,26 @@
 <?php
+session_start();
 if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
-    //if()
-    if(isset($_POST["perfil_paciente"])) {
+        $id_user = $_SESSION['id_utilizador'];
+        // $pageNumber = $_GET['pageNumber'];
+        // $pageSize = $_GET['pageSize'];
+        //$nome =$_GET['nome'];
+        //$morada = $_GET['morada'];
+        //$tel = $_GET['telemovel'];
+        //$email = $_GET['email'];
+
+        $connect = mysqli_connect('localhost', 'root', '', 'database2')
+        or die('Error connecting to the server: ' . mysqli_error($connect));
+        $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';
+        $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+        echo "<script>console.log('ola');</script>";
+        echo "<script>console.log('debug:" . $id_user . "' );</script>";
+        echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
+        //echo "<script>console.log('debug:".$result."' );</script>";
+        //echo "<script>console.log('debug:".$id_user."' );</script>";
+    }
+
+    /*if(isset($_POST["perfil_paciente"])) {
         $nome = $_POST['nome'];
         $data = $_POST['data_nascimento'];
         $nutente = $_POST['n_utente'];
@@ -35,7 +54,7 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
             header("Location: perfil_paciente.php");
         }
     }
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -103,30 +122,32 @@ https://templatemo.com/tm-570-chain-app-dev
   <!-- ***** Header Area End ***** -->
 
   <div class="containerInfo">
+      <?php while ($data=mysqli_fetch_array($result)){ ?>
     <div class="text">
       <h4>Terapeuta</h4>
-      <h1>Daniel Jorge</h1>
+      <h1><?php echo $data['nome']?></h1>
     </div>
     <div class="containerBlocks">
       <div class="profile">
         <h4>Informação do Utilizador</h4>
           <div class="row">
             <div class="column c1">
-              <input type="text" placeholder="Username">
-              <input type="text" placeholder="Nome">
-              <input type="password" placeholder="Password">
+              <input type="text" value="<?php echo $data['username']?>">
+                <input type="text" value="<?php echo $data['nome']?>">
+                <input type="password" value="<?php echo $data['password']?>">
             </div>
-            <div class="column c2">
-              <input type="text" placeholder="Morada">
-              <input type="email" placeholder="Email">
-              <input type="number" placeholder="Telemovel">
-            </div>
+              <div class="column c2">
+                  <input type="text" value="<?php echo $data['morada']?>">
+                  <input type="email" value="<?php echo $data['email']?>">
+                  <input type="number" value="<?php echo $data['telemovel']?>">
+              </div>
             <div class="column c3">
               <label for="img">Imagem de Perfil</label>
               <input type="file" id="img" name="img" accept="image/*">
               <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
             </div>
           </div>
+          <?php } ?>
       </div>
       <div class="pac">
         <h4>Registo de Paciente</h4>

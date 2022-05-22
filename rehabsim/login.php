@@ -14,6 +14,7 @@ if(isset($_GET["action"])) {
             $number = mysqli_num_rows($result);
 
             if ($number == 1) {
+                $_SESSION['id_utilizador'] = $row['id_utilizador'];
                 $_SESSION['authuser'] = 1;
                 $_SESSION['username'] = $user;
                 $_SESSION['tipo_utilizador']=$row['tipo_utilizador_id'];
@@ -24,10 +25,12 @@ if(isset($_GET["action"])) {
                     header("Location: pag_terapeuta.php");
                 }
                 else if (isset($_SESSION['tipo_utilizador'])&& $_SESSION['tipo_utilizador']==3){
+
                     header("Location: pag_cuidador.php");
                 }
                 echo "<script>console.log('debug:".$number."' );</script>";
                 echo "<script>console.log('debug:".$_SESSION['tipo_utilizador']."' );</script>";
+                echo "<script>console.log('debug:".$_SESSION['id_utilizador']."' );</script>";
                 break;
             } else {
                 $_SESSION['authuser'] = 0;
