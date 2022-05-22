@@ -41,7 +41,7 @@ if(isset($_GET["action"])) {
                 //echo 'Welcome'.$_SESSION['username']
         case "logout":
             session_unset();
-            header("Location: index.php");
+            $_SESSION['authuser'] = 0;
             break;
 
     }
