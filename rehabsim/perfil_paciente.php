@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+    $num_saude = $_SESSION['num_saude'];
+    echo "<script>console.log('.$num_saude.');</script>";
+    $connect = mysqli_connect('localhost', 'root', '', 'database2')
+    or die('Error connecting to the server: ' . mysqli_error($connect));
+    $sql = 'SELECT * FROM paciente WHERE paciente.num_saude="' . $num_saude . '"';
+    $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+    //echo "<script>console.log(.data_stringify($result).);</script>";
+}
+?>
 
 <!DOCTYPE html>
 <html lang=”en”>
@@ -65,30 +77,38 @@
 <!-- ***** Header Area End ***** -->
 
 <div class="containerInfo">
+    <?php while ($data=mysqli_fetch_array($result)){ ?>
     <div class="text">
         <h4>Perfil de Paciente</h4>
-        <h1>Bonifácio Bonzão</h1>
+        <h1><?php echo $data['nome']?></h1>
     </div>
     <div class="containerBlocks">
         <div class="profile">
             <h4>Informação do Paciente</h4>
             <div class="row">
                 <div class="column c1">
-                    <input type="text" placeholder="Nome">
-                    <input type="text" placeholder="Telemovel">
-                    <input type="password" placeholder="Email">
+                    <input type="text" value="<?php echo $data['nome']?>">
+                    <input type="date" value="<?php echo $data['data_nascimento']?>">
+                    <input type="number" value="<?php echo $data['num_saude']?>">
+                    <input type="number" value="<?php echo $data['nif']?>">
+                    <input type="text" value="<?php echo $data['sexo']?>">
                 </div>
                 <div class="column c2">
-                    <input type="text" placeholder="Data de Nascimento">
-                    <input type="email" placeholder="Sexo">
-                    <input type="number" placeholder="Nº de saúde">
+                    <input type="text" value="<?php echo $data['morada']?>">
+                    <input type="text" value="<?php echo $data['distrito']?>">
+                    <input type="email" value="<?php echo $data['email']?>">
+                    <input type="number" value="<?php echo $data['telemovel']?>">
+                    <input type="number" value="<?php echo $data['afasia_tipo']?>">
                 </div>
                 <div class="column c3">
+                    <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
+                    <textarea id="alergias" name="alergias" rows="3" cols="40" > <?php echo $data['alergias']?></textarea><br>
                     <label for="img">Imagem de Perfil</label>
                     <input type="file" id="img" name="img" accept="image/*">
                     <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                 </div>
             </div>
+            <?php } ?>
         </div>
         <div class="pac">
             <h4>Resultados da Sessão</h4>
@@ -141,4 +161,3 @@
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
-

@@ -19,7 +19,26 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
         //echo "<script>console.log('debug:".$result."' );</script>";
         //echo "<script>console.log('debug:".$id_user."' );</script>";
     }
+if(isset($_GET["action"])) {
+    switch ($_GET["action"]) {
+        case "perfil_paciente":
+            $pesquisa = $_POST['pesquisa'];
+            $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+            $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
+            $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
+            $num_results = mysqli_num_rows($result_pac);
+            $row = mysqli_fetch_array($result_pac);
 
+            if ($num_results == 0) {
+                echo "<br>O paciente que procura não existe. Adicione o novo paciente.";
+            } else if ($num_results == 1) {
+                $_SESSION['num_saude'] = $row['num_saude'];
+                echo "<script>console.log('adeus' );</script>";
+                echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
+               header("Location: perfil_paciente.php");
+            }
+    }
+}
     /*if(isset($_POST["perfil_paciente"])) {
         $nome = $_POST['nome'];
         $data = $_POST['data_nascimento'];
@@ -34,25 +53,9 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
         $tipo_afasia=$_POST['tipo_afasia'];
     //$imagem=$_POST['img'];
         $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-        $sql = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nutente.'","'.$telemovel.'","'.$email.'",
+        $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nutente.'","'.$telemovel.'","'.$email.'",
         "'.$alergias.'","'.$tipo_afasia.'")';
-        $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
-    }
-    else if (isset($_POST["submit"])) {
-        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-        $sql1 = 'SELECT * FROM paciente WHERE (nome="' . $_POST['pesquisa'] . '" )';
-        $result1 = mysqli_query($connect, $sql1) or die('The query failed: ' . mysqli_error($connect));
-        $num_results = mysqli_num_rows($result1);
-        while ($rows = mysqli_fetch_array($result1)) {
-            echo $rows['nome'];
-            echo "<br>";
-        }
-        if ($num_results == 0) {
-            echo "<br>O paciente que procura não existe. Adicione o novo paciente.";
-        }
-        else if ($num_results == 1) {
-            header("Location: perfil_paciente.php");
-        }
+        $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
     }
 }*/
 ?>
@@ -156,7 +159,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <div class="column c1">
                 <input type="text" name= "nome" placeholder="Nome"></p>
                 <input type="text" name= "data_nascimento"placeholder="Data de Nacimento"></p>
-                <input type="text" name= "n_utente" placeholder="Nº de Utente"></p>
+                <input type="text" name= "n_saude" placeholder="Nº de Saude"></p>
                 <input type="number" name= "NIF" placeholder="NIF">
                 <p><label>Género:</label></p>
                 <select class="sexoInput" name="sexo" id="sexo">
@@ -186,7 +189,7 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pl">
           <h4> Procurar Paciente existente</h4>
           <div class="formPaciente">
-              <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
+              <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente"">
               <input type="text" name= "pesquisa" placeholder="Número de utente">
               <input class="gradient-button savButton" type="submit" value="Submit" name="submit">
               </form>
