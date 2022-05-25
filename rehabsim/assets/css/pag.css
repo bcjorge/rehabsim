@@ -32,9 +32,12 @@
     grid-template-rows: 0.5fr 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
-    "pr pr pr"
-    "pac pac pl";
+    "pr"
+    "pac"
+    "pl"
+    "pl";
 }
+
 
 .profile { 
     grid-area: pr;

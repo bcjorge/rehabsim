@@ -30,12 +30,12 @@ if(isset($_GET["action"])) {
             $row = mysqli_fetch_array($result_pac);
 
             if ($num_results == 0) {
-                echo "<br>O paciente que procura não existe. Adicione o novo paciente.";
+                echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
             } else if ($num_results == 1) {
                 $_SESSION['num_saude'] = $row['num_saude'];
                 echo "<script>console.log('adeus' );</script>";
                 echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
-               header("Location: perfil_paciente.php");
+                header("Location: perfil_paciente.php");
             }
     }
 }
