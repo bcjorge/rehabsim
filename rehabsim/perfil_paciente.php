@@ -104,8 +104,11 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                     <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
                     <textarea id="alergias" name="alergias" rows="3" cols="40" > <?php echo $data['alergias']?></textarea><br>
                     <label for="img">Imagem de Perfil</label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                    <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
+                    <input type="file" id="img" name="img" value="<?php echo $data['imagem']?>" accept="image/*">
+                    <?php $imagem = $data['imagem'];
+                    echo '<img src="image/'.$imagem.'" />';
+                    echo "<br>";?>
+                    <div class="gradient-button savButton"><a href="perfil_paciente.php">Salvar Alterações</a></div>
                 </div>
             </div>
             <?php } ?>

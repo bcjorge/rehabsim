@@ -37,6 +37,37 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1){
                 header("Location: perfil_paciente.php");*/
 
 }
+/*if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+    if (isset($_POST["registar_utilizador"])) {
+        if (isset($_POST["Admin"])) {
+            $acao = "admin.php?action=pag_admin";
+        } else if (isset($_POST["Te"])) {
+            $acao = "admin.php?action=pag_terapeuta";
+        } else if (isset($_POST["Cg"])) {
+            $acao = "admin.php?action=pag_cuidador";
+        }
+        $nome_utilizador=$_POST['nome'];
+        $morada_utilizador=$_POST['morada'];
+        $telemovel_utilizador=$_POST['telemovel'];
+        $email_utilizador=$_POST['email'];
+        $tipo_utilizador=$_POST['funcao'];
+        $username_utilizador=$_POST['username'];
+        $pass_utilizador=hash("sha256", $_POST['password']);
+        $imagem=$_FILES['img']["name"];
+        $tempname = $_FILES["img"]["tmp_name"];
+        $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/".$imagem;
+
+        $connect = mysqli_connect('localhost', 'root', '', 'database2')
+        or die('Error connecting to the server: ' . mysqli_error($connect));
+        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id) VALUES ("'.$nome_utilizador.'","'.$morada_utilizador.'","'.$telemovel_utilizador.'","'.$email_utilizador.'","'.$tipo_utilizador.'","'.$username_utilizador.'","'.$pass_utilizador.'","'.$imagem.'",)';
+        $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
+        if (move_uploaded_file($tempname))  {
+            echo "Upload bem sucedido!";
+        }else{
+            echo "<script>alert('O upload da imagem falhou ');</script>";
+        }
+    }
+}*/
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -133,28 +164,28 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
       <div class="pac">
         <h4>Registo Novo Utilizador</h4>
-        <div class="formPaciente">
+        <div class="formPaciente" method="POST" action="admin.php?action=pag_admin" enctype="multipart/form-data">
             <div class="column c1">
-                <input type="text" placeholder="Nome"></p>
-                <input type="text" placeholder="Morada"></p>
-                <input type="text" placeholder="Telemovel"></p>
-                <input type="number" placeholder="Email">
+                <input type="text" name= "nome" placeholder="Nome"></p>
+                <input type="text" name= "morada" placeholder="Morada"></p>
+                <input type="text"  name= "telemovel" placeholder="Telemovel"></p>
+                <input type="email" name= "email" placeholder="Email">
             </div>
             <div class="column c2">
                 <p><label>Tipo de Utilizador:</label></p>
                 <select class="funcaoInput" name="funcao" id="funcao">
                     <option hidden disabled selected value> -- selecione uma opção -- </option>
-                    <option value="Admin">Administrador</option>
-                    <option value="Te">Terapeuta</option>
-                    <option value="Cg">Cuidador</option>
+                    <option name= "Admin" value="Admin">Administrador</option>
+                    <option name= "Te" value="Te">Terapeuta</option>
+                    <option name= "Cg" value="Cg">Cuidador</option>
                 </select>
-                <input type="text" placeholder="Username">
-                <input type="text" placeholder="Password">
+                <input type="text" name= "username" placeholder="Username">
+                <input type="text" name= "password" placeholder="Password">
             </div>
             <div class="column c3">
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
-                <div class="gradient-button savButton"><a href="login.html">Registar Paciente</a></div>
+                <input class="gradient-button savButton" type="submit"  name="registar_utilizador" value="Registar Utilizador">
             </div>
       </div>
       </div>

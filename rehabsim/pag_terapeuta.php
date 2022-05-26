@@ -22,42 +22,53 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "perfil_paciente":
-            $pesquisa = $_POST['pesquisa'];
-            $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-            $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
-            $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
-            $num_results = mysqli_num_rows($result_pac);
-            $row = mysqli_fetch_array($result_pac);
+            if(isset($_POST["submit"])) {
+                $pesquisa = $_POST['pesquisa'];
+                $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
+                $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
+                $num_results = mysqli_num_rows($result_pac);
+                $row = mysqli_fetch_array($result_pac);
 
-            if ($num_results == 0) {
-                echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
-            } else if ($num_results == 1) {
-                $_SESSION['num_saude'] = $row['num_saude'];
-                echo "<script>console.log('adeus' );</script>";
-                echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
-                header("Location: perfil_paciente.php");
+                if ($num_results == 0) {
+                    echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
+                } else if ($num_results == 1) {
+                    $_SESSION['num_saude'] = $row['num_saude'];
+                    echo "<script>console.log('adeus' );</script>";
+                    echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
+                    header("Location: perfil_paciente.php");
+                }
+            }
+            if(isset($_POST["registar_p"])) {
+                $nome = $_POST['nome'];
+                $data = $_POST['data_nascimento'];
+                $nsaude = $_POST['n_saude'];
+                $nif = $_POST['NIF'];
+                $sexo = $_POST['sexo'];
+                $morada = $_POST['morada'];
+                $distrito = $_POST['distrito'];
+                $email = $_POST['email'];
+                $telemovel = $_POST['telemovel'];
+                $alergias = $_POST['alergias'];
+                $tipo_afasia=$_POST['tipo_afasia'];
+                $imagem=$_FILES['img']["name"];
+                $tempname = $_FILES["img"]["tmp_name"];
+                $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/".$imagem;
+                $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo,imagem) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nsaude.'","'.$telemovel.'","'.$email.'",
+        "'.$alergias.'","'.$tipo_afasia.'","'.$imagem.'")';
+                $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
+                if (move_uploaded_file($tempname))  {
+                    echo "Upload bem sucedido!";
+                }else{
+                    echo "<script>alert('O upload da imagem falhou ');</script>";
+                }
             }
     }
 }
-    /*if(isset($_POST["perfil_paciente"])) {
-        $nome = $_POST['nome'];
-        $data = $_POST['data_nascimento'];
-        $nutente = $_POST['n_utente'];
-        $nif = $_POST['NIF'];
-        $sexo = $_POST['sexo'];
-        $morada = $_POST['morada'];
-        $distrito = $_POST['distrito'];
-        $email = $_POST['email'];
-        $telemovel = $_POST['telemovel'];
-        $alergias = $_POST['alergias'];
-        $tipo_afasia=$_POST['tipo_afasia'];
-    //$imagem=$_POST['img'];
-        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-        $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nutente.'","'.$telemovel.'","'.$email.'",
-        "'.$alergias.'","'.$tipo_afasia.'")';
-        $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
-    }
-}*/
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -155,7 +166,7 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="pac">
         <h4>Registo de Paciente</h4>
         <div class="formPaciente">
-          <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
+          <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente" enctype="multipart/form-data">
             <div class="column c1">
                 <input type="text" name= "nome" placeholder="Nome"></p>
                 <input type="text" name= "data_nascimento"placeholder="Data de Nacimento"></p>
@@ -164,9 +175,9 @@ https://templatemo.com/tm-570-chain-app-dev
                 <p><label>Género:</label></p>
                 <select class="sexoInput" name="sexo" id="sexo">
                     <option hidden disabled selected value> -- selecione uma opção -- </option>
-                    <option value="m">M</option>
-                    <option value="f">F</option>
-                    <option value="o">Outro</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">Outro</option>
                 </select>
             </div>
             <div class="column c2">
@@ -181,7 +192,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 <textarea id="alergias" name="alergias" rows="3" cols="40"></textarea><br>
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
-                <div class="gradient-button savButton"><a href="perfil_paciente.php">Registar Paciente</a></div>
+                <input class="gradient-button savButton"type="submit"  name="registar_p" value="Registar Paciente"</input>
             </div>
             </form>
       </div>
