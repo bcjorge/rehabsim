@@ -18,56 +18,47 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
     //echo "<script>console.log('debug:".$result."' );</script>";
     //echo "<script>console.log('debug:".$id_user."' );</script>";
-}
-if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1){
-    //$pesquisa = $_POST['pesquisa'];
-            //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-            $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
-            $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
-            echo "<script>console.log('ola');</script>";
-            //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
-            $num_results = mysqli_num_rows($result_ut);
-            //$rows = mysqli_fetch_array($result_ut);
 
-            if ($num_results == 0) {
-                echo "Não Existem Utilizadores para Listar.";
-            } /*else if ($num_results == 1) {
+}
+if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+    //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+    $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
+    $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
+    echo "<script>console.log('ola');</script>";
+    //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
+    $num_results = mysqli_num_rows($result_ut);
+    //$rows = mysqli_fetch_array($result_ut);
+
+    if ($num_results == 0) {
+        echo "Não Existem Utilizadores para Listar.";
+    } /*else if ($num_results == 1) {
                 echo "<script>console.log('adeus' );</script>";
                 echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
                 header("Location: perfil_paciente.php");*/
-
-}
-/*if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+    echo "<script>console.log('hello');</script>";
+//if (isset($_GET["regist_user"])) {
+    echo "<script>console.log('funciona');</script>";
     if (isset($_POST["registar_utilizador"])) {
-        if (isset($_POST["Admin"])) {
-            $acao = "admin.php?action=pag_admin";
-        } else if (isset($_POST["Te"])) {
-            $acao = "admin.php?action=pag_terapeuta";
-        } else if (isset($_POST["Cg"])) {
-            $acao = "admin.php?action=pag_cuidador";
-        }
-        $nome_utilizador=$_POST['nome'];
-        $morada_utilizador=$_POST['morada'];
-        $telemovel_utilizador=$_POST['telemovel'];
-        $email_utilizador=$_POST['email'];
-        $tipo_utilizador=$_POST['funcao'];
-        $username_utilizador=$_POST['username'];
-        $pass_utilizador=hash("sha256", $_POST['password']);
-        $imagem=$_FILES['img']["name"];
+        $nome_utilizador = $_POST['nome'];
+        $morada_utilizador = $_POST['morada'];
+        $telemovel_utilizador = $_POST['telemovel'];
+        $email_utilizador = $_POST['email'];
+        $tipo_utilizador = $_POST['funcao'];
+        $username_utilizador = $_POST['username'];
+        $pass_utilizador = hash("sha256", $_POST['password']);
+        $imagem = $_FILES['img']["name"];
         $tempname = $_FILES["img"]["tmp_name"];
-        $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/".$imagem;
-
+        $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/'.$imagem.'";
+        echo "<script>console.log('estou');</script>";
+        echo "<script>console.log('porque');</script>";
         $connect = mysqli_connect('localhost', 'root', '', 'database2')
         or die('Error connecting to the server: ' . mysqli_error($connect));
-        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id) VALUES ("'.$nome_utilizador.'","'.$morada_utilizador.'","'.$telemovel_utilizador.'","'.$email_utilizador.'","'.$tipo_utilizador.'","'.$username_utilizador.'","'.$pass_utilizador.'","'.$imagem.'",)';
+        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","'. $tipo_utilizador . '","'. $imagem . '")';
         $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
-        if (move_uploaded_file($tempname))  {
-            echo "Upload bem sucedido!";
-        }else{
-            echo "<script>alert('O upload da imagem falhou ');</script>";
-        }
+        //$pesquisa = $_POST['pesquisa'];
     }
-}*/
+
+}
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -157,6 +148,9 @@ https://templatemo.com/tm-570-chain-app-dev
                       <div class="column c3">
                           <label for="img">Imagem de Perfil</label>
                           <input type="file" id="img" name="img" accept="image/*">
+                          <?php $imagem = $data['imagem'];
+                          echo '<img src="image/'.$imagem.'" />';
+                          echo "<br>";?>
                           <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                       </div>
                       <?php } ?>
@@ -164,7 +158,8 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
       <div class="pac">
         <h4>Registo Novo Utilizador</h4>
-        <div class="formPaciente" method="POST" action="admin.php?action=pag_admin" enctype="multipart/form-data">
+        <div class="formPaciente" >
+            <form class="login" method="POST" action="pag_admin.php?action=regist_user" enctype="multipart/form-data">
             <div class="column c1">
                 <input type="text" name= "nome" placeholder="Nome"></p>
                 <input type="text" name= "morada" placeholder="Morada"></p>
@@ -175,18 +170,19 @@ https://templatemo.com/tm-570-chain-app-dev
                 <p><label>Tipo de Utilizador:</label></p>
                 <select class="funcaoInput" name="funcao" id="funcao">
                     <option hidden disabled selected value> -- selecione uma opção -- </option>
-                    <option name= "Admin" value="Admin">Administrador</option>
-                    <option name= "Te" value="Te">Terapeuta</option>
-                    <option name= "Cg" value="Cg">Cuidador</option>
+                    <option name= "Admin" value="1">Administrador</option>
+                    <option name= "Te" value="2">Terapeuta</option>
+                    <option name= "Cg" value="3">Cuidador</option>
                 </select>
                 <input type="text" name= "username" placeholder="Username">
-                <input type="text" name= "password" placeholder="Password">
+                <input type="password" name= "password" placeholder="Password">
             </div>
             <div class="column c3">
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
                 <input class="gradient-button savButton" type="submit"  name="registar_utilizador" value="Registar Utilizador">
             </div>
+            </form>
       </div>
       </div>
       <div class="pl">

@@ -58,7 +58,7 @@ if(isset($_GET["action"])) {
                 $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo,imagem) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nsaude.'","'.$telemovel.'","'.$email.'",
         "'.$alergias.'","'.$tipo_afasia.'","'.$imagem.'")';
                 $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
-                if (move_uploaded_file($tempname))  {
+                if (move_uploaded_file($tempname,$folder))  {
                     echo "Upload bem sucedido!";
                 }else{
                     echo "<script>alert('O upload da imagem falhou ');</script>";
@@ -158,6 +158,9 @@ https://templatemo.com/tm-570-chain-app-dev
             <div class="column c3">
               <label for="img">Imagem de Perfil</label>
               <input type="file" id="img" name="img" accept="image/*">
+                <?php $imagem = $data['imagem'];
+                echo '<img src="image/'.$imagem.'" />';
+                echo "<br>";?>
               <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
             </div>
           </div>

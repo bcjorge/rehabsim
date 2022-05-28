@@ -109,6 +109,9 @@ session_start();
                 <div class="column c3">
                     <label for="img">Imagem de Perfil</label>
                     <input type="file" id="img" name="img" accept="image/*">
+                    <?php $imagem = $data['imagem'];
+                    echo '<img src="image/'.$imagem.'" />';
+                    echo "<br>";?>
                     <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                 </div>
               <?php } ?>
