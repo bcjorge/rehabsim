@@ -87,27 +87,37 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
             <h4>Informação do Paciente</h4>
             <div class="row">
                 <div class="column c1">
-                    <input type="text" value="<?php echo $data['nome']?>">
-                    <input type="date" value="<?php echo $data['data_nascimento']?>">
-                    <input type="number" value="<?php echo $data['num_saude']?>">
-                    <input type="number" value="<?php echo $data['nif']?>">
-                    <input type="text" value="<?php echo $data['sexo']?>">
+                    <label for="nome">Nome</label><br>
+                    <input type="text" value="<?php echo $data['nome']?>"><br>
+                    <label for="data">Data de Nascimento</label><br>
+                    <input type="date" value="<?php echo $data['data_nascimento']?>"><br>
+                    <label for="numb">Numero de Saude</label><br>
+                    <input type="number" value="<?php echo $data['num_saude']?>"><br>
+                    <label for="nif">NIF</label><br>
+                    <input type="number" value="<?php echo $data['nif']?>"><br>
+                    <label for="genero">Genero</label><br>
+                    <input type="text" value="<?php echo $data['sexo']?>"><br>
                 </div>
                 <div class="column c2">
-                    <input type="text" value="<?php echo $data['morada']?>">
-                    <input type="text" value="<?php echo $data['distrito']?>">
-                    <input type="email" value="<?php echo $data['email']?>">
-                    <input type="number" value="<?php echo $data['telemovel']?>">
+                    <label for="morada">Morada</label><br>
+                    <input type="text" value="<?php echo $data['morada']?>"><br>
+                    <label for="distrito">Distrito</label><br>
+                    <input type="text" value="<?php echo $data['distrito']?>"><br>
+                    <label for="email">Email</label><br>
+                    <input type="email" value="<?php echo $data['email']?>"><br>
+                    <label for="tel">Telemovel</label><br>
+                    <input type="number" value="<?php echo $data['telemovel']?>"><br>
+                    <label for="afasia">Tipo de Afasia</label><br>
                     <input type="number" value="<?php echo $data['afasia_tipo']?>">
                 </div>
                 <div class="column c3">
                     <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
                     <textarea id="alergias" name="alergias" rows="3" cols="40" > <?php echo $data['alergias']?></textarea><br>
                     <label for="img">Imagem de Perfil</label>
-                    <input type="file" id="img" name="img" value="<?php echo $data['imagem']?>" accept="image/*">
                     <?php $imagem = $data['imagem'];
                     echo '<img src="image/'.$imagem.'" />';
                     echo "<br>";?>
+                    <input type="file" id="img" name="img" value="<?php echo $data['imagem']?>" accept="image/*">
                     <div class="gradient-button savButton"><a href="perfil_paciente.php">Salvar Alterações</a></div>
                 </div>
             </div>

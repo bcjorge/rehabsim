@@ -97,21 +97,27 @@ session_start();
             <h4>Informação do Utilizador</h4>
             <div class="row">
                 <div class="column c1">
-                    <input type="text" value="<?php echo $data['username']?>">
-                    <input type="text" value="<?php echo $data['nome']?>">
+                    <label for="username">Username</label><br>
+                    <input type="text" value="<?php echo $data['username']?>"><br>
+                    <label for="nome">Nome</label><br>
+                    <input type="text" value="<?php echo $data['nome']?>"><br>
+                    <label for="pass">Password</label><br>
                     <input type="password" value="<?php echo $data['password']?>">
                 </div>
                 <div class="column c2">
-                    <input type="text" value="<?php echo $data['morada']?>">
-                    <input type="email" value="<?php echo $data['email']?>">
-                    <input type="number" value="<?php echo $data['telemovel']?>">
+                    <label for="morada">Morada</label><br>
+                    <input type="text" value="<?php echo $data['morada']?>"><br>
+                    <label for="email">Email</label><br>
+                    <input type="email" value="<?php echo $data['email']?>"><br>
+                    <label for="tel">Telemovel</label><br>
+                    <input type="number" value="<?php echo $data['telemovel']?>"><br>
                 </div>
                 <div class="column c3">
                     <label for="img">Imagem de Perfil</label>
-                    <input type="file" id="img" name="img" accept="image/*">
                     <?php $imagem = $data['imagem'];
                     echo '<img src="image/'.$imagem.'" />';
                     echo "<br>";?>
+                    <input type="file" id="img" name="img" accept="image/*">
                     <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                 </div>
               <?php } ?>
@@ -124,7 +130,7 @@ session_start();
             <h4> Procurar Paciente</h4>
             <div class="formPaciente">
                 <input type="text" placeholder="Número de utente"></p>
-                <div  class="gradient-button savButton"  ><a href="login.php">Procurar</a></div>
+                <div class="gradient-button savButton"> <a href="login.php"> Procurar </a></div>
             </div>
         </div>
     </div>

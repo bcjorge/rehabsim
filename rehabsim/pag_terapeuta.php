@@ -67,19 +67,22 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
             case "pag_terapeuta":
                 if (isset($_POST["update"])) {
                     echo "<script>console.log('lá' );</script>";
-                    $nome_ter = $_POST['ter_nome'];
-                    $username_ter = $_POST['ter_username'];
-                    $ter_password = $_POST['ter_password'];
-                    $ter_morada = $_POST['ter_morada'];
-                    $ter_email = $_POST['ter_email'];
-                    $ter_telemovel = $_POST['ter_telemovel'];
-                    $ter_imagem = $_FILES['img_ter']["name"];
+                    $nome_ter = $_POST['nome'];
+                    $username_ter = $_POST['username'];
+                    $password_ter = $_POST['password'];
+                    $morada_ter = $_POST['morada'];
+                    $email_ter = $_POST['email'];
+                    $telemovel_ter = $_POST['telemovel'];
+                    $imagem_ter = $_FILES['img']["name"];
                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                    $update_query = "UPDATE utilizador SET utilizador.nome='$nome_ter', utilizador.morada='$ter_morada' , utilizador.telemovel='$ter_telemovel' , utilizador.email='$ter_email' , utilizador.username= '$username_ter', utilizador.password='$ter_password', utilizador.imagem='$ter_imagem' WHERE utilizador.id_utilizador='$id_user'";
+                    $update_query = 'UPDATE utilizador SET nome="'.$nome_ter.'", morada="'.$morada_ter.'" , telemovel="'.$telemovel_ter.'" , email="'.$email_ter.'" , username= "'.$username_ter.'", password="'.$password_ter.'", imagem="'.$imagem_ter.'" WHERE utilizador.id_utilizador="' . $id_user . '"';
                     echo "<script>console.log('aqui' );</script>";
                     $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                    echo "<script>console.log('adeus' );</script>";
+                    //$data_update=mysqli_fetch_array($result_update);
+                    echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                 } else {
-                    echo "<script>alert('O update da informação falhou ');</script>";
+                    echo "<script>alert('O update da informação falhou');</script>";
                 }
         }
     }
@@ -164,25 +167,31 @@ https://templatemo.com/tm-570-chain-app-dev
       <form class="login" method="POST" action="pag_terapeuta.php?action=pag_terapeuta" enctype="multipart/form-data">
         <h4>Informação do Utilizador</h4>
           <div class="row">
-            <div class="column c1">
-              <input type="text" name= "ter_username" value="<?php echo $data['username']?>">
-                <input type="text" name= "ter_nome" value="<?php echo $data['nome']?>">
-                <input type="password" name= "ter_password" value="<?php echo $data['password']?>">
-            </div>
-              <div class="column c2">
-                  <input type="text" name= "ter_morada" value="<?php echo $data['morada']?>">
-                  <input type="email" name= "ter_email" value="<?php echo $data['email']?>">
-                  <input type="number" name= "ter_telemovel" value="<?php echo $data['telemovel']?>">
+              <div class="column c1">
+                  <label for="username">Username</label><br>
+                  <input type="text" name="username" value="<?php echo $data['username']?>"><br>
+                  <label for="nome">Nome</label><br>
+                  <input type="text" name="nome" value="<?php echo $data['nome']?>"><br>
+                  <label for="pass">Password</label><br>
+                  <input type="password" name="password" value="<?php echo $data['password']?>">
               </div>
-            <div class="column c3">
-              <label for="img">Imagem de Perfil</label>
-              <input type="file" id="img_ter" name="img_ter" accept="image/*">
-                <?php $imagem = $data['imagem'];
-                echo '<img src="image/'.$imagem.'" />';
-                echo "<br>";?>
-                    <?php } ?>
-            </div>
-              <input class="gradient-button savButton"type="submit" name="update" ><Salvar Alterações></input>
+              <div class="column c2">
+                  <label for="morada">Morada</label><br>
+                  <input type="text" name="morada" value="<?php echo $data['morada']?>"><br>
+                  <label for="email">Email</label><br>
+                  <input type="email"name="email" value="<?php echo $data['email']?>"><br>
+                  <label for="tel">Telemovel</label><br>
+                  <input type="number" name="telemovel" value="<?php echo $data['telemovel']?>"><br>
+              </div>
+              <div class="column c3">
+                  <label for="img">Imagem de Perfil</label>
+                  <?php $imagem = $data['imagem'];
+                  echo '<img src="image/'.$imagem.'" />';
+                  echo "<br>";?>
+                  <input type="file" id="img" name="img" accept="image/*">
+                  <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
+              </div>
+              <?php } ?>
           </div>
       </form>
       </div>

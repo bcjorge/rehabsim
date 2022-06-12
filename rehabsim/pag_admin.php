@@ -136,21 +136,27 @@ https://templatemo.com/tm-570-chain-app-dev
                   <h4>Informação do Utilizador</h4>
                   <div class="row">
                       <div class="column c1">
-                          <input type="text" value="<?php echo $data['username']?>">
-                          <input type="text" value="<?php echo $data['nome']?>">
+                          <label for="username">Username</label><br>
+                          <input type="text" value="<?php echo $data['username']?>"><br>
+                          <label for="nome">Nome</label><br>
+                          <input type="text" value="<?php echo $data['nome']?>"><br>
+                          <label for="pass">Password</label><br>
                           <input type="password" value="<?php echo $data['password']?>">
                       </div>
                       <div class="column c2">
-                          <input type="text" value="<?php echo $data['morada']?>">
-                          <input type="email" value="<?php echo $data['email']?>">
-                          <input type="number" value="<?php echo $data['telemovel']?>">
+                          <label for="morada">Morada</label><br>
+                          <input type="text" value="<?php echo $data['morada']?>"><br>
+                          <label for="email">Email</label><br>
+                          <input type="email" value="<?php echo $data['email']?>"><br>
+                          <label for="tel">Telemovel</label><br>
+                          <input type="number" value="<?php echo $data['telemovel']?>"><br>
                       </div>
                       <div class="column c3">
                           <label for="img">Imagem de Perfil</label>
-                          <input type="file" id="img" name="img" accept="image/*">
                           <?php $imagem = $data['imagem'];
                           echo '<img src="image/'.$imagem.'" />';
                           echo "<br>";?>
+                          <input type="file" id="img" name="img" accept="image/*">
                           <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                       </div>
                       <?php } ?>
@@ -180,7 +186,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <div class="column c3">
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
-                <input class="gradient-button savButton" type="submit"  name="registar_utilizador" value="Registar Utilizador">
+                <input class="gradient-button sessionButton" type="submit"  name="registar_utilizador" value="Registar Utilizador">
             </div>
             </form>
       </div>
@@ -189,7 +195,14 @@ https://templatemo.com/tm-570-chain-app-dev
           <h4> Lista de Utilizadores</h4> <br>
               <?php while ($rows=mysqli_fetch_array($result_ut)){ ?>
                   <ul>
-                      <li><?php echo $rows['nome'] ."  - Utilizador do tipo: ". $rows['tipo_utilizador_id']?></li>
+                      <li><?php echo $rows['nome'] ."  - Utilizador do tipo: ". $rows['tipo_utilizador_id']?>
+                           <?php if ($rows['tipo_utilizador_id']==1);{?>
+                          <a href="pag_admin.php#nome" role="button" target="_blank" class="green"></a> <?php } ?>
+                          <?php if ($rows['tipo_utilizador_id']==2);{?>
+                              <a href="pag_terapeuta.php.php"></a> <?php } ?>
+                          <?php if ($rows['tipo_utilizador_id']==3);{?>
+                              <a href="pag_cuidador.php.php"></a> <?php } ?>
+                      </li>
                   </ul>
                   <br>
           <?php } ?>
