@@ -1,72 +1,90 @@
 <?php
 session_start();
-if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)){
-        $id_user = $_SESSION['id_utilizador'];
-        // $pageNumber = $_GET['pageNumber'];
-        // $pageSize = $_GET['pageSize'];
-        //$nome =$_GET['nome'];
-        //$morada = $_GET['morada'];
-        //$tel = $_GET['telemovel'];
-        //$email = $_GET['email'];
+if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
+    $id_user = $_SESSION['id_utilizador'];
+    // $pageNumber = $_GET['pageNumber'];
+    // $pageSize = $_GET['pageSize'];
+    //$nome =$_GET['nome'];
+    //$morada = $_GET['morada'];
+    //$tel = $_GET['telemovel'];
+    //$email = $_GET['email'];
 
-        $connect = mysqli_connect('localhost', 'root', '', 'database2')
-        or die('Error connecting to the server: ' . mysqli_error($connect));
-        $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';
-        $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
-        echo "<script>console.log('ola');</script>";
-        echo "<script>console.log('debug:" . $id_user . "' );</script>";
-        echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
-        //echo "<script>console.log('debug:".$result."' );</script>";
-        //echo "<script>console.log('debug:".$id_user."' );</script>";
-    }
-if(isset($_GET["action"])) {
-    switch ($_GET["action"]) {
-        case "perfil_paciente":
-            if(isset($_POST["submit"])) {
-                $pesquisa = $_POST['pesquisa'];
-                $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
-                $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
-                $num_results = mysqli_num_rows($result_pac);
-                $row = mysqli_fetch_array($result_pac);
+    $connect = mysqli_connect('localhost', 'root', '', 'database2')
+    or die('Error connecting to the server: ' . mysqli_error($connect));
+    $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';
+    $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+    echo "<script>console.log('ola');</script>";
+    echo "<script>console.log('debug:" . $id_user . "' );</script>";
+    echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
+    //echo "<script>console.log('debug:".$result."' );</script>";
+    //echo "<script>console.log('debug:".$id_user."' );</script>";
 
-                if ($num_results == 0) {
-                    echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
-                } else if ($num_results == 1) {
-                    $_SESSION['num_saude'] = $row['num_saude'];
-                    echo "<script>console.log('adeus' );</script>";
-                    echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
-                    header("Location: perfil_paciente.php");
+    if (isset($_GET["action"])) {
+        switch ($_GET["action"]) {
+            case "perfil_paciente":
+                if (isset($_POST["submit"])) {
+                    $pesquisa = $_POST['pesquisa'];
+                    $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                    $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
+                    $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
+                    $num_results = mysqli_num_rows($result_pac);
+                    $row = mysqli_fetch_array($result_pac);
+
+                    if ($num_results == 0) {
+                        echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
+                    } else if ($num_results == 1) {
+                        $_SESSION['num_saude'] = $row['num_saude'];
+                        echo "<script>console.log('adeus' );</script>";
+                        echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
+                        header("Location: perfil_paciente.php");
+                    }
                 }
-            }
-            if(isset($_POST["registar_p"])) {
-                $nome = $_POST['nome'];
-                $data = $_POST['data_nascimento'];
-                $nsaude = $_POST['n_saude'];
-                $nif = $_POST['NIF'];
-                $sexo = $_POST['sexo'];
-                $morada = $_POST['morada'];
-                $distrito = $_POST['distrito'];
-                $email = $_POST['email'];
-                $telemovel = $_POST['telemovel'];
-                $alergias = $_POST['alergias'];
-                $tipo_afasia=$_POST['tipo_afasia'];
-                $imagem=$_FILES['img']["name"];
-                $tempname = $_FILES["img"]["tmp_name"];
-                $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/".$imagem;
-                $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo,imagem) VALUES ("'.$data.'","'.$nome.'","'.$morada.'","'.$distrito.'","'.$sexo.'","'.$nif.'","'.$nsaude.'","'.$telemovel.'","'.$email.'",
-        "'.$alergias.'","'.$tipo_afasia.'","'.$imagem.'")';
-                $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
-                if (move_uploaded_file($tempname,$folder))  {
-                    echo "Upload bem sucedido!";
-                }else{
-                    echo "<script>alert('O upload da imagem falhou ');</script>";
+                if (isset($_POST["registar_p"])) {
+                    $nome = $_POST['nome'];
+                    $data = $_POST['data_nascimento'];
+                    $nsaude = $_POST['n_saude'];
+                    $nif = $_POST['NIF'];
+                    $sexo = $_POST['sexo'];
+                    $morada = $_POST['morada'];
+                    $distrito = $_POST['distrito'];
+                    $email = $_POST['email'];
+                    $telemovel = $_POST['telemovel'];
+                    $alergias = $_POST['alergias'];
+                    $tipo_afasia = $_POST['tipo_afasia'];
+                    $imagem = $_FILES['img']["name"];
+                    $tempname = $_FILES["img"]["tmp_name"];
+                    $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/" . $imagem;
+                    $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                    $insert_query = 'INSERT INTO paciente (data_nascimento, nome, morada, distrito, sexo, nif, num_saude, telemovel, email, alergias,afasia_tipo,imagem) VALUES ("' . $data . '","' . $nome . '","' . $morada . '","' . $distrito . '","' . $sexo . '","' . $nif . '","' . $nsaude . '","' . $telemovel . '","' . $email . '",
+        "' . $alergias . '","' . $tipo_afasia . '","' . $imagem . '")';
+                    $result_IQ = mysqli_query($connect, $insert_query) or die('The query failed: ' . mysqli_error($connect));
+                    if (move_uploaded_file($tempname, $folder)) {
+                        echo "Upload bem sucedido!";
+                    } else {
+                        echo "<script>alert('O upload da imagem falhou ');</script>";
+                    }
                 }
-            }
+            case "pag_terapeuta":
+                if (isset($_POST["update"])) {
+                    echo "<script>console.log('lá' );</script>";
+                    $nome_ter = $_POST['ter_nome'];
+                    $username_ter = $_POST['ter_username'];
+                    $ter_password = $_POST['ter_password'];
+                    $ter_morada = $_POST['ter_morada'];
+                    $ter_email = $_POST['ter_email'];
+                    $ter_telemovel = $_POST['ter_telemovel'];
+                    $ter_imagem = $_FILES['img_ter']["name"];
+                    $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                    $update_query = "UPDATE utilizador SET utilizador.nome='$nome_ter', utilizador.morada='$ter_morada' , utilizador.telemovel='$ter_telemovel' , utilizador.email='$ter_email' , utilizador.username= '$username_ter', utilizador.password='$ter_password', utilizador.imagem='$ter_imagem' WHERE utilizador.id_utilizador='$id_user'";
+                    echo "<script>console.log('aqui' );</script>";
+                    $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                } else {
+                    echo "<script>alert('O update da informação falhou ');</script>";
+                }
+        }
     }
+
 }
-
 
 
 ?>
@@ -143,28 +161,30 @@ https://templatemo.com/tm-570-chain-app-dev
     </div>
     <div class="containerBlocks">
       <div class="profile">
+      <form class="login" method="POST" action="pag_terapeuta.php?action=pag_terapeuta" enctype="multipart/form-data">
         <h4>Informação do Utilizador</h4>
           <div class="row">
             <div class="column c1">
-              <input type="text" value="<?php echo $data['username']?>">
-                <input type="text" value="<?php echo $data['nome']?>">
-                <input type="password" value="<?php echo $data['password']?>">
+              <input type="text" name= "ter_username" value="<?php echo $data['username']?>">
+                <input type="text" name= "ter_nome" value="<?php echo $data['nome']?>">
+                <input type="password" name= "ter_password" value="<?php echo $data['password']?>">
             </div>
               <div class="column c2">
-                  <input type="text" value="<?php echo $data['morada']?>">
-                  <input type="email" value="<?php echo $data['email']?>">
-                  <input type="number" value="<?php echo $data['telemovel']?>">
+                  <input type="text" name= "ter_morada" value="<?php echo $data['morada']?>">
+                  <input type="email" name= "ter_email" value="<?php echo $data['email']?>">
+                  <input type="number" name= "ter_telemovel" value="<?php echo $data['telemovel']?>">
               </div>
             <div class="column c3">
               <label for="img">Imagem de Perfil</label>
-              <input type="file" id="img" name="img" accept="image/*">
+              <input type="file" id="img_ter" name="img_ter" accept="image/*">
                 <?php $imagem = $data['imagem'];
                 echo '<img src="image/'.$imagem.'" />';
                 echo "<br>";?>
-              <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
+                    <?php } ?>
             </div>
+              <input class="gradient-button savButton"type="submit" name="update" ><Salvar Alterações></input>
           </div>
-          <?php } ?>
+      </form>
       </div>
       <div class="pac">
         <h4>Registo de Paciente</h4>
