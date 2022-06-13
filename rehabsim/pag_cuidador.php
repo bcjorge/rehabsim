@@ -1,24 +1,49 @@
 <?php
 session_start();
- if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1){
-    $id_user=$_SESSION['id_utilizador'];
-    // $pageNumber = $_GET['pageNumber'];
-    // $pageSize = $_GET['pageSize'];
-    //$nome =$_GET['nome'];
-    //$morada = $_GET['morada'];
-    //$tel = $_GET['telemovel'];
-    //$email = $_GET['email'];
+ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+     $id_user = $_SESSION['id_utilizador'];
+     // $pageNumber = $_GET['pageNumber'];
+     // $pageSize = $_GET['pageSize'];
+     //$nome =$_GET['nome'];
+     //$morada = $_GET['morada'];
+     //$tel = $_GET['telemovel'];
+     //$email = $_GET['email'];
 
-    $connect = mysqli_connect('localhost', 'root', '','database2')
-    or die('Error connecting to the server: ' . mysqli_error($connect));
-    $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="'.$id_user.'"';
-    $result = mysqli_query ($connect ,$sql) or die('The query failed: ' . mysqli_error($connect));
-    echo "<script>console.log('ola');</script>";
-    echo "<script>console.log('debug:".$id_user."' );</script>";
-    echo "<script>console.log('debug:".$_SESSION["authuser"]."' );</script>";
-    //echo "<script>console.log('debug:".$result."' );</script>";
-    //echo "<script>console.log('debug:".$id_user."' );</script>";
-}
+     $connect = mysqli_connect('localhost', 'root', '', 'database2')
+     or die('Error connecting to the server: ' . mysqli_error($connect));
+     $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';
+     $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+     echo "<script>console.log('ola');</script>";
+     echo "<script>console.log('debug:" . $id_user . "' );</script>";
+     echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
+     //echo "<script>console.log('debug:".$result."' );</script>";
+     //echo "<script>console.log('debug:".$id_user."' );</script>";
+
+     if (isset($_GET["action"])) {
+         switch ($_GET["action"]) {
+             case "pag_cuidador":
+                 if (isset($_POST["update"])) {
+                     echo "<script>console.log('lá' );</script>";
+                     $nome_ter = $_POST['nome'];
+                     $username_ter = $_POST['username'];
+                     $password_ter = $_POST['password'];
+                     $morada_ter = $_POST['morada'];
+                     $email_ter = $_POST['email'];
+                     $telemovel_ter = $_POST['telemovel'];
+                     $imagem_ter = $_FILES['img']["name"];
+                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                     $update_query = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '", imagem="' . $imagem_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                     echo "<script>console.log('aqui' );</script>";
+                     $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                     echo "<script>console.log('adeus' );</script>";
+                     //$data_update=mysqli_fetch_array($result_update);
+                     echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
+                 } else {
+                     echo "<script>alert('O update da informação falhou');</script>";
+                 }
+         }
+     }
+ }
 ?>
 
 <!DOCTYPE html>
@@ -94,34 +119,36 @@ session_start();
     </div>
     <div class="containerBlocks">
         <div class="profile">
+            <form class="login" method="POST" action="pag_cuidador.php?action=pag_cuidador" enctype="multipart/form-data">
             <h4>Informação do Utilizador</h4>
             <div class="row">
                 <div class="column c1">
                     <label for="username">Username</label><br>
-                    <input type="text" value="<?php echo $data['username']?>"><br>
+                    <input type="text" name="username" value="<?php echo $data['username']?>"><br>
                     <label for="nome">Nome</label><br>
-                    <input type="text" value="<?php echo $data['nome']?>"><br>
+                    <input type="text" name="nome" value="<?php echo $data['nome']?>"><br>
                     <label for="pass">Password</label><br>
-                    <input type="password" value="<?php echo $data['password']?>">
+                    <input type="password" name="password" value="<?php echo $data['password']?>">
                 </div>
                 <div class="column c2">
                     <label for="morada">Morada</label><br>
-                    <input type="text" value="<?php echo $data['morada']?>"><br>
+                    <input type="text" name="morada" value="<?php echo $data['morada']?>"><br>
                     <label for="email">Email</label><br>
-                    <input type="email" value="<?php echo $data['email']?>"><br>
+                    <input type="email"name="email" value="<?php echo $data['email']?>"><br>
                     <label for="tel">Telemovel</label><br>
-                    <input type="number" value="<?php echo $data['telemovel']?>"><br>
+                    <input type="number" name="telemovel" value="<?php echo $data['telemovel']?>"><br>
                 </div>
                 <div class="column c3">
                     <label for="img">Imagem de Perfil</label>
+                    <input type="file" id="img" name="img" accept="image/*">
+                    <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                     <?php $imagem = $data['imagem'];
                     echo '<img src="image/'.$imagem.'" />';
                     echo "<br>";?>
-                    <input type="file" id="img" name="img" accept="image/*">
-                    <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
                 </div>
               <?php } ?>
             </div>
+            </form>
         </div>
         <div class="pac">
             <h4>Lista de Pacientes</h4>

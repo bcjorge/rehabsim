@@ -27,7 +27,6 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     echo "<script>console.log('ola');</script>";
     //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
     $num_results = mysqli_num_rows($result_ut);
-    //$rows = mysqli_fetch_array($result_ut);
 
     if ($num_results == 0) {
         echo "Não Existem Utilizadores para Listar.";
