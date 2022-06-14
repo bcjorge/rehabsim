@@ -179,7 +179,7 @@ https://templatemo.com/tm-570-chain-app-dev
                   <label for="morada">Morada</label><br>
                   <input type="text" name="morada" value="<?php echo $data['morada']?>"><br>
                   <label for="email">Email</label><br>
-                  <input type="email"name="email" value="<?php echo $data['email']?>"><br>
+                  <input type="email" name="email" value="<?php echo $data['email']?>"><br>
                   <label for="tel">Telemovel</label><br>
                   <input type="number" name="telemovel" value="<?php echo $data['telemovel']?>"><br>
               </div>

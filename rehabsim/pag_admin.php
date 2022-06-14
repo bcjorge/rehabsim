@@ -18,9 +18,6 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
     //echo "<script>console.log('debug:".$result."' );</script>";
     //echo "<script>console.log('debug:".$id_user."' );</script>";
-
-}
-if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
     $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
     $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
@@ -28,13 +25,76 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
     $num_results = mysqli_num_rows($result_ut);
 
-    if ($num_results == 0) {
-        echo "Não Existem Utilizadores para Listar.";
-    } /*else if ($num_results == 1) {
-                echo "<script>console.log('adeus' );</script>";
-                echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
-                header("Location: perfil_paciente.php");*/
-    echo "<script>console.log('hello');</script>";
+if ($num_results == 0) {
+    echo "Não Existem Utilizadores para Listar.";
+}  if ($num_results == 1) {
+        echo "<script>console.log('adeus' );</script>";
+        echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
+        header("Location: perfil_paciente.php");
+    }
+
+     if (isset($_GET["action"])) {
+         switch ($_GET["action"]) {
+             case "regist_user":
+                 if (isset($_POST["registar_utilizador"])) {
+                     $nome_utilizador = $_POST['nome'];
+                     $morada_utilizador = $_POST['morada'];
+                     $telemovel_utilizador = $_POST['telemovel'];
+                     $email_utilizador = $_POST['email'];
+                     $tipo_utilizador = $_POST['funcao'];
+                     $username_utilizador = $_POST['username'];
+                     $pass_utilizador = hash("sha256", $_POST['password']);
+                     $imagem = $_FILES['img']["name"];
+                     $tempname = $_FILES["img"]["tmp_name"];
+                     $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/'.$imagem.'";
+                     echo "<script>console.log('estou');</script>";
+                     echo "<script>console.log('porque');</script>";
+                     $connect = mysqli_connect('localhost', 'root', '', 'database2')
+                     or die('Error connecting to the server: ' . mysqli_error($connect));
+                     $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","'. $tipo_utilizador . '","'. $imagem . '")';
+                     $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
+                     //$pesquisa = $_POST['pesquisa'];
+                 }
+                 break;
+             case "editar_admin":
+                 if (isset($_POST["update"])) {
+                     echo "<script>console.log('lá' );</script>";
+                     $nome_admin = $_POST['nome'];
+                     $username_admin = $_POST['username'];
+                     $password_admin = $_POST['password'];
+                     $morada_admin = $_POST['morada'];
+                     $email_admin = $_POST['email'];
+                     $telemovel_admin = $_POST['telemovel'];
+                     $imagem_admin = $_FILES['img']["name"];
+                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                     $update_query = 'UPDATE utilizador SET nome="'.$nome_admin.'", morada="'.$morada_admin.'" , telemovel="'.$telemovel_admin.'" , email="'.$email_admin.'" , username= "'.$username_admin.'", password="'.$password_admin.'", imagem="'.$imagem_admin.'" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                     echo "<script>console.log('aqui' );</script>";
+                     $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                     echo "<script>console.log('adeus' );</script>";
+                     //$data_update=mysqli_fetch_array($result_update);
+                     echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
+                 } else {
+                     echo "<script>alert('O update da informação falhou');</script>";
+                 }
+         }
+     }
+    }
+    /*
+    if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
+        //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+        $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
+        $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
+        echo "<script>console.log('ola');</script>";
+        //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
+        $num_results = mysqli_num_rows($result_ut);
+
+        if ($num_results == 0) {
+            echo "Não Existem Utilizadores para Listar.";
+        } /*else if ($num_results == 1) {
+                    echo "<script>console.log('adeus' );</script>";
+                    echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
+                    header("Location: perfil_paciente.php");*/
+/*    echo "<script>console.log('hello');</script>";
 //if (isset($_GET["regist_user"])) {
     echo "<script>console.log('funciona');</script>";
     if (isset($_POST["registar_utilizador"])) {
@@ -55,9 +115,9 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
         $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","'. $tipo_utilizador . '","'. $imagem . '")';
         $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
         //$pesquisa = $_POST['pesquisa'];
-    }
+    }*/
 
-}
+
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -132,23 +192,24 @@ https://templatemo.com/tm-570-chain-app-dev
           </div>
           <div class="containerBlocks">
               <div class="profile">
+                  <form class="login" method="POST" action="pag_admin.php?action=editar_admin" enctype="multipart/form-data">
                   <h4>Informação do Utilizador</h4>
                   <div class="row">
                       <div class="column c1">
                           <label for="username">Username</label><br>
-                          <input type="text" value="<?php echo $data['username']?>"><br>
+                          <input type="text" name="username" value="<?php echo $data['username']?>"><br>
                           <label for="nome">Nome</label><br>
-                          <input type="text" value="<?php echo $data['nome']?>"><br>
+                          <input type="text" name="nome" value="<?php echo $data['nome']?>"><br>
                           <label for="pass">Password</label><br>
-                          <input type="password" value="<?php echo $data['password']?>">
+                          <input type="password" name="password" value="<?php echo $data['password']?>">
                       </div>
                       <div class="column c2">
                           <label for="morada">Morada</label><br>
-                          <input type="text" value="<?php echo $data['morada']?>"><br>
+                          <input type="text" name="morada" value="<?php echo $data['morada']?>"><br>
                           <label for="email">Email</label><br>
-                          <input type="email" value="<?php echo $data['email']?>"><br>
+                          <input type="email" name="email" value="<?php echo $data['email']?>"><br>
                           <label for="tel">Telemovel</label><br>
-                          <input type="number" value="<?php echo $data['telemovel']?>"><br>
+                          <input type="number" name="telemovel" value="<?php echo $data['telemovel']?>"><br>
                       </div>
                       <div class="column c3">
                           <label for="img">Imagem de Perfil</label>
@@ -156,10 +217,11 @@ https://templatemo.com/tm-570-chain-app-dev
                           echo '<img src="image/'.$imagem.'" />';
                           echo "<br>";?>
                           <input type="file" id="img" name="img" accept="image/*">
-                          <div class="gradient-button savButton"><a href="login.php">Salvar Alterações</a></div>
+                          <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                       </div>
                       <?php } ?>
                   </div>
+                  </form>
       </div>
       <div class="pac">
         <h4>Registo Novo Utilizador</h4>
@@ -198,9 +260,9 @@ https://templatemo.com/tm-570-chain-app-dev
                            <?php if ($rows['tipo_utilizador_id']==1);{?>
                           <a href="pag_admin.php#nome" role="button" target="_blank" class="green"></a> <?php } ?>
                           <?php if ($rows['tipo_utilizador_id']==2);{?>
-                              <a href="pag_terapeuta.php.php"></a> <?php } ?>
+                              <a href="pag_terapeuta.php"></a> <?php } ?>
                           <?php if ($rows['tipo_utilizador_id']==3);{?>
-                              <a href="pag_cuidador.php.php"></a> <?php } ?>
+                              <a href="pag_cuidador.php"></a> <?php } ?>
                       </li>
                   </ul>
                   <br>
