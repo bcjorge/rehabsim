@@ -200,9 +200,13 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="formPaciente">
           <form class="login" method="POST" action="pag_terapeuta.php?action=perfil_paciente" enctype="multipart/form-data">
             <div class="column c1">
+                <label for="nome">Nome</label><br>
                 <input type="text" name= "nome" placeholder="Nome"></p>
+                <label for="data_nascimento">Data de Nacimento</label><br>
                 <input type="text" name= "data_nascimento"placeholder="Data de Nacimento"></p>
+                <label for="n_saude">Nº de Saúde</label><br>
                 <input type="text" name= "n_saude" placeholder="Nº de Saude"></p>
+                <label for="NIF">NIF</label><br>
                 <input type="number" name= "NIF" placeholder="NIF">
                 <p><label>Género:</label></p>
                 <select class="sexoInput" name="sexo" id="sexo">
@@ -213,11 +217,16 @@ https://templatemo.com/tm-570-chain-app-dev
                 </select>
             </div>
             <div class="column c2">
-                <input type="text" name= "morada" placeholder="Morada">
-                <input type="text" name="distrito" placeholder="Distrito">
-                <input type="email" name= "email" placeholder="Email">
-                <input type="number" name= "telemovel" placeholder="Telemovel">
-                <input type="text" name= "tipo_afasia" placeholder="tipo_de_afasia">
+                <label for="morada">Morada</label><br>
+                <input type="text" name= "morada" placeholder="Morada"><br>
+                <label for="distrita">Distrito</label><br>
+                <input type="text" name="distrito" placeholder="Distrito"><br>
+                <label for="email">Email</label><br>
+                <input type="email" name= "email" placeholder="Email"><br>
+                <label for="telemovel">Telemóvel</label><br>
+                <input type="number" name= "telemovel" placeholder="Telemovel"><br>
+                <label for="tipo_afasia">Tipo de Afasia</label><br>
+                <input type="text" name= "tipo_afasia" placeholder="tipo_de_afasia"><br>
             </div>
             <div class="column c3">
                 <label for="alergias">Lista de Alergias (separadas por vírgula):</label>

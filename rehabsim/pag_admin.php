@@ -76,6 +76,15 @@ if ($num_results == 0) {
                  } else {
                      echo "<script>alert('O update da informação falhou');</script>";
                  }
+                 break;
+             case "ativar":
+                 $ativar='UPDATE utilizador SET estado="Ativado" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                 $result_ativar=mysqli_query($connect, $ativar) or die('The query failed: ' . mysqli_error($connect));
+                 break;
+             case "desativar":
+                 $desativar='UPDATE utilizador SET estado="Desativado" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                 $result_desativar=mysqli_query($connect, $desativar) or die('The query failed: ' . mysqli_error($connect));
+                 break;
          }
      }
     }
@@ -228,9 +237,13 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="formPaciente" >
             <form class="login" method="POST" action="pag_admin.php?action=regist_user" enctype="multipart/form-data">
             <div class="column c1">
+                <label for="nome">Nome</label><br>
                 <input type="text" name= "nome" placeholder="Nome"></p>
+                <label for="morada">Morada</label><br>
                 <input type="text" name= "morada" placeholder="Morada"></p>
+                <label for="telemovel">Telemóvel</label><br>
                 <input type="text"  name= "telemovel" placeholder="Telemovel"></p>
+                <label for="email">Email</label><br>
                 <input type="email" name= "email" placeholder="Email">
             </div>
             <div class="column c2">
@@ -240,8 +253,10 @@ https://templatemo.com/tm-570-chain-app-dev
                     <option name= "Admin" value="1">Administrador</option>
                     <option name= "Te" value="2">Terapeuta</option>
                     <option name= "Cg" value="3">Cuidador</option>
-                </select>
-                <input type="text" name= "username" placeholder="Username">
+                </select><br>
+                <label for="username">Username</label><br>
+                <input type="text" name= "username" placeholder="Username"><br>
+                <label for="password">Password</label><br>
                 <input type="password" name= "password" placeholder="Password">
             </div>
             <div class="column c3">
