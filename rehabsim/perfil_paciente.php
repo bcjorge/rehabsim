@@ -25,14 +25,20 @@ if (isset($_GET["action"])) {
                 $afasia=$_POST['afasia'];
                 $alergias_pac=$_POST['alergias'];
                 $imagem_pac = $_FILES['img']["name"];
+                if(!empty($imagem_pac)){
                 $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
                 $update_query = 'UPDATE paciente SET data_nascimento="'.$data_nascimento_pac.'", nome="'.$nome_pac.'", morada="'.$morada_pac.'" , distrito="'.$distrito_pac.'",  sexo="'.$genero_pac.'", nif="'.$NIF_pac.'", num_saude="'.$n_saude_pac.'",telemovel="'.$telemovel_pac.'" , email="'.$email_pac.'" , alergias= "'.$alergias_pac.'", afasia_tipo="'.$afasia.'", imagem="'.$imagem_pac.'" WHERE paciente.num_saude="' . $num_saude . '"';
                 echo "<script>console.log('aqui' );</script>";
                 $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
                 echo "<script>console.log('adeus' );</script>";
                 //$data_update=mysqli_fetch_array($result_update);
-                echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
-            } else {
+
+            } else{
+                    $update_query1 = 'UPDATE paciente SET data_nascimento="'.$data_nascimento_pac.'", nome="'.$nome_pac.'", morada="'.$morada_pac.'" , distrito="'.$distrito_pac.'",  sexo="'.$genero_pac.'", nif="'.$NIF_pac.'", num_saude="'.$n_saude_pac.'",telemovel="'.$telemovel_pac.'" , email="'.$email_pac.'" , alergias= "'.$alergias_pac.'", afasia_tipo="'.$afasia.'" WHERE paciente.num_saude="' . $num_saude . '"';
+                    echo "<script>console.log('aqui' );</script>";
+                    $result_update1 = mysqli_query($connect, $update_query1) or die('The query failed: ' . mysqli_error($connect));
+                } echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";}
+            else {
                 echo "<script>alert('O update da informação falhou');</script>";
             }
             break;
