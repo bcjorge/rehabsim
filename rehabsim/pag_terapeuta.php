@@ -2,6 +2,7 @@
 session_start();
 if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
     $id_user = $_SESSION['id_utilizador'];
+
     // $pageNumber = $_GET['pageNumber'];
     // $pageSize = $_GET['pageSize'];
     //$nome =$_GET['nome'];
@@ -84,8 +85,15 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                 } else {
                     echo "<script>alert('O update da informação falhou');</script>";
                 }
+           /* case "dados_consulta":
+                if (isset($_POST["gravar_dados"])) {
+                    $paciente=$_POST['paciente_nome'];
+                    $terapeuta=$_POST['terapeuta_nome'];
+                    $cuidador=$_POST['cuidador_nome'];
+                    $afasia=$_POST['afasia'];*/
+
+                }
         }
-    }
 
 }
 
@@ -231,25 +239,44 @@ https://templatemo.com/tm-570-chain-app-dev
             </div>
             <div class="column c3">
                 <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
-                <textarea id="alergias" name="alergias" rows="3" cols="40"></textarea><br>
+                <textarea id="alergias" name="alergias" rows="3" cols="30"></textarea><br>
+                <br>
                 <label for="img">Imagem de Perfil</label>
                 <input type="file" id="img" name="img" accept="image/*">
-                <input class="gradient-button savButton"type="submit"  name="registar_p" value="Registar Paciente"</input>
+                <br>
+                <br>
+                <input class="gradient-button sessionButton"type="submit"  name="registar_p" value="Registar Paciente"</input>
             </div>
             </form>
       </div>
       </div>
       <div class="pl">
-          <h4> Procurar Paciente existente</h4>
+          <div class="column c1">
+              <h5> Procurar Paciente existente</h5>
           <div class="formPaciente">
               <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente"">
               <input type="text" name= "pesquisa" placeholder="Número de utente">
-              <input class="gradient-button savButton" type="submit" value="Submit" name="submit">
+              <input class="gradient-button sessionButton" type="submit" value="Procurar" name="submit">
               </form>
-
-      </div>
+          </div>
     </div>
+          <form class="pag" method="POST" action="pag_terapeuta.php?action=dados_consulta"">
+          <div class="column c2">
+              <h5> Inserir Nova Consulta </h5>
+              <div class="formPaciente">
+                  <input type="text" name= "paciente_nome" placeholder="Nome do Paciente">
+                  <input type="text" name= "cuidador_nome" placeholder="Nome do Cuidador">
+                  <input type="text" name= "terapeuta_nome" placeholder="Terapeuta Responsável">
+              </div>
+          </div>
+          <div class="column c3">
+              <div class="formPaciente">
+                  <br>
+                  <input type="text" name= "num_saude" placeholder="Numero de saude">
+                  <input type="number" name= "afasia" placeholder="Tipo de afasia">
+                  <input class="gradient-button sessionButton" type="submit" value="Iniciar Consulta" name="gravar_dados">
   </div>
+          </div>
 
 
     <!-- Scripts -->
