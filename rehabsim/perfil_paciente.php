@@ -8,6 +8,36 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     $sql = 'SELECT * FROM paciente WHERE paciente.num_saude="' . $num_saude . '"';
     $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
     //echo "<script>console.log(.data_stringify($result).);</script>";
+if (isset($_GET["action"])) {
+    switch ($_GET["action"]) {
+        case "editar_paciente":
+            if (isset($_POST["update"])) {
+                echo "<script>console.log('lá' );</script>";
+                $nome_pac = $_POST['nome'];
+                $data_nascimento_pac=$_POST['data_nascimento'];
+                $n_saude_pac=$_POST['n_saude'];
+                $NIF_pac=$_POST['NIF'];
+                $genero_pac=$_POST['genero'];
+                $morada_pac = $_POST['morada'];
+                $distrito_pac=$_POST['distrito'];
+                $email_pac = $_POST['email'];
+                $telemovel_pac = $_POST['telemovel'];
+                $afasia=$_POST['afasia'];
+                $alergias_pac=$_POST['alergias'];
+                $imagem_pac = $_FILES['img']["name"];
+                $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                $update_query = 'UPDATE paciente SET data_nascimento="'.$data_nascimento_pac.'", nome="'.$nome_pac.'", morada="'.$morada_pac.'" , distrito="'.$distrito_pac.'",  sexo="'.$genero_pac.'", nif="'.$NIF_pac.'", num_saude="'.$n_saude_pac.'",telemovel="'.$telemovel_pac.'" , email="'.$email_pac.'" , alergias= "'.$alergias_pac.'", afasia_tipo="'.$afasia.'", imagem="'.$imagem_pac.'" WHERE paciente.num_saude="' . $num_saude . '"';
+                echo "<script>console.log('aqui' );</script>";
+                $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                echo "<script>console.log('adeus' );</script>";
+                //$data_update=mysqli_fetch_array($result_update);
+                echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
+            } else {
+                echo "<script>alert('O update da informação falhou');</script>";
+            }
+            break;
+    }
+}
 }
 ?>
 
@@ -84,44 +114,47 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     </div>
     <div class="containerBlocks">
         <div class="profile">
+            <form class="login" method="POST" action="perfil_paciente.php?action=editar_paciente" enctype="multipart/form-data">
             <h4>Informação do Paciente</h4>
             <div class="row">
                 <div class="column c1">
                     <label for="nome">Nome</label><br>
-                    <input type="text" value="<?php echo $data['nome']?>"><br>
-                    <label for="data">Data de Nascimento</label><br>
-                    <input type="date" value="<?php echo $data['data_nascimento']?>"><br>
-                    <label for="numb">Numero de Saude</label><br>
-                    <input type="number" value="<?php echo $data['num_saude']?>"><br>
+                    <input type="text" name= "nome" value="<?php echo $data['nome']?>"><br>
+                    <label for="data_nascimento">Data de Nascimento</label><br>
+                    <input type="date" name= "data_nascimento" value="<?php echo $data['data_nascimento']?>"><br>
+                    <label for="n_saude">Numero de Saude</label><br>
+                    <input type="number" name= "n_saude" value="<?php echo $data['num_saude']?>"><br>
                     <label for="nif">NIF</label><br>
-                    <input type="number" value="<?php echo $data['nif']?>"><br>
+                    <input type="number" name= "NIF" value="<?php echo $data['nif']?>"><br>
                     <label for="genero">Genero</label><br>
-                    <input type="text" value="<?php echo $data['sexo']?>"><br>
+                    <input type="text" name= "genero" value="<?php echo $data['sexo']?>"><br>
                 </div>
                 <div class="column c2">
                     <label for="morada">Morada</label><br>
-                    <input type="text" value="<?php echo $data['morada']?>"><br>
+                    <input type="text" name= "morada" value="<?php echo $data['morada']?>"><br>
                     <label for="distrito">Distrito</label><br>
-                    <input type="text" value="<?php echo $data['distrito']?>"><br>
+                    <input type="text" name= "distrito" value="<?php echo $data['distrito']?>"><br>
                     <label for="email">Email</label><br>
-                    <input type="email" value="<?php echo $data['email']?>"><br>
-                    <label for="tel">Telemovel</label><br>
-                    <input type="number" value="<?php echo $data['telemovel']?>"><br>
+                    <input type="email" name= "email" value="<?php echo $data['email']?>"><br>
+                    <label for="telemovel">Telemovel</label><br>
+                    <input type="number" name= "telemovel" value="<?php echo $data['telemovel']?>"><br>
                     <label for="afasia">Tipo de Afasia</label><br>
-                    <input type="number" value="<?php echo $data['afasia_tipo']?>">
+                    <input type="number" name= "afasia" value="<?php echo $data['afasia_tipo']?>">
                 </div>
                 <div class="column c3">
                     <label for="alergias">Lista de Alergias (separadas por vírgula):</label>
                     <textarea id="alergias" name="alergias" rows="3" cols="40" > <?php echo $data['alergias']?></textarea><br>
-                    <label for="img">Imagem de Perfil</label>
+                    <label for="img">Imagem de Perfil</label><br>
                     <?php $imagem = $data['imagem'];
+                    if(!empty($imagem)){
                     echo '<img src="image/'.$imagem.'" />';
-                    echo "<br>";?>
+                    echo "<br>";}?>
                     <input type="file" id="img" name="img" value="<?php echo $data['imagem']?>" accept="image/*">
-                    <div class="gradient-button savButton"><a href="perfil_paciente.php">Salvar Alterações</a></div>
+                    <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                 </div>
+                <?php } ?>
             </div>
-            <?php } ?>
+            </form>
         </div>
         <div class="pac">
             <h4>Resultados da Sessão</h4>
