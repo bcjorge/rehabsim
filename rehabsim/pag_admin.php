@@ -2,27 +2,20 @@
 session_start();
 if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     $id_user = $_SESSION['id_utilizador'];
-        // $pageNumber = $_GET['pageNumber'];
-        // $pageSize = $_GET['pageSize'];
-        //$nome =$_GET['nome'];
-        //$morada = $_GET['morada'];
-        //$tel = $_GET['telemovel'];
-        //$email = $_GET['email'];
 
         $connect = mysqli_connect('localhost', 'root', '', 'database2')
         or die('Error connecting to the server: ' . mysqli_error($connect));
+
         $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';
         $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
         echo "<script>console.log('ola');</script>";
         echo "<script>console.log('debug:" . $id_user . "' );</script>";
         echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
-        //echo "<script>console.log('debug:".$result."' );</script>";
-        //echo "<script>console.log('debug:".$id_user."' );</script>";
-        //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+
+//query para a listagem de utilizadores
         $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
         $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
         echo "<script>console.log('ola');</script>";
-        //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
         $num_results = mysqli_num_rows($result_ut);
 
         if ($num_results == 0) {
@@ -85,8 +78,17 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                 case "desativar":
                     $desativar = 'UPDATE utilizador SET estado="Desativado" WHERE utilizador.id_utilizador="' . $id_user . '"';
                     $result_desativar = mysqli_query($connect, $desativar) or die('The query failed: ' . mysqli_error($connect));
-                    break;            }
-        }
+                    break;
+                case "clicar":
+                    echo "<script>console.log('chega aquiiii' );</script>";
+                    $id_utilizador3=$_POST['id_utl'];
+                    $_SESSION['ola']=$id_utilizador3;
+                    //$_SESSION['blabla']=2;
+                    echo "<script>console.log('debug: session " . $_SESSION['clickon'] . "' );</script>";
+                    header("Location: perfil_utilizadores.php");
+
+                }
+            }
     }
 
     /*
@@ -271,17 +273,20 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
       <div class="pl">
           <h4> Lista de Utilizadores</h4> <br>
-          <form method="post" action="pag_admin.php?action=procurar">
-          <select class="funcaoInput" id="utilizador" name="id">
+          <form method="POST" action="pag_admin.php?action=clicar">
+          <select class="funcaoInput" id="utilizador" name="id_utl" >
               <?php
               echo("<option> -- Selecionar utilizador -- </option>");
               while ($rows=mysqli_fetch_array($result_ut)){
                   $id_utilizador=$rows['id_utilizador'];
                   $nome_utilizador=$rows['nome'];
                   $tipo_utilizador=$rows['tipo_utilizador_id'];
-                  echo("<option value=$id_utilizador>$nome_utilizador - $tipo_utilizador</option>");} ?>
+                  echo("<option value=$id_utilizador>$nome_utilizador - $tipo_utilizador</option>");
+              }
+              ?>
+              <input class="gradient-button sessionButton" type="submit"  value="Procurar utilizador">
           </select>
-          <input class="gradient-button sessionButton" type="submit"  name="procurar_util" value="Procurar utilizador">
+
           </form>
       </div>
     </div>
