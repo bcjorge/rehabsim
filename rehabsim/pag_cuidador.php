@@ -31,16 +31,24 @@ session_start();
                      $email_ter = $_POST['email'];
                      $telemovel_ter = $_POST['telemovel'];
                      $imagem_ter = $_FILES['img']["name"];
-                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                     $update_query = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '", imagem="' . $imagem_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
-                     echo "<script>console.log('aqui' );</script>";
-                     $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
-                     echo "<script>console.log('adeus' );</script>";
-                     //$data_update=mysqli_fetch_array($result_update);
+                     if(!empty($imagem_ter)) {
+                         $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                         $update_query = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '", imagem="' . $imagem_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                         echo "<script>console.log('aqui' );</script>";
+                         $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                         echo "<script>console.log('adeus' );</script>";
+                         //$data_update=mysqli_fetch_array($result_update);
+                     }
+                     else{
+                         $update_query1 = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                         echo "<script>console.log('aqui' );</script>";
+                         $result_update1 = mysqli_query($connect, $update_query1) or die('The query failed: ' . mysqli_error($connect));
+                     }
                      echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                  } else {
                      echo "<script>alert('O update da informação falhou');</script>";
                  }
+                 break;
          }
      }
  }
@@ -143,8 +151,9 @@ session_start();
                     <input type="file" id="img" name="img" accept="image/*">
                     <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                     <?php $imagem = $data['imagem'];
+                    if(!empty($imagem)){
                     echo '<img src="image/'.$imagem.'" />';
-                    echo "<br>";?>
+                    echo "<br>";}?>
                 </div>
               <?php } ?>
             </div>

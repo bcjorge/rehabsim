@@ -224,8 +224,9 @@ https://templatemo.com/tm-570-chain-app-dev
                       <div class="column c3">
                           <label for="img">Imagem de Perfil</label>
                           <?php $imagem = $data['imagem'];
+                          if(!empty($imagem)){
                           echo '<img src="image/'.$imagem.'" />';
-                          echo "<br>";?>
+                          echo "<br>";}?>
                           <input type="file" id="img" name="img" accept="image/*">
                           <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                       </div>
