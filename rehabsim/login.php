@@ -8,7 +8,7 @@ if(isset($_GET["action"])) {
             $user = $_POST['username'];
             $connect = mysqli_connect('localhost', 'root', '', 'database2')
             or die('Error connecting to the server: ' . mysqli_error($connect));
-            $sql = 'SELECT * FROM utilizador WHERE username = "' .$user. '" AND password =  "' .hash("sha256", $pass). '"';
+            $sql = 'SELECT * FROM utilizador WHERE username = "' .$user. '" AND password =  "' .hash("sha256", $pass). '"AND estado ="ativado"';
             $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
             $row = mysqli_fetch_array($result);
             $number = mysqli_num_rows($result);
@@ -33,7 +33,7 @@ if(isset($_GET["action"])) {
                 break;
             } else {
                 $_SESSION['authuser'] = 0;
-                echo "<script>alert('Password ou Utilizador Incorretos');</script>";
+                echo "<script>alert('Password ou Utilizador Incorretos. Utilizador pode estar desativado');</script>";
                 //echo'login incorreto. Password ou Utilizador Incorretos';
                 break;
             }

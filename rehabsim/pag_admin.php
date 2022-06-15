@@ -26,6 +26,15 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
             echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
             header("Location: perfil_paciente.php");
         }
+//query utilizadores ativados
+        $ut_desativados='SELECT * FROM utilizador WHERE utilizador.estado="desativado"';
+        $result_des = mysqli_query($connect, $ut_desativados) or die('The query failed: ' . mysqli_error($connect));
+        $num_desativados=mysqli_num_rows($result_des);
+
+ //query utilizadores desativados
+        $ut_ativados='SELECT * FROM utilizador WHERE utilizador.estado="ativado"';
+        $result_ativ = mysqli_query($connect, $ut_ativados) or die('The query failed: ' . mysqli_error($connect));
+        $num_ativados=mysqli_num_rows($result_ativ);
 
         if (isset($_GET["action"])) {
             switch ($_GET["action"]) {
@@ -60,23 +69,32 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                         $email_admin = $_POST['email'];
                         $telemovel_admin = $_POST['telemovel'];
                         $imagem_admin = $_FILES['img']["name"];
-                        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                        $update_query = 'UPDATE utilizador SET nome="' . $nome_admin . '", morada="' . $morada_admin . '" , telemovel="' . $telemovel_admin . '" , email="' . $email_admin . '" , username= "' . $username_admin . '", password="' . $password_admin . '", imagem="' . $imagem_admin . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
-                        echo "<script>console.log('aqui' );</script>";
-                        $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
-                        echo "<script>console.log('adeus' );</script>";
-                        //$data_update=mysqli_fetch_array($result_update);
+                        if(!empty($imagem_admin)) {
+                            $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                            $update_query = 'UPDATE utilizador SET nome="' . $nome_admin . '", morada="' . $morada_admin . '" , telemovel="' . $telemovel_admin . '" , email="' . $email_admin . '" , username= "' . $username_admin . '", password="' . $password_admin . '", imagem="' . $imagem_admin . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                            echo "<script>console.log('aqui' );</script>";
+                            $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                            echo "<script>console.log('adeus' );</script>";
+                            //$data_update=mysqli_fetch_array($result_update);
+                        }
+                        else{
+                            $update_query1 = 'UPDATE utilizador SET nome="' . $nome_admin . '", morada="' . $morada_admin . '" , telemovel="' . $telemovel_admin . '" , email="' . $email_admin . '" , username= "' . $username_admin . '", password="' . $password_admin . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                            echo "<script>console.log('aqui' );</script>";
+                            $result_update1 = mysqli_query($connect, $update_query1) or die('The query failed: ' . mysqli_error($connect));
+                        }
                         echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                     } else {
                         echo "<script>alert('O update da informação falhou');</script>";
                     }
                     break;
                 case "ativar":
-                    $ativar = 'UPDATE utilizador SET estado="Ativado" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                    $user_ativo=$_POST['id_ativ'];
+                    $ativar = 'UPDATE utilizador SET estado="Ativado" WHERE id_utilizador ="' .$user_ativo. '"';
                     $result_ativar = mysqli_query($connect, $ativar) or die('The query failed: ' . mysqli_error($connect));
                     break;
                 case "desativar":
-                    $desativar = 'UPDATE utilizador SET estado="Desativado" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                    $user_desativo=$_POST['id_desat'];
+                    $desativar = 'UPDATE utilizador SET estado="Desativado" WHERE id_utilizador ="' .$user_desativo. '"';
                     $result_desativar = mysqli_query($connect, $desativar) or die('The query failed: ' . mysqli_error($connect));
                     break;
                 case "clicar":
@@ -288,7 +306,37 @@ https://templatemo.com/tm-570-chain-app-dev
           </select>
 
           </form>
-      </div>
+
+          <h4> Ativar/Desativar Utilizadores</h4> <br>
+          <form method="POST" action="pag_admin.php?action=ativar">
+              <select class="funcaoInput" id="utilizador" name="id_ativ" ><br>
+                  <?php
+                  echo("<option> -- Selecionar utilizador -- </option>");
+                  while ($desativados=mysqli_fetch_array($result_des)){
+                      $id_utilizadordesat=$desativados['id_utilizador'];
+                      $nome_utilizadordesat=$desativados['nome'];
+                      $tipo_utilizadordesat=$desativados['tipo_utilizador_id'];
+                      echo("<option value=$id_utilizadordesat>$nome_utilizadordesat - $tipo_utilizadordesat</option>");
+                  }
+                  ?>
+                  <input class="gradient-button sessionButton" type="submit"  value="Ativar Utilizador">
+              </select>
+              <br>
+          </form>
+          <form method="POST" action="pag_admin.php?action=desativar">
+              <select class="funcaoInput" id="utilizador" name="id_desat" >
+                  <?php
+                  echo("<option> -- Selecionar utilizador -- </option>");
+                  while ($ativados=mysqli_fetch_array($result_ativ)){
+                      $id_utilizadorativ=$ativados['id_utilizador'];
+                      $nome_utilizadorativ=$ativados['nome'];
+                      $tipo_utilizadorativ=$ativados['tipo_utilizador_id'];
+                      echo("<option value=$id_utilizadorativ>$nome_utilizadorativ - $tipo_utilizadorativ</option>");
+                  }
+                  ?><br>
+                  <input class="gradient-button sessionButton" type="submit"  value="Desativar Utilizador">
+              </select>
+          </form>
     </div>
 
   </div>
