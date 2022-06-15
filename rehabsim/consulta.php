@@ -1,4 +1,26 @@
-<?php?>
+<?php
+session_start();
+if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
+    $id_user = $_SESSION['id_utilizador'];
+    if (isset($_GET["action"])) {
+        switch ($_GET["action"]) {
+            case "inserir":
+                if (isset($_POST["resultados"])) {
+                    $terapeuta= $_POST['terapeuta'];
+                    $cuidador= $_POST['cuidador'];
+                    $data= $_POST['data'];
+                    $avaliacao=$_POST['avaliacao'];
+                    $auto_avaliacao= $_POST['auto_avaliacao'];
+                    $comentarios= $_POST['comentarios'];
+                    $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                    $insert_results='INSERT INTO registo_consulta (paciente_pontuacao, autoavaliacao, data, comentarios) VALUES ("' . $avaliacao . '","' . $auto_avaliacao . '","' . $data . '","' . $comentarios . '")';
+                    $result_IQ = mysqli_query($connect, $insert_results) or die('The query failed: ' . mysqli_error($connect));
+                }
+                break;
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang=”en”>
 <head>
@@ -71,6 +93,7 @@
         <br>
     </div>
     <div class="profile">
+        <form class="login" method="POST" action="consulta.php?action=inserir" enctype="multipart/form-data">
         <h5>Informações Gerais</h5>
         <div class="row">
             <div class="column c1">
@@ -103,11 +126,11 @@
                 <h5> Preenchimento pelo cuidador </h5>
                 <br>
                 <label for="avaliacao">Avaliação do Cuidador</label><br>
-                <input class="inputresult" type="number" placeholder="Avaliação total">
+                <input class="inputresult" name="avaliacao" type="number" placeholder="Avaliação total">
                 <br>
                 <br>
                 <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
-                <input class="inputresult" type="number" placeholder="Dificuldade 1-5">
+                <input class="inputresult" name="auto_avaliacao" type="number" placeholder="Dificuldade 1-5">
                 <br>
             </div>
             <div class="column c3">
@@ -115,5 +138,6 @@
                 <label for="comentarios">Possiveis esclarecimentos:</label>
                 <textarea id="comentarios" name="comentarios" rows="3" cols="40" > <?php //echo $data['alergias']?></textarea><br>
                 <br>
-                <div class="gradient-button sessionButton"><a href="login.php">Salvar Resultados</a></div>
+                <input class="gradient-button savButton" type="submit"  name="resultados" value="Salvar Resultados">
+                </form>
             </div>

@@ -7,6 +7,7 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     or die('Error connecting to the server: ' . mysqli_error($connect));
     $sql = 'SELECT * FROM paciente WHERE paciente.num_saude="' . $num_saude . '"';
     $result = mysqli_query($connect, $sql) or die('The query failed: ' . mysqli_error($connect));
+
     //echo "<script>console.log(.data_stringify($result).);</script>";
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
@@ -197,6 +198,8 @@ if (isset($_GET["action"])) {
                         <h5>Nível Atual:</h5>
                         <br>
                         <div class="gradient-button sessionButton"><a href="historico.php">Histórico de sessões</a></div>
+                        <br><br>
+                        <div class="gradient-button sessionButton"><a href="consulta.php">Nova Consulta</a></div>
                     </div>
                 </div>
             </div>
