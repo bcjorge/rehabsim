@@ -76,15 +76,24 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     $telemovel_ter = $_POST['telemovel'];
                     $imagem_ter = $_FILES['img']["name"];
                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                    $update_query = 'UPDATE utilizador SET nome="'.$nome_ter.'", morada="'.$morada_ter.'" , telemovel="'.$telemovel_ter.'" , email="'.$email_ter.'" , username= "'.$username_ter.'", password="'.$password_ter.'", imagem="'.$imagem_ter.'" WHERE utilizador.id_utilizador="' . $id_user . '"';
-                    echo "<script>console.log('aqui' );</script>";
-                    $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
-                    echo "<script>console.log('adeus' );</script>";
-                    //$data_update=mysqli_fetch_array($result_update);
+                    if(!empty($imagem_ter)) {
+                        $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                        $update_query = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '", imagem="' . $imagem_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                        echo "<script>console.log('aqui' );</script>";
+                        $result_update = mysqli_query($connect, $update_query) or die('The query failed: ' . mysqli_error($connect));
+                        echo "<script>console.log('adeus' );</script>";
+                        //$data_update=mysqli_fetch_array($result_update);
+                    }
+                    else{
+                        $update_query1 = 'UPDATE utilizador SET nome="' . $nome_ter . '", morada="' . $morada_ter . '" , telemovel="' . $telemovel_ter . '" , email="' . $email_ter . '" , username= "' . $username_ter . '", password="' . $password_ter . '" WHERE utilizador.id_utilizador="' . $id_user . '"';
+                        echo "<script>console.log('aqui' );</script>";
+                        $result_update1 = mysqli_query($connect, $update_query1) or die('The query failed: ' . mysqli_error($connect));
+                    }
                     echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                 } else {
                     echo "<script>alert('O update da informação falhou');</script>";
                 }
+                break;
            /* case "dados_consulta":
                 if (isset($_POST["gravar_dados"])) {
                     $paciente=$_POST['paciente_nome'];
@@ -254,7 +263,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="column c1">
               <h5> Procurar Paciente existente</h5>
           <div class="formPaciente">
-              <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente"">
+              <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
               <input type="text" name= "pesquisa" placeholder="Número de utente">
               <input class="gradient-button sessionButton" type="submit" value="Procurar" name="submit">
               </form>

@@ -21,6 +21,25 @@ session_start();
 
      if (isset($_GET["action"])) {
          switch ($_GET["action"]) {
+             case "perfil_paciente":
+              if (isset($_POST["submit"])) {
+            $pesquisa = $_POST['pesquisa'];
+            $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+             $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
+             $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
+             $num_results = mysqli_num_rows($result_pac);
+             $row = mysqli_fetch_array($result_pac);
+
+              if ($num_results == 0) {
+             echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
+             } else if ($num_results == 1) {
+              $_SESSION['num_saude'] = $row['num_saude'];
+                 echo "<script>console.log('adeus' );</script>";
+                echo "<script>console.log('debug:" . $_SESSION['num_saude'] . "' );</script>";
+                 header("Location: perfil_paciente.php");
+             }
+            }
+              break;
              case "pag_cuidador":
                  if (isset($_POST["update"])) {
                      echo "<script>console.log('lá' );</script>";
@@ -165,8 +184,10 @@ session_start();
         <div class="pl">
             <h4> Procurar Paciente</h4>
             <div class="formPaciente">
-                <input type="text" placeholder="Número de utente"></p>
-                <div class="gradient-button savButton"> <a href="login.php"> Procurar </a></div>
+                <form class="pag" method="POST" action="pag_cuidador.php?action=perfil_paciente">
+                <input type="text" name= "pesquisa" placeholder="Número de utente"></p>
+                <input class="gradient-button sessionButton" type="submit" value="Procurar" name="submit">
+                </form>
             </div>
         </div>
     </div>
