@@ -25,7 +25,6 @@ if(isset($_GET["action"])) {
                     header("Location: pag_terapeuta.php");
                 }
                 else if (isset($_SESSION['tipo_utilizador'])&& $_SESSION['tipo_utilizador']==3){
-
                     header("Location: pag_cuidador.php");
                 }
                 echo "<script>console.log('debug:".$number."' );</script>";
