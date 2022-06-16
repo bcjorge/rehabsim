@@ -86,7 +86,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>RehabSIM - Reabilitação para pacientes com Afasia</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem, ac sollicitudin velit velit mollis ipsum. Morbi ultrices hendrerit sem et commodo.</p>
+                    <p> A plataforma RehabSIM permite o registo das avaliações dos terapeutas sobre a progressão dos pacientes com afasia. Além disso, auxilia o terapeuta com o sistema de apoio à decisão para decidir o nível de dificuldade dos próximos exercícios que o pacienet terá de executar.</p>
                   </div>
                   <!-- <div class="col-lg-12">
                     <div class="white-button first-button scroll-to-section">
@@ -115,8 +115,8 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h4>Lorem <em>Ipsum Dolor</em> sit amet</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem. </p>
+            <h4>Plataforma <em>Rehab SIM</em> sit amet</h4>
+            <p> A plataforma a um clique de distância </p>
           </div>
         </div>
       </div>
@@ -125,37 +125,37 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="row">
         <div class="col-lg-3">
           <div class="service-item">
-            <h4>Lorem Ipsum</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem.</p>
+            <h4>O que é a afasia?</h4>
+            <p> A afasia manifesta-se pela dificuldade de expressão e de compreensão. É mais frequente nos idosos e em individuos com doenças neurológicas.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="http://cienciasecognicao.org/neuroemdebate/arquivos/1706">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item">
-            <h4>Lorem Ipsum</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem.</p>
+            <h4>Tipos de afasia</h4>
+            <p> Existem vários tipos de afasia. Alguns dos tipos são: Afasia Global, Afasia de Broca, Afasia de Wernicke, Afasia Progressiva Primária e Afasia Anómica. </p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="https://www.regionalneurological.com/types-of-aphasia/">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item">
-            <h4>Lorem Ipsum</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris laoreet, velit vitae accumsan volutpat, velit ex porttitor sem.</p>
+            <h4>Diagnóstico</h4>
+            <p> O diagnóstico é realizado por neurologistas e é realizado com exames como a TAC e a ressonância magnética cerebral e pela avaliação das funções cognitivas.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="https://www.aphasia.com/clinical-guides/aphasia-assessment-tools/">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item">
-            <h4>Lorem Ipsum</h4>
-            <p>Lorem ipsum dolor consectetur adipiscing elit sedder williamsburg photo booth quinoa and fashion axe.</p>
+            <h4>Tratamento</h4>
+            <p> Não existem medicamentos ou cirurgias indicados para afasias. O tratamento é terapêutico e deve ser realizado por uma equipe multiprofissional. </p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="https://www.nhs.uk/conditions/aphasia/treatment/">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -213,9 +213,9 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-3">
           <div class="footer-widget">
             <h4>Contact Us</h4>
-            <p>Rio de Janeiro - RJ, 22795-008, Brazil</p>
-            <p><a href="#">010-020-0340</a></p>
-            <p><a href="#">info@company.co</a></p>
+            <p>Largo da Torre, 2825-149 Caparica</p>
+            <p><a href="https://www.fct.unl.pt/">FCT UNL- Faculdade de CiÊncias e Tecnologia Da Universidade Nova de Lisboa</a></p>
+            <p><a href="#">info@company.com</a></p>
           </div>
         </div>
         <div class="col-lg-3">
@@ -224,11 +224,6 @@ https://templatemo.com/tm-570-chain-app-dev
             <ul>
               <li><a href="#">Home</a></li>
               <li><a href="#">Services</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Testimonials</a></li>
-              <li><a href="#">Pricing</a></li>
-            </ul>
-            <ul>
               <li><a href="#">About</a></li>
               <li><a href="#">Testimonials</a></li>
               <li><a href="#">Pricing</a></li>
@@ -258,7 +253,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <div class="logo">
               <img src="assets/images/white-logo.png" alt="">
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+            <p>Rehab SIM. A revolucionar a Saúde desde 2022 </p>
           </div>
         </div>
         <div class="col-lg-12">
