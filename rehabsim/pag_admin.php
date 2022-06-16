@@ -47,6 +47,7 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                         $tipo_utilizador = $_POST['funcao'];
                         $username_utilizador = $_POST['username'];
                         $pass_utilizador = hash("sha256", $_POST['password']);
+                        $estado=$_POST['estado'];
                         $imagem = $_FILES['img']["name"];
                         $tempname = $_FILES["img"]["tmp_name"];
                         $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/'.$imagem.'";
@@ -54,7 +55,7 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                         echo "<script>console.log('porque');</script>";
                         $connect = mysqli_connect('localhost', 'root', '', 'database2')
                         or die('Error connecting to the server: ' . mysqli_error($connect));
-                        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","' . $tipo_utilizador . '","' . $imagem . '")';
+                        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem,estado) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","' . $tipo_utilizador . '","' . $imagem . '","' . $estado . '")';
                         $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
                         //$pesquisa = $_POST['pesquisa'];
                     }
@@ -104,7 +105,7 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                     //$_SESSION['blabla']=2;
                     echo "<script>console.log('debug: session " . $_SESSION['clickon'] . "' );</script>";
                     header("Location: perfil_utilizadores.php");
-
+                    break;
                 }
             }
     }
@@ -280,6 +281,12 @@ https://templatemo.com/tm-570-chain-app-dev
                 <input type="text" name= "username" placeholder="Username"><br>
                 <label for="password">Password</label><br>
                 <input type="password" name= "password" placeholder="Password">
+                <p><label>Estado do Utilizador:</label></p>
+                <select class="funcaoInput" name="estado" id="funcao">
+                    <option hidden disabled selected value> -- selecione uma opção -- </option>
+                    <option name= "Ativado" value="Ativado">Ativado</option>
+                    <option name= "Desativado" value="Desativado">Desativado</option>
+                </select><br>
             </div>
             <div class="column c3">
                 <label for="img">Imagem de Perfil</label>
@@ -336,6 +343,8 @@ https://templatemo.com/tm-570-chain-app-dev
                   ?><br>
                   <input class="gradient-button sessionButton" type="submit"  value="Desativar Utilizador">
               </select>
+              <br>
+              <div class="gradient-button sessionButton"><a href="graficos.php">Consultar dados</a></div>
           </form>
     </div>
 
