@@ -97,19 +97,52 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
             case "dados_consulta":
                 if (isset($_POST["gravar_dados"])) {
                     $paciente=$_POST['num_saude'];
-                    $terapeuta=$_POST['terapeuta_nome'];
-                    $cuidador=$_POST['cuidador_nome'];
+                    $terapeuta=$_POST['terapeuta_username'];
+                    $cuidador=$_POST['cuidador_username'];
 
-                    /*$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+                    $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
 
-                   //Inserir
+                    $verify_utilizador= 'SELECT * FROM utilizador WHERE utilizador.username="'.$terapeuta.'" or utilizador.username="'.$cuidador.'"';
+                    $result_very_utilizador=mysqli_query($connect, $verify_utilizador) or die('The query failed: ' . mysqli_error($connect));
+                    $row_ut = mysqli_fetch_array($result_very_utilizador);
+                    $number_ut = mysqli_num_rows($result_very_utilizador);
+                    echo "<script>console.log('corretos:".$number_ut."' );</script>";
+
+                    $verify_paciente= 'SELECT * FROM paciente WHERE paciente.num_saude="'.$paciente.'"';
+                    $result_very_paciente=mysqli_query($connect, $verify_paciente) or die('The query failed: ' . mysqli_error($connect));
+                    $row_pc = mysqli_fetch_array($result_very_paciente);
+                    $number_pc = mysqli_num_rows($result_very_paciente);
+                    echo "<script>console.log('corretos_pc:".$number_pc."' );</script>";
+
+                    if ($number_ut==2 && $number_pc==1 ){
+                    //Inserir paciente id
                     $insert_utilizador_consulta_pac = 'INSERT INTO registo_consulta (paciente_id) SELECT id_paciente FROM paciente WHERE paciente.num_saude="'.$paciente.'"';
                     $result_IU1 = mysqli_query($connect, $insert_utilizador_consulta_pac) or die('The query failed: ' . mysqli_error($connect));
+                    echo "<script>console.log('paciente:".$result_IU1['id_paciente']."' );</script>";
+                    //selcionar consulta mais recente
+                    $consulta_recente_sql='SELECT MAX(id_consulta) AS id_consulta FROM registo_consulta';
+                    $consulta_recente = mysqli_query($connect, $consulta_recente_sql) or die('The query failed: ' . mysqli_error($connect));
+                    $row_consulta = mysqli_fetch_array($consulta_recente);
+                    echo "<script>console.log('consulta:".$row_consulta['id_consulta']."' );</script>";
+                    //Inserir teraupeuta
+                    $insert_utilizador_consulta_ter = 'INSERT INTO utilizador_consulta (utilizadores_id_utilizador,registo_consulta_id_consulta) SELECT id_utilizador,'.$row_consulta['id_consulta'].' FROM utilizador WHERE utilizador.username="'.$terapeuta.'"';
+                    $result_IU2 = mysqli_query($connect, $insert_utilizador_consulta_ter) or die('The query failed: ' . mysqli_error($connect));
+                    //Inserir cuidador
+                    $insert_utilizador_consulta_cui = 'INSERT INTO utilizador_consulta (utilizadores_id_utilizador,registo_consulta_id_consulta) SELECT id_utilizador,'.$row_consulta['id_consulta'].' FROM utilizador WHERE utilizador.username="'.$cuidador.'"';
+                    $result_IU3 = mysqli_query($connect, $insert_utilizador_consulta_cui) or die('The query failed: ' . mysqli_error($connect));
 
-                    $insert_utilizador_consulta_ter = 'INSERT INTO utilizador_consulta (utilizador_id_utilizador) VALUES (utilizador.id_paciente) WHERE paciente.num_saude="'.$paciente.'"';*/
-                }
+                    $_SESSION['id_consulta']=$row_consulta['id_consulta'];
+                    $_SESSION['id_cuidador']=$cuidador;
+                    $_SESSION['id_terapeuta']=$terapeuta;
+                    header("Location: consulta.php");
+                    }
+                    else{
+                        echo "<script>alert('Utilizador ou Paciente não existe na base de dados.');</script>";
+                        break;
+                    }
                 }
         }
+    }
 
 }
 
@@ -277,8 +310,8 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="column c2">
               <h5> Inserir Nova Consulta </h5>
               <div class="formPaciente">
-                  <input type="text" name= "cuidador_nome" placeholder="Nome do Cuidador">
-                  <input type="text" name= "terapeuta_nome" placeholder="Terapeuta Responsável">
+                  <input type="text" name= "cuidador_username" placeholder="Username do Cuidador">
+                  <input type="text" name= "terapeuta_username" placeholder="Terapeuta Responsável">
               </div>
           </div>
           <div class="column c3">

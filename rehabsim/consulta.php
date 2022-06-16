@@ -105,8 +105,7 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                 <input type="text" name="cuidador" value="Nome Cuidador<?php //echo $data['morada']?>"><br>
             </div>
             <div class="column c3">
-                <label for="data">Data da Consulta</label><br>
-                <input type="date" name="data" value="Data<?php //echo $data['morada']?>"><br>
+
             </div>
         </div>
     </div>
@@ -116,11 +115,18 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
             <div class="column c1">
                 <h5> Exercicios Receitados  </h5>
                 <br>
-                <h5> Dificuldade Total <?php //echo $rows['ex_type']?> </h5> <p>Valor:<?php //echo $rows['n_dif']?></p><br>
-                <h5> N <?php //echo $rows['ex_type']?> </h5> <p>Nível:<?php //echo $rows['n_dif']?></p>
-                <h5> C <?php //echo $rows['ex_type']?></h5> <p> Nível:</p>
-                <h5> F </h5> <?php //echo $rows['ex_type']?><p> Nível:</p>
-                <h5> R </h5> <p> Nível:</p>
+                <label for="dif_total">Dificuldade Total</label><br>
+                <input class="inputresult" name="dif_total" type="number" placeholder="Dificuldade total"><br>
+                <label for="ex_n">Exercicio N</label><br>
+                <input class="inputresult" name="ex_n" type="number" placeholder="Dificuldade 1-3"><br>
+                <label for="ex_c">Exercicio C</label><br>
+                <input class="inputresult" name="ex_c" type="number" placeholder="Dificuldade 1-3"><br>
+                <label for="ex_f">Exercicio F</label><br>
+                <input class="inputresult" name="ex_f" type="number" placeholder="Dificuldade 1-3"><br>
+                <label for="ex_r">Exercicio R</label><br>
+                <input class="inputresult" name="ex_r" type="number" placeholder="Dificuldade 1-3"><br>
+
+
             </div>
             <div class="column c2">
                 <h5> Preenchimento pelo cuidador </h5>
@@ -132,6 +138,8 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                 <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
                 <input class="inputresult" name="auto_avaliacao" type="number" placeholder="Dificuldade 1-5">
                 <br>
+                <label for="data">Data da Consulta</label><br>
+                <input type="date" name="data" value="Data<?php //echo $data['morada']?>"><br>
             </div>
             <div class="column c3">
                 <h5> Comentarios</h5>
