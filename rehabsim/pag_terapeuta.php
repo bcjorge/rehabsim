@@ -101,6 +101,8 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     $cuidador=$_POST['cuidador_nome'];
 
                     /*$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+
+                   //Inserir
                     $insert_utilizador_consulta_pac = 'INSERT INTO registo_consulta (paciente_id) SELECT id_paciente FROM paciente WHERE paciente.num_saude="'.$paciente.'"';
                     $result_IU1 = mysqli_query($connect, $insert_utilizador_consulta_pac) or die('The query failed: ' . mysqli_error($connect));
 
