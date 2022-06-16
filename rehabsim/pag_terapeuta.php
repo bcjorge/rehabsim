@@ -94,13 +94,20 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     echo "<script>alert('O update da informação falhou');</script>";
                 }
                 break;
-           /* case "dados_consulta":
+            case "dados_consulta":
                 if (isset($_POST["gravar_dados"])) {
-                    $paciente=$_POST['paciente_nome'];
+                    $paciente=$_POST['num_saude'];
                     $terapeuta=$_POST['terapeuta_nome'];
                     $cuidador=$_POST['cuidador_nome'];
-                    $afasia=$_POST['afasia'];*/
 
+                    /*$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
+
+                   //Inserir
+                    $insert_utilizador_consulta_pac = 'INSERT INTO registo_consulta (paciente_id) SELECT id_paciente FROM paciente WHERE paciente.num_saude="'.$paciente.'"';
+                    $result_IU1 = mysqli_query($connect, $insert_utilizador_consulta_pac) or die('The query failed: ' . mysqli_error($connect));
+
+                    $insert_utilizador_consulta_ter = 'INSERT INTO utilizador_consulta (utilizador_id_utilizador) VALUES (utilizador.id_paciente) WHERE paciente.num_saude="'.$paciente.'"';*/
+                }
                 }
         }
 
@@ -156,10 +163,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#services">Services</a></li>
               <li class="scroll-to-section"><a href="#about">About</a></li>
-              <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
-              <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
               <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
             </ul>        
             <a class='menu-trigger'>
@@ -273,7 +277,6 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="column c2">
               <h5> Inserir Nova Consulta </h5>
               <div class="formPaciente">
-                  <input type="text" name= "paciente_nome" placeholder="Nome do Paciente">
                   <input type="text" name= "cuidador_nome" placeholder="Nome do Cuidador">
                   <input type="text" name= "terapeuta_nome" placeholder="Terapeuta Responsável">
               </div>
@@ -281,8 +284,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="column c3">
               <div class="formPaciente">
                   <br>
-                  <input type="text" name= "num_saude" placeholder="Numero de saude">
-                  <input type="number" name= "afasia" placeholder="Tipo de afasia">
+                  <input type="text" name= "num_saude" placeholder="Numero de Saude do Paciente">
                   <input class="gradient-button sessionButton" type="submit" value="Iniciar Consulta" name="gravar_dados">
   </div>
           </div>
