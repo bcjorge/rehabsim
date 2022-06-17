@@ -95,11 +95,8 @@ if (isset($_GET["action"])) {
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#services">Services</a></li>
-                        <li class="scroll-to-section"><a href="#about">About</a></li>
-                        <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
-                        <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
+                        <li class="scroll-to-section"><a href="index.php">Home</a></li>
+                        <li class="scroll-to-section"><a href="index.php">About</a></li>
                         <li><div class="gradient-button"><a href="login.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
                     </ul>
                     <a class='menu-trigger'>

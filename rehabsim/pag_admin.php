@@ -13,7 +13,7 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
         echo "<script>console.log('debug:" . $_SESSION["authuser"] . "' );</script>";
 
 //query para a listagem de utilizadores
-        $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
+        $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id ';
         $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
         echo "<script>console.log('ola');</script>";
         $num_results = mysqli_num_rows($result_ut);
@@ -27,12 +27,12 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
             header("Location: perfil_paciente.php");
         }
 //query utilizadores ativados
-        $ut_desativados='SELECT * FROM utilizador WHERE utilizador.estado="desativado"';
+        $ut_desativados='SELECT * FROM utilizador WHERE utilizador.estado="desativado" ORDER BY tipo_utilizador_id';
         $result_des = mysqli_query($connect, $ut_desativados) or die('The query failed: ' . mysqli_error($connect));
         $num_desativados=mysqli_num_rows($result_des);
 
  //query utilizadores desativados
-        $ut_ativados='SELECT * FROM utilizador WHERE utilizador.estado="ativado"';
+        $ut_ativados='SELECT * FROM utilizador WHERE utilizador.estado="ativado" ORDER BY tipo_utilizador_id';
         $result_ativ = mysqli_query($connect, $ut_ativados) or die('The query failed: ' . mysqli_error($connect));
         $num_ativados=mysqli_num_rows($result_ativ);
 
@@ -197,8 +197,8 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#about">About</a></li>
+              <li class="scroll-to-section"><a href="index.php">Home</a></li>
+              <li class="scroll-to-section"><a href="index.php">About</a></li>
                 <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
             </ul>
             <a class='menu-trigger'>
@@ -303,10 +303,10 @@ https://templatemo.com/tm-570-chain-app-dev
                   $id_utilizador=$rows['id_utilizador'];
                   $nome_utilizador=$rows['nome'];
                   $tipo_utilizador=$rows['tipo_utilizador_id'];
-                  echo("<option value=$id_utilizador>$nome_utilizador - $tipo_utilizador</option>");
+                  echo("<option value=$id_utilizador>$tipo_utilizador - $nome_utilizador</option>");
               }
               ?>
-              <input class="gradient-button sessionButton" type="submit"  value="Procurar utilizador">
+              <input class="button3" type="submit"  value="Procurar utilizador">
           </select>
 
           </form>
@@ -320,10 +320,10 @@ https://templatemo.com/tm-570-chain-app-dev
                       $id_utilizadordesat=$desativados['id_utilizador'];
                       $nome_utilizadordesat=$desativados['nome'];
                       $tipo_utilizadordesat=$desativados['tipo_utilizador_id'];
-                      echo("<option value=$id_utilizadordesat>$nome_utilizadordesat - $tipo_utilizadordesat</option>");
+                      echo("<option value=$id_utilizadordesat>$tipo_utilizadordesat - $nome_utilizadordesat</option>");
                   }
                   ?>
-                  <input class="gradient-button sessionButton" type="submit"  value="Ativar Utilizador">
+                  <input class="button3" type="submit"  value="Ativar Utilizador">
               </select>
               <br>
           </form>
@@ -335,10 +335,10 @@ https://templatemo.com/tm-570-chain-app-dev
                       $id_utilizadorativ=$ativados['id_utilizador'];
                       $nome_utilizadorativ=$ativados['nome'];
                       $tipo_utilizadorativ=$ativados['tipo_utilizador_id'];
-                      echo("<option value=$id_utilizadorativ>$nome_utilizadorativ - $tipo_utilizadorativ</option>");
+                      echo("<option value=$id_utilizadorativ>$tipo_utilizadorativ - $nome_utilizadorativ</option>");
                   }
                   ?><br>
-                  <input class="gradient-button sessionButton" type="submit"  value="Desativar Utilizador">
+                  <input class="button3" type="submit"  value="Desativar Utilizador">
               </select>
               <br>
               <div class="gradient-button sessionButton"><a href="graficos.php">Consultar dados</a></div>

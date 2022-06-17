@@ -120,8 +120,8 @@ session_start();
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#about">About</a></li>
+                        <li class="scroll-to-section"><a href="index.php" >Home</a></li>
+                        <li class="scroll-to-section"><a href="index.php">About</a></li>
                         <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
                     </ul>
                     <a class='menu-trigger'>
@@ -164,12 +164,12 @@ session_start();
                 </div>
                 <div class="column c3">
                     <label for="img">Imagem de Perfil</label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                    <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
                     <?php $imagem = $data['imagem'];
                     if(!empty($imagem)){
-                    echo '<img src="image/'.$imagem.'" />';
+                    echo '<img class="imagem_perfil" src="image/'.$imagem.'" />';
                     echo "<br>";}?>
+                    <input type="file" id="img" name="img" accept="image/*">
+                    <input class="savButton" type="submit"  name="update" value="Salvar Alterações">
                 </div>
               <?php } ?>
             </div>
@@ -183,7 +183,7 @@ session_start();
             <div class="formPaciente">
                 <form class="pag" method="POST" action="pag_cuidador.php?action=perfil_paciente">
                 <input type="text" name= "pesquisa" placeholder="Número de utente"></p>
-                <input class="gradient-button sessionButton" type="submit" value="Procurar" name="submit">
+                <input class="sessionButton1" type="submit" value="Procurar" name="submit">
                 </form>
             </div>
         </div>

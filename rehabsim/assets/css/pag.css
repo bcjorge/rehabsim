@@ -1,3 +1,7 @@
+body{
+    margin-bottom: 50px;
+}
+
 .containerInfo{
     justify-content:center;
     margin-left: 10%;
@@ -76,14 +80,37 @@
 }
 
 .savButton{
-    padding-top: 20px;
-    float: right;
+    align-content: center;
+    background-color: rgb(242,79,22);
+    color: white;
 }
 
 .sessionButton{
-    padding-top: 20px;
     align-content: center;
     float: left;
+}
+
+.sessionButton1{
+    align-content: center;
+    float: left;
+    border: 2px solid rgb(242,79,22);
+    color: rgb(242,79,22);
+    background-color: white;
+    width: 220px;
+}
+
+.sessionButton2{
+    align-content: center;
+    background-color: rgb(242,79,22);
+    color: white;
+}
+
+.button3{
+    align-content: center;
+    background-color: rgb(242,79,22);
+    color: white;
+    margin-left: 50px;
+    width: 200px;
 }
 
 input{
@@ -131,4 +158,10 @@ textarea:focus, input:focus{
 }
 .searchbutton{
     width: 20px;
+}
+
+.imagem_perfil{
+    width:  290px;
+    height: 290px;
+    object-fit: cover;
 }

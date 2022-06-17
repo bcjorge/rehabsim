@@ -85,8 +85,8 @@ https://templatemo.com/tm-570-chain-app-dev
               <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h2>RehabSIM - Reabilitação para pacientes com Afasia</h2>
-                    <p> A plataforma RehabSIM permite o registo das avaliações dos terapeutas sobre a progressão dos pacientes com afasia. Além disso, auxilia o terapeuta com o sistema de apoio à decisão para decidir o nível de dificuldade dos próximos exercícios que o pacienet terá de executar.</p>
+                    <h2 class="tit1"> RehabSIM - Reabilitação para pacientes com Afasia</h2>
+                    <p style="color:white;"> A plataforma RehabSIM permite o registo das avaliações dos terapeutas sobre a progressão dos pacientes com afasia. Além disso, auxilia o terapeuta com o sistema de apoio à decisão para decidir o nível de dificuldade dos próximos exercícios que o pacienet terá de executar.</p>
                   </div>
                   <!-- <div class="col-lg-12">
                     <div class="white-button first-button scroll-to-section">
@@ -110,12 +110,12 @@ https://templatemo.com/tm-570-chain-app-dev
     </div>
   </div>
 
-  <div id="services" class="services section">
+  <div id="about" class="services section">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h4>Plataforma <em>Rehab SIM</em> sit amet</h4>
+            <h4>Plataforma <em>Rehab SIM</em></h4>
             <p> A plataforma a um clique de distância </p>
           </div>
         </div>
@@ -258,8 +258,7 @@ https://templatemo.com/tm-570-chain-app-dev
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
-            <p>Copyright © 2022 RehabSIM. All Rights Reserved. 
-          <br>Design: <a href="https://templatemo.com/" target="_blank" title="css templates">TemplateMo</a></p>
+            <p>Copyright © 2022 RehabSIM. All Rights Reserved.
           </div>
         </div>
       </div>

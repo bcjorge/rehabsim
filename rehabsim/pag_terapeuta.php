@@ -195,8 +195,8 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#about">About</a></li>
+              <li class="scroll-to-section"><a href="index.php">Home</a></li>
+              <li class="scroll-to-section"><a href="index.php">About</a></li>
               <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
             </ul>        
             <a class='menu-trigger'>
@@ -241,10 +241,10 @@ https://templatemo.com/tm-570-chain-app-dev
                   <label for="img">Imagem de Perfil</label>
                   <?php $imagem = $data['imagem'];
                   if(!empty($imagem)){
-                  echo '<img src="image/'.$imagem.'" />';
+                  echo '<img class="imagem_perfil" src="image/'.$imagem.'" />';
                   echo "<br>";}?>
                   <input type="file" id="img" name="img" accept="image/*">
-                  <input class="gradient-button savButton" type="submit"  name="update" value="Salvar Alterações">
+                  <input class="savButton" type="submit"  name="update" value="Salvar Alterações">
               </div>
               <?php } ?>
           </div>
@@ -291,7 +291,7 @@ https://templatemo.com/tm-570-chain-app-dev
                 <input type="file" id="img" name="img" accept="image/*">
                 <br>
                 <br>
-                <input class="gradient-button sessionButton"type="submit"  name="registar_p" value="Registar Paciente"</input>
+                <input class="gradient-button sessionButton2"type="submit"  name="registar_p" value="Registar Paciente"</input>
             </div>
             </form>
       </div>
@@ -302,7 +302,7 @@ https://templatemo.com/tm-570-chain-app-dev
           <div class="formPaciente">
               <form class="pag" method="POST" action="pag_terapeuta.php?action=perfil_paciente">
               <input type="text" name= "pesquisa" placeholder="Número de utente">
-              <input class="gradient-button sessionButton" type="submit" value="Procurar" name="submit">
+              <input class="gradient-button sessionButton1" type="submit" value="Procurar" name="submit">
               </form>
           </div>
     </div>
@@ -318,7 +318,7 @@ https://templatemo.com/tm-570-chain-app-dev
               <div class="formPaciente">
                   <br>
                   <input type="text" name= "num_saude" placeholder="Numero de Saude do Paciente">
-                  <input class="gradient-button sessionButton" type="submit" value="Iniciar Consulta" name="gravar_dados">
+                  <input class="gradient-button sessionButton1" type="submit" value="Iniciar Consulta" name="gravar_dados">
   </div>
           </div>
 
