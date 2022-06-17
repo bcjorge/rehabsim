@@ -8,6 +8,8 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     $result_dados = mysqli_query($connect, $dados_paciente) or die('The query failed: ' . mysqli_error($connect));
     $dados_paciente1='SELECT * ,COUNT(*) AS afasia_count FROM paciente GROUP BY afasia_tipo';
     $result_dados1 = mysqli_query($connect, $dados_paciente1) or die('The query failed: ' . mysqli_error($connect));
+    $dados_consulta='SELECT * ,COUNT(*) AS consulta_count FROM registo_consulta GROUP BY paciente_id';
+    $result_consulta=mysqli_query($connect, $dados_consulta) or die('The query failed: ' . mysqli_error($connect));
 }
 ?>
 <!DOCTYPE html>
@@ -164,6 +166,7 @@ https://templatemo.com/tm-570-chain-app-dev
                                         'rgba(75, 192, 192, 0.2)',
                                         'rgba(54, 162, 235, 0.2)',
                                         'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 130, 86, 0.2)',
                                         'rgba(201, 203, 207, 0.2)'
                                     ],
                                     borderColor: [
@@ -173,6 +176,7 @@ https://templatemo.com/tm-570-chain-app-dev
                                         'rgb(75, 192, 192)',
                                         'rgb(54, 162, 235)',
                                         'rgb(153, 102, 255)',
+                                        'rgb(255, 130, 86)',
                                         'rgb(201, 203, 207)'
                                     ],
                                     borderWidth: 1
@@ -197,10 +201,63 @@ https://templatemo.com/tm-570-chain-app-dev
                         </script>
                       </div>
                       <div class="column c3">
+                          <?php
+                          while ($data_consulta=mysqli_fetch_array($result_consulta)) {
+                              $registo_consulta []=$data_consulta['paciente_id'];
+                              $quantidade_consulta []=$data_consulta['consulta_count'];
+                          }
+                          ?>
+                          <div>
+                              <canvas id="myChart2"></canvas>
+                          </div>
+                          <script>
+                              const labels2 = <?php echo json_encode($registo_consulta);?>;
+                              const data2 = {
+                                  labels: labels2,
+                                  datasets: [{
+                                      label: 'Distribuição de consultas',
+                                      data: <?php echo json_encode($quantidade_consulta);?>,
+                                      backgroundColor: [
+                                          'rgba(255, 99, 132, 0.2)',
+                                          'rgba(255, 159, 64, 0.2)',
+                                          'rgba(255, 205, 86, 0.2)',
+                                          'rgba(75, 192, 192, 0.2)',
+                                          'rgba(54, 162, 235, 0.2)',
+                                          'rgba(153, 102, 255, 0.2)',
+                                          'rgba(250, 130, 74, 0.2)',
+                                          'rgba(201, 203, 207, 0.2)'
+                                      ],
+                                      borderColor: [
+                                          'rgb(255, 99, 132)',
+                                          'rgb(255, 159, 64)',
+                                          'rgb(255, 205, 86)',
+                                          'rgb(75, 192, 192)',
+                                          'rgb(54, 162, 235)',
+                                          'rgb(153, 102, 255)',
+                                          'rgb(250, 130, 74)',
+                                          'rgb(201, 203, 207)'
+                                      ],
+                                      borderWidth: 1
+                                  }]
+                              };
+                              const config2 = {
+                                  type: 'bar',
+                                  data: data2,
+                                  options: {
+                                      scales: {
+                                          y: {
+                                              beginAtZero: true
+                                          }
+                                      }
+                                  },
+                              };
 
+                              const myChart2 = new Chart(
+                                  document.getElementById('myChart2'),
+                                  config2
+                              );
                       </div>
-
-                  </div>
+                              </div>
       </div>
           </div>
       <div class="pac">
