@@ -18,7 +18,7 @@ $rows_info_cui=mysqli_fetch_array($resultado_infocui);
 $selecao_infoter='SELECT utilizador.nome FROM utilizador WHERE utilizador.username="'.$username_terapeuta.'"';
 $resultado_infoter= mysqli_query($connect, $selecao_infoter) or die('The query failed: ' . mysqli_error($connect));
 $rows_info_ter=mysqli_fetch_array($resultado_infoter);
-}
+
     if (isset($_GET["action"])) {
         switch ($_GET["action"]) {
             case "exercicios":
@@ -116,7 +116,7 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
     <div class="text">
         <?php //while $rows_info_pac=mysqli_fetch_array($resultado_infopac);?>
         <h4>Dados de Consulta</h4>
-        <h1> Nome paciente <?php echo $rows_info_pac['nome']?> </h1>
+        <h1> <?php echo $rows_info_pac['nome']?> </h1>
         <br>
     </div>
     <div class="profile">
@@ -130,11 +130,11 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
             </div>
             <div class="column c2">
                 <label for="cuidador">Cuidador</label><br>
-                <input type="text" name="cuidador" value="Nome Cuidador<?php echo $rows_info_cui['nome']?>"><br>
+                <input type="text" name="cuidador" value="<?php echo $rows_info_cui['nome']?>"><br>
             </div>
             <div class="column c3">
                 <label for="terapeuta">Terapeuta</label><br>
-                <input type="text" name="terapeuta" value="Nome Terapeuta<?php echo $rows_info_ter['nome']?>"><br>
+                <input type="text" name="terapeuta" value="<?php echo $rows_info_ter['nome']?>"><br>
             </div>
         </div>
     </div>
@@ -143,41 +143,63 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
         <div class="row">
             <div class="column c1">
                 <form class="login" method="POST" action="consulta.php?action=exercicios" enctype="multipart/form-data">
-                <h5> Exercicios Receitados  </h5>
+                <h5> Exercicios a receitar pelo Terapeuta </h5>
                 <br>
                 <label for="dif_total">Dificuldade Total</label><br>
-                <input class="inputresult" name="dif_total" type="number" placeholder="Dificuldade total"><br>
-                <label for="ex_n">Exercicio N</label><br>
-                <input class="inputresult" name="ex_n" type="number" placeholder="Dificuldade 1-3"><br>
-                <label for="ex_c">Exercicio C</label><br>
-                <input class="inputresult" name="ex_c" type="number" placeholder="Dificuldade 1-3"><br>
-                <label for="ex_f">Exercicio F</label><br>
-                <input class="inputresult" name="ex_f" type="number" placeholder="Dificuldade 1-3"><br>
-                <label for="ex_r">Exercicio R</label><br>
-                <input class="inputresult" name="ex_r" type="number" placeholder="Dificuldade 1-3"><br>
-                    <br>
+                <input min="1" max="12" class="inputresult" name="dif_total" type="number" placeholder="Dificuldade total"><br>
                     <input class="gradient-button savButton" type="submit"  name="gravar_exercicios" value="Receitar Exercicios">
-                </form>
-            </div>
+                </div>
             <div class="column c2">
-                <form class="login" method="POST" action="consulta.php?action=inserir" enctype="multipart/form-data">
-                <h5> Preenchimento pelo cuidador </h5>
-                <br>
-                <label for="avaliacao">Avaliação do Cuidador</label><br>
-                <input class="inputresult" name="avaliacao" type="number" placeholder="Avaliação total">
                 <br>
                 <br>
-                <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
-                <input class="inputresult" name="auto_avaliacao" type="number" placeholder="Dificuldade 1-5">
-                <br>
-                <label for="data">Data da Consulta</label><br>
-                <input type="date" name="data" value="Data<?php //echo $data['morada']?>"><br>
+                <label for="ex_n">Exercicio N</label><br>
+                <input min="0" max="3" class="inputresult" name="ex_n" type="number" placeholder="Dificuldade 1-3"><br>
+                <label for="ex_c">Exercicio C</label><br>
+                <input min="0" max="3" class="inputresult" name="ex_c" type="number" placeholder="Dificuldade 1-3"><br>
             </div>
             <div class="column c3">
-                <h5> Comentarios</h5>
-                <label for="comentarios">Possiveis esclarecimentos:</label>
-                <textarea id="comentarios" name="comentarios" rows="3" cols="40" > <?php //echo $data['alergias']?></textarea><br>
                 <br>
-                <input class="gradient-button savButton" type="submit"  name="resultados" value="Salvar Resultados">
+                <br>
+                <label for="ex_f">Exercicio F</label><br>
+                <input min="0" max="3" class="inputresult" name="ex_f" type="number" placeholder="Dificuldade 1-3"><br>
+                <label for="ex_r">Exercicio R</label><br>
+                <input min="0" max="3" class="inputresult" name="ex_r" type="number" placeholder="Dificuldade 1-3"><br>
+                    <br>
+            </div>
                 </form>
+            </div>
+        </div>
+        <br>
+            <div class="pl">
+                <div class="row">
+                    <div class="column c1">
+                        <h5> Exercicios Receitados </h5><br>
+                        <h6> Dificuldade total:</h6> <p> Valor</p>
+                        <h6> Exercício N:</h6> <p> Valor</p>
+                        <h6> Exercício C:</h6> <p> Valor</p>
+                        <h6> Exercício F:</h6> <p> Valor</p>
+                        <h6> Exercício R:</h6> <p> Valor</p>
+                    </div>
+                    <div class="column c2">
+                        <form class="login" method="POST" action="consulta.php?action=inserir" enctype="multipart/form-data">
+                            <h5> Preenchimento pelo cuidador </h5>
+                            <br>
+                            <label for="avaliacao">Avaliação do Cuidador</label><br>
+                            <input class="inputresult" name="avaliacao" type="number" placeholder="Avaliação total">
+                            <br>
+                            <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
+                            <input class="inputresult" name="auto_avaliacao" type="number" placeholder="Dificuldade 1-5">
+                            <br>
+                            <label for="data">Data da Consulta</label><br>
+                            <input type="date" name="data" placeholder="Data da realização" "><br>
+                    </div>
+                    <div class="column c3">
+                        <h5> Comentarios</h5>
+                        <label for="comentarios">Possiveis esclarecimentos:</label>
+                        <textarea id="comentarios" name="comentarios" rows="3" cols="40" > <?php //echo $data['alergias']?></textarea><br>
+                        <br>
+                        <input class="gradient-button savButton" type="submit"  name="resultados" value="Salvar Resultados">
+                        </form>
+                    </div>
+                </div>
             </div>

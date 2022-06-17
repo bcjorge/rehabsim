@@ -2,12 +2,6 @@
 session_start();
  if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
      $id_user = $_SESSION['id_utilizador'];
-     // $pageNumber = $_GET['pageNumber'];
-     // $pageSize = $_GET['pageSize'];
-     //$nome =$_GET['nome'];
-     //$morada = $_GET['morada'];
-     //$tel = $_GET['telemovel'];
-     //$email = $_GET['email'];
 
      $connect = mysqli_connect('localhost', 'root', '', 'database2')
      or die('Error connecting to the server: ' . mysqli_error($connect));
@@ -20,17 +14,9 @@ session_start();
      //echo "<script>console.log('debug:".$id_user."' );</script>";
 
      //queries para listagem de consultas relativas aos pacientes deste cuidador
-     $consultas_cuidador='SELECT * FROM utilizador_consulta WHERE utilizador_consulta.utilizadores_id_utilizador= "'.$id_user.'"';
+     $consultas_cuidador='SELECT registo_consulta.id_consulta, paciente.nome, paciente.id_paciente FROM paciente INNER JOIN registo_consulta ON paciente.id_paciente = registo_consulta.paciente_id INNER JOIN utilizador_consulta ON registo_consulta.id_consulta = utilizador_consulta.registo_consulta_id_consulta WHERE utilizador_consulta.utilizadores_id_utilizador= "'.$id_user.'"';
      $result_consultas_cuidador = mysqli_query($connect, $consultas_cuidador) or die('The query failed: ' . mysqli_error($connect));
-     $num_consultas=mysqli_fetch_array($result_consultas_cuidador);
 
-     $pacs_cuidador= 'SELECT * FROM registo_consulta WHERE registo_consulta.id_consulta="'.$num_consultas['registo_consulta_id_consulta'].'"';
-     $result_pacs_cuidador = mysqli_query($connect, $pacs_cuidador) or die('The query failed: ' . mysqli_error($connect));
-     $num_pacs=mysqli_fetch_array($result_pacs_cuidador);
-
-     $nome_paciente='SELECT nome FROM paciente WHERE paciente.id_paciente= "'.$num_pacs['paciente_id'].'"';
-     $result_nome_pac=mysqli_query($connect, $nome_paciente) or die('The query failed: ' . mysqli_error($connect));
-     $nome_pac=mysqli_fetch_array($result_nome_pac);
 
      if (isset($_GET["action"])) {
          switch ($_GET["action"]) {
@@ -83,7 +69,20 @@ session_start();
                  }
              case "clicar_consulta":
                  $id_ir_consulta=$_POST['id_cc'];
-                 $_SESSION['consulta']=$id_ir_consulta;
+                 $_SESSION['id_consulta']=$id_ir_consulta;
+                 echo "<script>console.log('idconsulta:" . $_SESSION['id_consulta'] . "' );</script>";
+                 $username_cuidador='SELECT utilizador.username FROM utilizador WHERE utilizador.id_utilizador="'.$id_user.'"';
+                 $res_user_cuidador=mysqli_query($connect, $username_cuidador) or die('The query failed: ' . mysqli_error($connect));
+                 $row_res_cui= mysqli_fetch_array($res_user_cuidador);
+                 $_SESSION['id_cuidador']=$row_res_cui['username'];
+                 echo "<script>console.log('cuidador:" . $_SESSION['id_cuidador'] . "' );</script>";
+
+                 $username_terapeuta='SELECT utilizador.username FROM utilizador INNER JOIN utilizador_consulta ON utilizador.id_utilizador=utilizador_consulta.utilizadores_id_utilizador WHERE utilizador_consulta.registo_consulta_id_consulta="'.$id_ir_consulta.'" AND utilizador.tipo_utilizador_id="2"';
+                 $res_user_terapeuta=mysqli_query($connect, $username_terapeuta) or die('The query failed: ' . mysqli_error($connect));
+                 $row_res_ter= mysqli_fetch_array($res_user_terapeuta);
+                 $_SESSION['id_terapeuta']=$row_res_ter['username'];
+                 echo "<script>console.log('terapeuta:" . $_SESSION['id_terapeuta'] . "' );</script>";
+                 //Abrir consulta
                  header("Location: consulta.php");
                  break;
          }
@@ -194,15 +193,17 @@ session_start();
             </form>
         </div>
         <div class="pac">
-            <h4>Lista de Consultas</h4>
-            <form method="POST" action="consulta.php?action=clicar_consulta">
+            <h4>Histórico de Consultas</h4>
+            <form method="POST" action="pag_cuidador.php?action=clicar_consulta">
                 <select class="funcaoInput" id="consulta" name="id_cc" >
                     <?php
                     echo("<option> -- Selecionar consulta -- </option>");
-                        $id_consulta=$num_pacs['id_consulta'];
-                        $nome_paciente=$nome_pac['nome'];
-                        $id_paciente=$num_pacs['paciente_id'];
+                    while ($num_consultas=mysqli_fetch_array($result_consultas_cuidador)) {
+                        $id_consulta = $num_consultas['id_consulta'];
+                        $nome_paciente = $num_consultas['nome'];
+                        $id_paciente = $num_consultas['id_paciente'];
                         echo("<option value=$id_consulta> $id_consulta - $nome_paciente - ID do Paciente: $id_paciente</option>");
+                    }
                     ?>
                     <input class="button3" type="submit"  value="Ir para consulta">
                 </select>

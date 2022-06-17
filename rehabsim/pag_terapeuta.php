@@ -20,6 +20,11 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
     //echo "<script>console.log('debug:".$result."' );</script>";
     //echo "<script>console.log('debug:".$id_user."' );</script>";
 
+    //queries para listagem de consultas relativas aos pacientes deste terapeuta
+    $consultas_terapeuta='SELECT registo_consulta.id_consulta, paciente.nome, paciente.id_paciente FROM paciente INNER JOIN registo_consulta ON paciente.id_paciente = registo_consulta.paciente_id INNER JOIN utilizador_consulta ON registo_consulta.id_consulta = utilizador_consulta.registo_consulta_id_consulta WHERE utilizador_consulta.utilizadores_id_utilizador= "'.$id_user.'"';
+    $result_consultas_terapeuta = mysqli_query($connect, $consultas_terapeuta) or die('The query failed: ' . mysqli_error($connect));
+
+
     if (isset($_GET["action"])) {
         switch ($_GET["action"]) {
             case "perfil_paciente":
@@ -141,6 +146,26 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                         break;
                     }
                 }
+            case "clicar_consulta":
+                $id_ir_consulta2=$_POST['id_tc'];
+                $_SESSION['id_consulta']=$id_ir_consulta2;
+                echo "<script>console.log('cuidador:" . $_SESSION['id_consulta'] . "' );</script>";
+                echo "<script>console.log('idconsulta:" . $_SESSION['id_consulta'] . "' );</script>";
+                $username_terapeuta='SELECT utilizador.username FROM utilizador WHERE utilizador.id_utilizador="'.$id_user.'"';
+                $res_user_terapeuta=mysqli_query($connect, $username_terapeuta) or die('The query failed: ' . mysqli_error($connect));
+                $row_res_ter= mysqli_fetch_array($res_user_terapeuta);
+                $_SESSION['id_terapeuta']=$row_res_ter['username'];
+                echo "<script>console.log('terapeuta:" . $_SESSION['id_terapeuta '] . "' );</script>";
+
+                $username_cuidador='SELECT utilizador.username FROM utilizador INNER JOIN utilizador_consulta ON utilizador.id_utilizador=utilizador_consulta.utilizadores_id_utilizador WHERE utilizador_consulta.registo_consulta_id_consulta="'.$id_ir_consulta2.'" AND utilizador.tipo_utilizador_id="3"';
+                $res_user_cuidador=mysqli_query($connect, $username_cuidador) or die('The query failed: ' . mysqli_error($connect));
+                $row_res_cui= mysqli_fetch_array($res_user_cuidador);
+                $_SESSION['id_cuidador']=$row_res_cui['username'];
+                echo "<script>console.log('cuidador:" . $_SESSION['id_cuidador'] . "' );</script>";
+                //Abrir consulta
+                header("Location: consulta.php");
+                break;
+
         }
     }
 
@@ -305,6 +330,24 @@ https://templatemo.com/tm-570-chain-app-dev
               <input class="gradient-button sessionButton1" type="submit" value="Procurar" name="submit">
               </form>
           </div>
+              <br>
+              <br>
+              <br>
+              <h5> Histórico de Consultas</h5>
+              <form method="POST" action="pag_terapeuta.php?action=clicar_consulta">
+                  <select class="funcaoInput" id="consulta" name="id_tc" >
+                      <?php
+                          echo("<option> -- Selecionar consulta -- </option>");
+                          while($num_consultas=mysqli_fetch_array($result_consultas_terapeuta)){
+                          $id_consulta = $num_consultas['id_consulta'];
+                          $nome_paciente = $num_consultas['nome'];
+                          $id_paciente = $num_consultas['id_paciente'];
+                          echo("<option value=$id_consulta> $id_consulta - $nome_paciente - ID do Paciente: $id_paciente</option>");
+                      }
+                      ?>
+                      <input class="button3" type="submit"  value="Ir para consulta">
+                  </select>
+
     </div>
           <form class="pag" method="POST" action="pag_terapeuta.php?action=dados_consulta"">
           <div class="column c2">
