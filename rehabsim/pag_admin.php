@@ -102,8 +102,6 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                     echo "<script>console.log('chega aquiiii' );</script>";
                     $id_utilizador3=$_POST['id_utl'];
                     $_SESSION['ola']=$id_utilizador3;
-                    //$_SESSION['blabla']=2;
-                    echo "<script>console.log('debug: session " . $_SESSION['clickon'] . "' );</script>";
                     header("Location: perfil_utilizadores.php");
                     break;
                 }

@@ -19,6 +19,19 @@ session_start();
      //echo "<script>console.log('debug:".$result."' );</script>";
      //echo "<script>console.log('debug:".$id_user."' );</script>";
 
+     //queries para listagem de consultas relativas aos pacientes deste cuidador
+     $consultas_cuidador='SELECT * FROM utilizador_consulta WHERE utilizador_consulta.utilizadores_id_utilizador= "'.$id_user.'"';
+     $result_consultas_cuidador = mysqli_query($connect, $consultas_cuidador) or die('The query failed: ' . mysqli_error($connect));
+     $num_consultas=mysqli_fetch_array($result_consultas_cuidador);
+
+     $pacs_cuidador= 'SELECT * FROM registo_consulta WHERE registo_consulta.id_consulta="'.$num_consultas['registo_consulta_id_consulta'].'"';
+     $result_pacs_cuidador = mysqli_query($connect, $pacs_cuidador) or die('The query failed: ' . mysqli_error($connect));
+     $num_pacs=mysqli_fetch_array($result_pacs_cuidador);
+
+     $nome_paciente='SELECT nome FROM paciente WHERE paciente.id_paciente= "'.$num_pacs['paciente_id'].'"';
+     $result_nome_pac=mysqli_query($connect, $nome_paciente) or die('The query failed: ' . mysqli_error($connect));
+     $nome_pac=mysqli_fetch_array($result_nome_pac);
+
      if (isset($_GET["action"])) {
          switch ($_GET["action"]) {
              case "perfil_paciente":
@@ -66,7 +79,12 @@ session_start();
                      echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                  } else {
                      echo "<script>alert('O update da informação falhou');</script>";
+                     break;
                  }
+             case "clicar_consulta":
+                 $id_ir_consulta=$_POST['id_cc'];
+                 $_SESSION['consulta']=$id_ir_consulta;
+                 header("Location: consulta.php");
                  break;
          }
      }
@@ -176,7 +194,19 @@ session_start();
             </form>
         </div>
         <div class="pac">
-            <h4>Lista de Pacientes</h4>
+            <h4>Lista de Consultas</h4>
+            <form method="POST" action="consulta.php?action=clicar_consulta">
+                <select class="funcaoInput" id="consulta" name="id_cc" >
+                    <?php
+                    echo("<option> -- Selecionar consulta -- </option>");
+                        $id_consulta=$num_pacs['id_consulta'];
+                        $nome_paciente=$nome_pac['nome'];
+                        $id_paciente=$num_pacs['paciente_id'];
+                        echo("<option value=$id_consulta> $id_consulta - $nome_paciente - ID do Paciente: $id_paciente</option>");
+                    ?>
+                    <input class="button3" type="submit"  value="Ir para consulta">
+                </select>
+
         </div>
         <div class="pl">
             <h4> Procurar Paciente</h4>
