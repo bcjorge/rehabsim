@@ -44,7 +44,7 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
                     $auto_avaliacao= $_POST['auto_avaliacao'];
                     $comentarios= $_POST['comentarios'];
                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                    $insert_results='INSERT INTO registo_consulta (paciente_pontuacao, autoavaliacao, data, comentarios) VALUES ("' . $avaliacao . '","' . $auto_avaliacao . '","' . $data . '","' . $comentarios . '")';
+                    $insert_results='UPDATE registo_consulta SET paciente_pontuacao="'.$avaliacao.'", autoavaliacao="'.$auto_avaliacao.'",data="'.$data.'", comentarios="'.$comentarios.'" WHERE registo_consulta.id_consulta="'.$consulta.'";';
                     $result_IQ = mysqli_query($connect, $insert_results) or die('The query failed: ' . mysqli_error($connect));
                 }
         }
