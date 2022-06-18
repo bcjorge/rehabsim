@@ -1,10 +1,11 @@
 <?php
 session_start();
 echo "<script>console.log('bem vindo' );</script>";
+$id_user = $_SESSION['id_utilizador'];
 $consulta=$_SESSION['id_consulta'];
 $afasia = $_SESSION['afasia'];
 $dificuldade = $_SESSION['dificuldade'];
-
+echo "<script>console.log('iduser:" . $id_user . "' );</script>";
 echo "<script>console.log('consulta:" . $consulta . "' );</script>";
 echo "<script>console.log('afasia:" . $afasia. "' );</script>";
 echo "<script>console.log('dificuldade:" . $dificuldade . "' );</script>";
@@ -20,16 +21,34 @@ echo "<script>console.log('dificuldade:" . $dificuldade . "' );</script>";
     $res_dados_apoio= mysqli_query($connect, $dados_apoio) or die('The query failed: '. mysqli_error($connect));
     $rows_res_apoio=mysqli_fetch_array($res_dados_apoio);
 
-    $query_exercises = 'SELECT * FROM exercises WHERE afasia = "'.$afasia.'" AND difficulty = "'.$dificuldade.'" ORDER BY RAND() LIMIT 1';
-    $exercises_result = mysqli_query($connect, $query_exercises) or die('The query failed:'. mysqli_error($connect));
-
+    //$query_exercises = 'SELECT * FROM exercises WHERE afasia = "'.$afasia.'" AND difficulty = "'.$dificuldade.'" ORDER BY RAND() LIMIT 1';
+    //$exercises_result = mysqli_query($connect, $query_exercises) or die('The query failed:'. mysqli_error($connect));
     //variaveis
     $avaliacao_total=$rows_res_apoio['paciente_pontuacao'];
     $avaliacao_utente=$rows_res_apoio['autoavaliacao'];
 
+    //tipo utilizador para voltar para tras
+    $tipo_utilizador='SELECT tipo_utilizador_id FROM utilizador WHERE utilizador.id_utilizador="'.$id_user.'"';
+    $result_tipo_user= mysqli_query($connect, $tipo_utilizador) or die('The query failed: '. mysqli_error($connect));
+    $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
+
+
 echo "<script>console.log('id do exerc:" . $avaliacao_total . "' );</script>";
 echo "<script>console.log('n de linhas:" . $avaliacao_utente . "' );</script>";
 
+if (isset($_GET["action"])) {
+    switch ($_GET["action"]) {
+        case "back":
+            if (isset($_POST["nova_consulta"])) {
+                if ($rows_tipo_user['tipo_utilizador_id'] == 2) {
+                    header("Location: pag_terapeuta.php");
+                }
+                if ($rows_tipo_user['tipo_utilizador_id']== 3) {
+                    echo "<script>alert('Não tem autorização para aceder a esta página.');</script>";
+                }
+            }
+    }
+}
     /*Terminal Node 1*/
     if
     ((
@@ -1814,6 +1833,10 @@ echo "<script>console.log('n de linhas:" . $avaliacao_utente . "' );</script>";
         $dif_proxima_sessao = 0;
     }
 
+    //ir buscar exercícios dependendo do resultado
+    $buscar_exercicios='SELECT * FROM exercises WHERE exercises.afasia="'.$afasia.'" AND exercises.difficulty="'.$dif_proxima_sessao.'"';
+    $result_buscar_ex=mysqli_query($connect, $buscar_exercicios) or die('The query failed: '. mysqli_error($connect));
+
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -1879,69 +1902,34 @@ echo "<script>console.log('n de linhas:" . $avaliacao_utente . "' );</script>";
 
 <div class="containerInfo">
     <div class="text">
-        <h4>Terapeuta</h4>
-        <h1><?php //echo $data['nome']?></h1>
+        <h4>Sistema de apoio à decisão</h4>
+        <h1>Consulta ID <?php echo $consulta?></h1>
     </div>
     <div class="containerBlocks">
         <div class="profile">
-            <form class="login" method="POST" action="pag_terapeuta.php?action=pag_terapeuta" enctype="multipart/form-data">
-                <h4>Informação do Utilizador</h4>
                 <div class="row">
                     <div class="column c1">
-
+                        <?php echo "<h5 class='text_center'>Dificuldade Próxima Sessão: </h5> <br> <h1 class='text_center'>".$dif_proxima_sessao."</h1>"?>
                     </div>
                     <div class="column c2">
-
+                        <h5 class='text_center'> Possiveis Conjuntos de exercícios</h5>
+                        <br>
+                    <?php while ($rows_buscar=mysqli_fetch_array($result_buscar_ex)){ ?>
+                        <ul>
+                            <li><?php echo "<h6 class='text_center'> N:".$rows_buscar['n_dif']." - C:".$rows_buscar['c_dif']." - F:".$rows_buscar['f_dif']." - R: ".$rows_buscar['r_dif']."</h6>"?></li>
+                        </ul>
+                        <?php } ?>
                     </div>
                     <div class="column c3">
-
-                        <input class="savButton" type="submit"  name="update" value="Salvar Alterações">
+                        <br><br><br><br>
+                        <form class="login" method="POST" action="apoiodecisao.php?action=back" enctype="multipart/form-data">
+                        <input class="savButton text_center" type="submit"  name="nova_consulta" value="Marcar Nova Consulta">
+                        </form>
                     </div>
                 </div>
-            </form>
         </div>
-        <div class="pac">
-            <h4>Registo de Paciente</h4>
-            <div class="formPaciente">
-
-                    <div class="column c1">
-
-                    </div>
-                    <div class="column c2">
-
-                    </div>
-                    <div class="column c3">
-
-                        <input class="gradient-button sessionButton2"type="submit"  name="registar_p" value="Registar Paciente"</input>
-                    </div>
-            </div>
-        </div>
-        <div class="pl">
-            <div class="column c1">
-                <h5> Procurar Paciente existente</h5>
-                <div class="formPaciente">
-
-                </div>
-                <br>
-                <br>
-                <br>
-                <h5> Histórico de Consultas</h5>
-
-
-            </div>
-
-            <div class="column c2">
-                <h5> Inserir Nova Consulta </h5>
-                <div class="formPaciente">
-                </div>
-            </div>
-            <div class="column c3">
-                <div class="formPaciente">
-
-                    <input class="gradient-button sessionButton1" type="submit" value="Iniciar Consulta" name="gravar_dados">
-                </div>
-            </div>
-
+    </div>
+</div>
 
             <!-- Scripts -->
             <script src="vendor/jquery/jquery.min.js"></script>

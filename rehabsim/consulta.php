@@ -1,5 +1,6 @@
 <?php
 session_start();
+$id_user = $_SESSION['id_utilizador'];
 $consulta=$_SESSION['id_consulta'];
 $username_terapeuta=$_SESSION['id_terapeuta'];
 $username_cuidador=$_SESSION['id_cuidador'];
@@ -30,6 +31,11 @@ echo "<script>console.log('boooraaaa' );</script>";
 //avaliação da parte do cuidador
 $buscar_aval= 'SELECT paciente_pontuacao, autoavaliacao, data, comentarios FROM registo_consulta WHERE registo_consulta.id_consulta = "'.$consulta.'"';
 $resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query failed: ' . mysqli_error($connect));
+
+//tipo utilizador para voltar para tras
+$tipo_utilizador='SELECT tipo_utilizador_id FROM utilizador WHERE utilizador.id_utilizador="'.$id_user.'"';
+$result_tipo_user= mysqli_query($connect, $tipo_utilizador) or die('The query failed: '. mysqli_error($connect));
+$rows_tipo_user=mysqli_fetch_array($result_tipo_user);
 
     if (isset($_GET["action"])) {
         switch ($_GET["action"]) {
@@ -105,6 +111,14 @@ $resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query f
                     $insert_results='UPDATE registo_consulta SET paciente_pontuacao="'.$avaliacao.'", autoavaliacao="'.$auto_avaliacao.'",data="'.$data.'", comentarios="'.$comentarios.'" WHERE registo_consulta.id_consulta="'.$consulta.'"';
                     $result_IQ = mysqli_query($connect, $insert_results) or die('The query failed: ' . mysqli_error($connect));
                 }
+            case "voltar":
+                    if ($rows_tipo_user['tipo_utilizador_id'] == 2) {
+                        header("Location: pag_terapeuta.php");
+                    }
+                    if ($rows_tipo_user['tipo_utilizador_id']== 3) {
+                        header("Location: pag_cuidador.php");
+                    }
+
         }
 }
 ?>
@@ -155,7 +169,7 @@ $resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query f
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="index.php">Home</a></li>
+                        <li class="scroll-to-section"><a href="consulta.php?action=voltar">Voltar</a></li>
                         <li class="scroll-to-section"><a href="apoiodecisao.php">Apoio Decisão</a></li>
                         <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
                     </ul>

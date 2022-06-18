@@ -16,6 +16,10 @@ body{
     color: #f24f16;
 }
 
+.text_center{
+    text-align: center;
+}
+
 .containerBlocks {  
     padding-top: 40px;
     display: grid;
