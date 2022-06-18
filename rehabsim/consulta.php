@@ -9,6 +9,8 @@ $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error co
 $selecao_infopac='SELECT paciente.nome,paciente.id_paciente,paciente.afasia_tipo,paciente.num_saude FROM paciente INNER JOIN registo_consulta ON paciente.id_paciente=registo_consulta.paciente_id WHERE registo_consulta.id_consulta="'.$consulta.'"';
 $resultado_infopac= mysqli_query($connect, $selecao_infopac) or die('The query failed: ' . mysqli_error($connect));
 $rows_info_pac=mysqli_fetch_array($resultado_infopac);
+$_SESSION['afasia']=$rows_info_pac['afasia_tipo'];
+
 //Insercao de nome cuidador
 $selecao_infocui='SELECT utilizador.nome FROM utilizador WHERE utilizador.username="'.$username_cuidador.'"';
 $resultado_infocui= mysqli_query($connect, $selecao_infocui) or die('The query failed: ' . mysqli_error($connect));
@@ -154,7 +156,7 @@ $resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query f
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.php">Home</a></li>
-                        <li class="scroll-to-section"><a href="index.php">About</a></li>
+                        <li class="scroll-to-section"><a href="apoiodecisao.php">Apoio Decisão</a></li>
                         <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
                     </ul>
                     <a class='menu-trigger'>
@@ -236,7 +238,8 @@ $resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query f
                         <?php echo "<h6>Exercício C: ".$rows_sql_exercises['c_dif']."</h6>"?>
                         <?php echo "<h6>Exercício F: ".$rows_sql_exercises['f_dif']."</h6>"?>
                         <?php echo "<h6>Exercício R: ".$rows_sql_exercises['r_dif']."</h6>"?>
-                        <?php } ?>
+
+                        <?php $_SESSION['dificuldade']=$rows_sql_exercises['difficulty']; } ?>
                     <br>
                         <a href="<?php $_SERVER['PHP_SELF']; ?>">Atualizar</a>
                     </div>

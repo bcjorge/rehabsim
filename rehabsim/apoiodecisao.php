@@ -1,12 +1,35 @@
 <?php
 session_start();
-if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
-    $id_user = $_SESSION['id_utilizador'];
+echo "<script>console.log('bem vindo' );</script>";
+$consulta=$_SESSION['id_consulta'];
+$afasia = $_SESSION['afasia'];
+$dificuldade = $_SESSION['dificuldade'];
+
+echo "<script>console.log('consulta:" . $consulta . "' );</script>";
+echo "<script>console.log('afasia:" . $afasia. "' );</script>";
+echo "<script>console.log('dificuldade:" . $dificuldade . "' );</script>";
+
+//$afasia = $_SESSION['afasia'];
+//$dificuldade = $_SESSION['dificuldade'];
+//$avaliacao_total=$_SESSION['avaliacao'];
+//$avaliacao_utente=$_SESSION['avaliacao'];
+
     $connect = mysqli_connect('localhost', 'root', '', 'database2')
     or die('Error connecting to the server: ' . mysqli_error($connect));
-    $query_exercises = 'SELECT * FROM exercises WHERE AFASIA = $afasia AND DIFFICULTY = $dificuldade ORDER BY RAND() LIMIT 1';
-    $exercises_result = mysqli_query($connect, $query_exercises) or die('The query failed: ' . mysqli_error($connect));
-}
+    $dados_apoio='SELECT * FROM registo_consulta WHERE registo_consulta.id_consulta="'.$consulta.'"';
+    $res_dados_apoio= mysqli_query($connect, $dados_apoio) or die('The query failed: '. mysqli_error($connect));
+    $rows_res_apoio=mysqli_fetch_array($res_dados_apoio);
+
+    $query_exercises = 'SELECT * FROM exercises WHERE afasia = "'.$afasia.'" AND difficulty = "'.$dificuldade.'" ORDER BY RAND() LIMIT 1';
+    $exercises_result = mysqli_query($connect, $query_exercises) or die('The query failed:'. mysqli_error($connect));
+
+    //variaveis
+    $avaliacao_total=$rows_res_apoio['paciente_pontuacao'];
+    $avaliacao_utente=$rows_res_apoio['autoavaliacao'];
+
+echo "<script>console.log('id do exerc:" . $avaliacao_total . "' );</script>";
+echo "<script>console.log('n de linhas:" . $avaliacao_utente . "' );</script>";
+
     /*Terminal Node 1*/
     if
     ((
