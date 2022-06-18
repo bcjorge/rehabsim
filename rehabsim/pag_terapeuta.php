@@ -120,10 +120,10 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     echo "<script>console.log('corretos_pc:".$number_pc."' );</script>";
 
                     if ($number_ut==2 && $number_pc==1 ){
+                        echo "<script>console.log('entrei no if de verificacao' );</script>";
                     //Inserir paciente id
                     $insert_utilizador_consulta_pac = 'INSERT INTO registo_consulta (paciente_id) SELECT id_paciente FROM paciente WHERE paciente.num_saude="'.$paciente.'"';
                     $result_IU1 = mysqli_query($connect, $insert_utilizador_consulta_pac) or die('The query failed: ' . mysqli_error($connect));
-                    echo "<script>console.log('paciente:".$result_IU1['id_paciente']."' );</script>";
                     //selcionar consulta mais recente
                     $consulta_recente_sql='SELECT MAX(id_consulta) AS id_consulta FROM registo_consulta';
                     $consulta_recente = mysqli_query($connect, $consulta_recente_sql) or die('The query failed: ' . mysqli_error($connect));
@@ -139,12 +139,16 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     $_SESSION['id_consulta']=$row_consulta['id_consulta'];
                     $_SESSION['id_cuidador']=$cuidador;
                     $_SESSION['id_terapeuta']=$terapeuta;
+                        echo "<script>console.log('sessao_conuslta:".$_SESSION['id_consulta']."' );</script>";
+                        echo "<script>console.log('sessao_cuidador:".$_SESSION['id_cuidador']."' );</script>";
+                        echo "<script>console.log('sessao_terapeuta:".$_SESSION['id_terapeuta']."' );</script>";
                     header("Location: consulta.php");
+
                     }
                     else{
                         echo "<script>alert('Utilizador ou Paciente não existe na base de dados.');</script>";
-                        break;
                     }
+                    break;
                 }
             case "clicar_consulta":
                 $id_ir_consulta2=$_POST['id_tc'];
@@ -347,9 +351,9 @@ https://templatemo.com/tm-570-chain-app-dev
                       ?>
                       <input class="button3" type="submit"  value="Ir para consulta">
                   </select>
-
+              </form>
     </div>
-          <form class="pag" method="POST" action="pag_terapeuta.php?action=dados_consulta"">
+          <form class="pag" method="POST" action="pag_terapeuta.php?action=dados_consulta">
           <div class="column c2">
               <h5> Inserir Nova Consulta </h5>
               <div class="formPaciente">
@@ -362,8 +366,10 @@ https://templatemo.com/tm-570-chain-app-dev
                   <br>
                   <input type="text" name= "num_saude" placeholder="Numero de Saude do Paciente">
                   <input class="gradient-button sessionButton1" type="submit" value="Iniciar Consulta" name="gravar_dados">
-  </div>
+                </div>
           </div>
+      </form>
+      </div>
 
 
     <!-- Scripts -->

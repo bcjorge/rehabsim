@@ -4,7 +4,6 @@ $consulta=$_SESSION['id_consulta'];
 $username_terapeuta=$_SESSION['id_terapeuta'];
 $username_cuidador=$_SESSION['id_cuidador'];
 
-
 $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
 //Insercao dos dados do paciente
 $selecao_infopac='SELECT paciente.nome,paciente.id_paciente,paciente.afasia_tipo,paciente.num_saude FROM paciente INNER JOIN registo_consulta ON paciente.id_paciente=registo_consulta.paciente_id WHERE registo_consulta.id_consulta="'.$consulta.'"';
@@ -19,6 +18,17 @@ $selecao_infoter='SELECT utilizador.nome FROM utilizador WHERE utilizador.userna
 $resultado_infoter= mysqli_query($connect, $selecao_infoter) or die('The query failed: ' . mysqli_error($connect));
 $rows_info_ter=mysqli_fetch_array($resultado_infoter);
 
+//exercicios
+$sql_exercises='SELECT exercises.difficulty, exercises.n_dif, exercises.c_dif, exercises.f_dif, exercises.r_dif FROM exercises INNER JOIN registo_consulta ON exercises.id_exercises = registo_consulta.exercises_id_exercises WHERE registo_consulta.id_consulta = "'.$consulta.'"';
+$resultado_sql_exercises= mysqli_query($connect, $sql_exercises) or die('The query failed: ' . mysqli_error($connect));
+//$rows_sql_exercises= mysqli_fetch_array($resultado_sql_exercises);
+echo "<script>console.log('boooraaaa' );</script>";
+//echo "<script>console.log('" . $rows_sql_exercises['difficulty'] . "' );</script>";
+
+//avaliação da parte do cuidador
+$buscar_aval= 'SELECT paciente_pontuacao, autoavaliacao, data, comentarios FROM registo_consulta WHERE registo_consulta.id_consulta = "'.$consulta.'"';
+$resultado_buscar_aval= mysqli_query($connect, $buscar_aval) or die('The query failed: ' . mysqli_error($connect));
+
     if (isset($_GET["action"])) {
         switch ($_GET["action"]) {
             case "exercicios":
@@ -28,13 +38,59 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
                     $dif_c=$_POST['ex_c'];
                     $dif_f=$_POST['ex_f'];
                     $dif_r=$_POST['ex_r'];
+
+                    // N
+                    if(empty($dif_n)){
+                        echo "<script>console.log('N is empty' );</script>";
+                        $dif_n_null="IS NULL";
+                    }else{
+                        $dif_n_null="=$dif_n";
+                        echo "<script>console.log('" . $dif_n_null . "' );</script>";
+                    }
+
+                    // C
+                    if(empty($dif_c)){
+                        echo "<script>console.log('C is empty' );</script>";
+                        $dif_c_null="IS NULL";
+                    }else{
+                        $dif_c_null="=$dif_c";
+                        echo "<script>console.log('" . $dif_c_null . "' );</script>";
+                    }
+
+                    // F
+                    if(empty($dif_f)){
+                        $dif_f_null="IS NULL";
+                        echo "<script>console.log('" . $dif_f_null . "' );</script>";
+                    }else{
+                        $dif_f_null="=$dif_f";
+                        echo "<script>console.log('" . $dif_f_null . "' );</script>";
+                    }
+
+                    // R
+                    if(empty($dif_r)){
+                        echo "<script>console.log('R is empty' );</script>";
+                        $dif_r_null="IS NULL";
+                    }else{
+                        $dif_r_null="=$dif_r";
+                        echo "<script>console.log('" . $dif_r_null . "' );</script>";
+                    }
+                     //console.log da query de procura do exercicio correto
+                        echo "<script>console.log('SELECT id_exercises FROM exercises WHERE afasia=". $rows_info_pac['afasia_tipo'] ." AND exercises.n_dif=".$dif_n." AND exercises.c_dif=".$dif_c." AND exercises.f_dif ".$dif_f_null." AND exercises.r_dif=".$dif_r."');</script>";
                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                    $ex_id= 'SELECT exercices.id_exercices FROM exercices WHERE exercices.afasia="'.$rows_info_pac['afasia_tipo'].'",exercices.n_dif="'.$dif_n.'",exercices.c_dif="'.$dif_c.'",exercices.f_dif="'.$dif_f.'",exercices.r_dif="'.$dif_r.'"';
+                    $ex_id= 'SELECT id_exercises FROM exercises WHERE afasia="'.$rows_info_pac['afasia_tipo'].'" AND exercises.n_dif '.$dif_n_null.' AND exercises.c_dif '.$dif_c_null.' AND exercises.f_dif '.$dif_f_null.' AND exercises.r_dif '.$dif_r_null.' AND exercises.difficulty= '.$dif_total.';';
                     $result_ex_id=mysqli_query($connect, $ex_id) or die('The query failed: ' . mysqli_error($connect));
                     $row_ex_id=mysqli_fetch_array($result_ex_id);
-
-                    $update_ex_id='UPDATE registo_consulta SET exercices_id_excercices="'.$row_ex_id['id_exercices'].'"';
-                    $result_update_ex_id= $result_update = mysqli_query($connect, $update_ex_id) or die('The query failed: ' . mysqli_error($connect));
+                    $number_row_ex = mysqli_num_rows($result_ex_id);
+                    echo "<script>console.log('total:" . $dif_total . "' );</script>";
+                    echo "<script>console.log('id do exerc:" . $row_ex_id['id_exercises'] . "' );</script>";
+                    echo "<script>console.log('n de linhas:" . $number_row_ex . "' );</script>";
+                    if($number_row_ex==1){
+                        echo "<script>console.log('És o maior' );</script>";
+                        $update_ex_id='UPDATE registo_consulta SET exercises_id_exercises="'.$row_ex_id['id_exercises'].'" WHERE id_consulta = "'.$consulta.'"';
+                        $result_update_ex_id= mysqli_query($connect, $update_ex_id) or die('The query failed: ' . mysqli_error($connect));
+                    }else{
+                        echo "<script>alert('Exercícios não encontrados');</script>";
+                    }
 
                 }
             case "inserir":
@@ -44,7 +100,7 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
                     $auto_avaliacao= $_POST['auto_avaliacao'];
                     $comentarios= $_POST['comentarios'];
                     $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-                    $insert_results='UPDATE registo_consulta SET paciente_pontuacao="'.$avaliacao.'", autoavaliacao="'.$auto_avaliacao.'",data="'.$data.'", comentarios="'.$comentarios.'" WHERE registo_consulta.id_consulta="'.$consulta.'";';
+                    $insert_results='UPDATE registo_consulta SET paciente_pontuacao="'.$avaliacao.'", autoavaliacao="'.$auto_avaliacao.'",data="'.$data.'", comentarios="'.$comentarios.'" WHERE registo_consulta.id_consulta="'.$consulta.'"';
                     $result_IQ = mysqli_query($connect, $insert_results) or die('The query failed: ' . mysqli_error($connect));
                 }
         }
@@ -173,32 +229,38 @@ $rows_info_ter=mysqli_fetch_array($resultado_infoter);
             <div class="pl">
                 <div class="row">
                     <div class="column c1">
+                        <?php while ($rows_sql_exercises= mysqli_fetch_array($resultado_sql_exercises)){ ?>
                         <h5> Exercicios Receitados </h5><br>
-                        <h6> Dificuldade total:</h6> <p> Valor</p>
-                        <h6> Exercício N:</h6> <p> Valor</p>
-                        <h6> Exercício C:</h6> <p> Valor</p>
-                        <h6> Exercício F:</h6> <p> Valor</p>
-                        <h6> Exercício R:</h6> <p> Valor</p>
+                        <?php echo "<h6>Dificuldade total: ".$rows_sql_exercises['difficulty']."</h6>"?>
+                        <?php echo "<h6>Exercício N: ".$rows_sql_exercises['n_dif']."</h6>"?>
+                        <?php echo "<h6>Exercício C: ".$rows_sql_exercises['c_dif']."</h6>"?>
+                        <?php echo "<h6>Exercício F: ".$rows_sql_exercises['f_dif']."</h6>"?>
+                        <?php echo "<h6>Exercício R: ".$rows_sql_exercises['r_dif']."</h6>"?>
+                        <?php } ?>
+                    <br>
+                        <a href="<?php $_SERVER['PHP_SELF']; ?>">Atualizar</a>
                     </div>
                     <div class="column c2">
                         <form class="login" method="POST" action="consulta.php?action=inserir" enctype="multipart/form-data">
                             <h5> Preenchimento pelo cuidador </h5>
+                            <?php while ($rows_aval= mysqli_fetch_array($resultado_buscar_aval)){ ?>
                             <br>
                             <label for="avaliacao">Avaliação do Cuidador</label><br>
-                            <input class="inputresult" name="avaliacao" type="number" placeholder="Avaliação total">
+                            <input class="inputresult" name="avaliacao" type="number" value="<?php echo $rows_aval['paciente_pontuacao']?>">
                             <br>
                             <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
-                            <input class="inputresult" name="auto_avaliacao" type="number" placeholder="Dificuldade 1-5">
+                            <input class="inputresult" name="auto_avaliacao" type="number" value="<?php echo $rows_aval['autoavaliacao']?>">
                             <br>
                             <label for="data">Data da Consulta</label><br>
-                            <input type="date" name="data" placeholder="Data da realização" "><br>
+                            <input type="date" name="data" value="<?php echo $rows_aval['data']?>"><br>
                     </div>
                     <div class="column c3">
                         <h5> Comentarios</h5>
                         <label for="comentarios">Possiveis esclarecimentos:</label>
-                        <textarea id="comentarios" name="comentarios" rows="3" cols="40" > <?php //echo $data['alergias']?></textarea><br>
+                        <textarea id="comentarios" name="comentarios" rows="3" cols="40" > <?php echo $rows_aval['comentarios']?></textarea><br>
                         <br>
                         <input class="gradient-button savButton" type="submit"  name="resultados" value="Salvar Resultados">
+                        <?php }?>
                         </form>
                     </div>
                 </div>
