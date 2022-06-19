@@ -163,50 +163,16 @@ https://templatemo.com/tm-570-chain-app-dev
     </div>
   </div>
 
-  <?php/*
-  if(isset($_GET["action"])){
-      $action=$_GET["action"];
-  }
-  else  $action="homepage";
-  switch ($action) {
-      case "login":
-          include("login.php");
-          break;
-      case "verifylogin":
-          include("verifylogin.php");
-          break;
-      case "index":
-          include("index.php");
-          break;
-      default:
-          include("index.php");
-          break;
-  }
-  */?>
-
   <footer id="newsletter">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading">
-            <h4>Join our mailing list to receive the news &amp; latest trends</h4>
+            <h4>Saiba mais sobre a plataforma Rehab SIM</h4>
           </div>
         </div>
         <div class="col-lg-6 offset-lg-3">
-          <form id="search" action="#" method="GET">
-            <div class="row">
-              <div class="col-lg-6 col-sm-6">
-                <fieldset>
-                  <input type="address" name="address" class="email" placeholder="Email Address..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6 col-sm-6">
-                <fieldset>
-                  <button type="submit" class="main-button">Subscribe Now <i class="fa fa-angle-right"></i></button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
+
         </div>
       </div>
       <div class="row">
@@ -215,38 +181,21 @@ https://templatemo.com/tm-570-chain-app-dev
             <h4>Contact Us</h4>
             <p>Largo da Torre, 2825-149 Caparica</p>
             <p><a href="https://www.fct.unl.pt/">FCT UNL- Faculdade de CiÊncias e Tecnologia Da Universidade Nova de Lisboa</a></p>
-            <p><a href="#">info@company.com</a></p>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="footer-widget">
             <h4>About Us</h4>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Services</a></li>
+              <li><a href=""index.php"">Home</a></li>
               <li><a href="#">About</a></li>
-              <li><a href="#">Testimonials</a></li>
-              <li><a href="#">Pricing</a></li>
             </ul>
           </div>
         </div>
-        <div class="col-lg-3">
-          <div class="footer-widget">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><a href="#">Free Apps</a></li>
-              <li><a href="#">App Engine</a></li>
-              <li><a href="#">Programming</a></li>
-              <li><a href="#">Development</a></li>
-              <li><a href="#">App News</a></li>
-            </ul>
-            <ul>
-              <li><a href="#">App Dev Team</a></li>
-              <li><a href="#">Digital Web</a></li>
-              <li><a href="#">Normal Apps</a></li>
-            </ul>
+          <div class="col-lg-3">
+              <div class="footer-widget">
+              </div>
           </div>
-        </div>
         <div class="col-lg-3">
           <div class="footer-widget">
             <h4>About Our Company</h4>

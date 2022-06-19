@@ -78,11 +78,13 @@ https://templatemo.com/tm-570-chain-app-dev
 
           <div class="text">
               <h4>Administrador</h4>
-              <h1>Dados Estatisticos</h1>
+              <h1>Dados Estatisticos</h1><br>
           </div>
           <div class="containerBlocks">
               <div class="profile">
                   <h4>Dados estatisticos do Paciente</h4>
+                  <br>
+                  <br>
                   <div class="row">
                       <div class="column c1">
                           <?php
@@ -256,29 +258,12 @@ https://templatemo.com/tm-570-chain-app-dev
                                   document.getElementById('myChart2'),
                                   config2
                               );
+                          </script>
                       </div>
                               </div>
       </div>
           </div>
-      <div class="pac">
-        <h4>Dados Estatisticos Consulta</h4>
-        <div class="formPaciente" >
-            <div class="column c1">
-
-
-            </div>
-            <div class="column c2">
-
-            </div>
-            <div class="column c3">
-
-      </div>
-      </div>
-  </div>
-      <div class="pl">
-          <h4> Lista de Utilizadores</h4> <br>
-
-    </div>
+      
 
   </div>
 
