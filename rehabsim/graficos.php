@@ -10,6 +10,14 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
     $result_dados1 = mysqli_query($connect, $dados_paciente1) or die('The query failed: ' . mysqli_error($connect));
     $dados_consulta='SELECT * ,COUNT(*) AS consulta_count FROM registo_consulta GROUP BY paciente_id';
     $result_consulta=mysqli_query($connect, $dados_consulta) or die('The query failed: ' . mysqli_error($connect));
+
+    if (isset($_GET["action"])) {
+        switch ($_GET["action"]) {
+            case "back":
+                     header("Location: pag_admin.php");
+            break;
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -59,6 +67,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
+                <li class="scroll-to-section"><a href="graficos.php?action=back">Voltar</a></li>
               <li class="scroll-to-section"><a href="index.php" >Home</a></li>
               <li class="scroll-to-section"><a href="index.php">About</a></li>
                 <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
