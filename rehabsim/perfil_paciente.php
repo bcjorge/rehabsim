@@ -97,7 +97,7 @@ if (isset($_GET["action"])) {
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.php">Home</a></li>
                         <li class="scroll-to-section"><a href="index.php">About</a></li>
-                        <li><div class="gradient-button"><a href="login.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
+                        <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -160,46 +160,6 @@ if (isset($_GET["action"])) {
             </div>
             </form>
         </div>
-        <div class="pac">
-            <h4>Resultados da Sessão</h4>
-                <div class="row">
-                    <div class="column c1">
-                       <h5> Exercícios Receitados </h5>
-                        <br>
-                        <h5> N </h5> <p> Nível:</p>
-                        <h5> C </h5> <p> Nível:</p>
-                        <h5> F </h5> <p> Nível:</p>
-                        <h5> R </h5> <p> Nível:</p>
-                        <br>
-                        <h5> Dificuldade Sentida </h5>
-                    </div>
-                    <div class="column c2">
-                        <br> <br>
-                        <input class="inputresult" type="number" placeholder="Resultado N">
-                        <br>
-                        <input class="inputresult" type="number" placeholder="Resultado C">
-                        <br>
-                        <input class="inputresult" type="number" placeholder="Resultado F">
-                        <br>
-                        <input class="inputresult" type="number" placeholder="Resultado R">
-                        <br> <br>
-                        <input class="inputresult" type="number" placeholder="Dificuldade 1-5">
-                        <br>
-                        <div class="gradient-button sessionButton"><a href="login.php">Salvar Resultados</a></div>
-                    </div>
-                    <div class="column c3">
-                        <h4> Informação Patológica</h4>
-                        <br>
-                        <h5>Tipo de Afasia: </h5>
-                        <br>
-                        <h5>Nível Atual:</h5>
-                        <br>
-                        <div class="gradient-button sessionButton"><a href="historico.php">Histórico de sessões</a></div>
-                        <br><br>
-                        <div class="gradient-button sessionButton"><a href="consulta.php">Nova Consulta</a></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

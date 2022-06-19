@@ -47,6 +47,7 @@ if (isset($_GET["action"])) {
                     echo "<script>alert('Não tem autorização para aceder a esta página.');</script>";
                 }
             }
+            break;
     }
 }
     /*Terminal Node 1*/

@@ -21,14 +21,15 @@ session_start();
      if (isset($_GET["action"])) {
          switch ($_GET["action"]) {
              case "perfil_paciente":
-              if (isset($_POST["submit"])) {
+              if (isset($_POST["perfil"])) {
+                  echo "<script>console.log('estou a chegar aqui' );</script>";
             $pesquisa = $_POST['pesquisa'];
             $connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
              $sql_pac = 'SELECT * FROM paciente WHERE num_saude="' . $pesquisa . '" ';
              $result_pac = mysqli_query($connect, $sql_pac) or die('The query failed: ' . mysqli_error($connect));
              $num_results = mysqli_num_rows($result_pac);
              $row = mysqli_fetch_array($result_pac);
-
+                  echo "<script>console.log('debug:" . $num_results . "' );</script>";
               if ($num_results == 0) {
              echo "<script>alert('O Paciente que procurou não existe na base de dados. Registe o novo paciente.');</script>";
              } else if ($num_results == 1) {
@@ -38,7 +39,7 @@ session_start();
                  header("Location: perfil_paciente.php");
              }
             }
-              break;
+                 break;
              case "pag_cuidador":
                  if (isset($_POST["update"])) {
                      echo "<script>console.log('lá' );</script>";
@@ -65,8 +66,8 @@ session_start();
                      echo "<script>alert('Edicao de dados bem sucedida. Por favor faça refresh no site');</script>";
                  } else {
                      echo "<script>alert('O update da informação falhou');</script>";
-                     break;
                  }
+                 break;
              case "clicar_consulta":
                  $id_ir_consulta=$_POST['id_cc'];
                  $_SESSION['id_consulta']=$id_ir_consulta;
@@ -207,14 +208,14 @@ session_start();
                     ?>
                     <input class="button3" type="submit"  value="Ir para consulta">
                 </select>
-
+            </form>
         </div>
         <div class="pl">
             <h4> Procurar Paciente</h4>
             <div class="formPaciente">
                 <form class="pag" method="POST" action="pag_cuidador.php?action=perfil_paciente">
                 <input type="text" name= "pesquisa" placeholder="Número de utente"></p>
-                <input class="sessionButton1" type="submit" value="Procurar" name="submit">
+                <input class="sessionButton1" type="submit" value="Procurar" name="perfil">
                 </form>
             </div>
         </div>

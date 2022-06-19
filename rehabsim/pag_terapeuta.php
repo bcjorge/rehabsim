@@ -3,13 +3,6 @@ session_start();
 if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
     $id_user = $_SESSION['id_utilizador'];
 
-    // $pageNumber = $_GET['pageNumber'];
-    // $pageSize = $_GET['pageSize'];
-    //$nome =$_GET['nome'];
-    //$morada = $_GET['morada'];
-    //$tel = $_GET['telemovel'];
-    //$email = $_GET['email'];
-
     $connect = mysqli_connect('localhost', 'root', '', 'database2')
     or die('Error connecting to the server: ' . mysqli_error($connect));
     $sql = 'SELECT * FROM utilizador WHERE utilizador.id_utilizador="' . $id_user . '"';

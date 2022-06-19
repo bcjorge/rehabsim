@@ -107,46 +107,6 @@ if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
                 }
             }
     }
-
-    /*
-    if (isset($_SESSION["authuser"])&&$_SESSION["authuser"]==1) {
-        //$connect = mysqli_connect('localhost', 'root', '', 'database2') or die('Error connecting to the server: ' . mysqli_error($connect));
-        $sql_ut = 'SELECT * FROM utilizador ORDER BY tipo_utilizador_id';
-        $result_ut = mysqli_query($connect, $sql_ut) or die('The query failed: ' . mysqli_error($connect));
-        echo "<script>console.log('ola');</script>";
-        //echo "<script>console.log('debug:".$result_ut['nome']."' );</script>";
-        $num_results = mysqli_num_rows($result_ut);
-
-        if ($num_results == 0) {
-            echo "Não Existem Utilizadores para Listar.";
-        } /*else if ($num_results == 1) {
-                    echo "<script>console.log('adeus' );</script>";
-                    echo "<script>console.log('debug:". $_SESSION['num_saude']."' );</script>";
-                    header("Location: perfil_paciente.php");*/
-/*    echo "<script>console.log('hello');</script>";
-//if (isset($_GET["regist_user"])) {
-    echo "<script>console.log('funciona');</script>";
-    if (isset($_POST["registar_utilizador"])) {
-        $nome_utilizador = $_POST['nome'];
-        $morada_utilizador = $_POST['morada'];
-        $telemovel_utilizador = $_POST['telemovel'];
-        $email_utilizador = $_POST['email'];
-        $tipo_utilizador = $_POST['funcao'];
-        $username_utilizador = $_POST['username'];
-        $pass_utilizador = hash("sha256", $_POST['password']);
-        $imagem = $_FILES['img']["name"];
-        $tempname = $_FILES["img"]["tmp_name"];
-        $folder = "C:\wamp64\www\projecto\rehabsim\rehabsim\image/'.$imagem.'";
-        echo "<script>console.log('estou');</script>";
-        echo "<script>console.log('porque');</script>";
-        $connect = mysqli_connect('localhost', 'root', '', 'database2')
-        or die('Error connecting to the server: ' . mysqli_error($connect));
-        $insert_user = 'INSERT INTO  utilizador (nome, morada,telemovel, email, username,password, tipo_utilizador_id,imagem) VALUES ("' . $nome_utilizador . '","' . $morada_utilizador . '","' . $telemovel_utilizador . '","' . $email_utilizador . '","' . $username_utilizador . '","' . $pass_utilizador . '","'. $tipo_utilizador . '","'. $imagem . '")';
-        $result_user = mysqli_query($connect, $insert_user) or die('The query failed: ' . mysqli_error($connect));
-        //$pesquisa = $_POST['pesquisa'];
-    }*/
-
-
 ?>
 <!DOCTYPE html>
 <html lang=”en”>
@@ -195,8 +155,7 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li class="scroll-to-section"><a href="index.php">Home</a></li>
-              <li class="scroll-to-section"><a href="index.php">About</a></li>
+              <li class="scroll-to-section"><a href="graficos.php">Dados Estatisticos</a></li>
                 <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
             </ul>
             <a class='menu-trigger'>
@@ -292,6 +251,8 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
       </div>
       <div class="pl">
+          <div class="row">
+              <div class="column c1">
           <h4> Lista de Utilizadores</h4> <br>
           <form method="POST" action="pag_admin.php?action=clicar">
           <select class="funcaoInput" id="utilizador" name="id_utl" >
@@ -308,8 +269,9 @@ https://templatemo.com/tm-570-chain-app-dev
           </select>
 
           </form>
-
-          <h4> Ativar/Desativar Utilizadores</h4> <br>
+              </div>
+              <div class="column c2">
+          <h4> Ativar Utilizadores</h4> <br>
           <form method="POST" action="pag_admin.php?action=ativar">
               <select class="funcaoInput" id="utilizador" name="id_ativ" ><br>
                   <?php
@@ -325,6 +287,9 @@ https://templatemo.com/tm-570-chain-app-dev
               </select>
               <br>
           </form>
+              </div>
+                  <div class="column c3">
+                      <h4> Desativar Utilizadores</h4> <br>
           <form method="POST" action="pag_admin.php?action=desativar">
               <select class="funcaoInput" id="utilizador" name="id_desat" >
                   <?php
@@ -339,8 +304,9 @@ https://templatemo.com/tm-570-chain-app-dev
                   <input class="button3" type="submit"  value="Desativar Utilizador">
               </select>
               <br>
-              <div class="gradient-button sessionButton"><a href="graficos.php">Consultar dados</a></div>
           </form>
+              </div>
+          </div>
     </div>
 
   </div>
