@@ -139,7 +139,6 @@ session_start();
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="index.php" >Home</a></li>
-                        <li class="scroll-to-section"><a href="index.php">About</a></li>
                         <li><div class="gradient-button"><a href="login.php?action=logout"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li>
                     </ul>
                     <a class='menu-trigger'>

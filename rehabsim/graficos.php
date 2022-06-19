@@ -90,8 +90,7 @@ https://templatemo.com/tm-570-chain-app-dev
           </div>
           <div class="containerBlocks">
               <div class="profile">
-                  <h4>Dados estatisticos do Paciente</h4>
-                  <br>
+                  <h4>Estatisticas Gerais de Utilizadores e Pacientes</h4>
                   <br>
                   <div class="row">
                       <div class="column c1">
