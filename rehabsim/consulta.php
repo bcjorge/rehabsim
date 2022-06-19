@@ -101,6 +101,7 @@ $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
                     }
 
                 }
+                break;
             case "inserir":
                 if (isset($_POST["resultados"])) {
                     $data=$_POST['data'];
@@ -111,6 +112,7 @@ $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
                     $insert_results='UPDATE registo_consulta SET paciente_pontuacao="'.$avaliacao.'", autoavaliacao="'.$auto_avaliacao.'",data="'.$data.'", comentarios="'.$comentarios.'" WHERE registo_consulta.id_consulta="'.$consulta.'"';
                     $result_IQ = mysqli_query($connect, $insert_results) or die('The query failed: ' . mysqli_error($connect));
                 }
+                break;
             case "voltar":
                     if ($rows_tipo_user['tipo_utilizador_id'] == 2) {
                         header("Location: pag_terapeuta.php");
@@ -118,7 +120,7 @@ $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
                     if ($rows_tipo_user['tipo_utilizador_id']== 3) {
                         header("Location: pag_cuidador.php");
                     }
-
+                    break;
         }
 }
 ?>
@@ -263,7 +265,7 @@ $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
                             <?php while ($rows_aval= mysqli_fetch_array($resultado_buscar_aval)){ ?>
                             <br>
                             <label for="avaliacao">Avaliação do Cuidador</label><br>
-                            <input class="inputresult" name="avaliacao" type="number" value="<?php echo $rows_aval['paciente_pontuacao']?>">
+                            <input class="inputresult" name="avaliacao" type="number" step="0.01" value="<?php echo $rows_aval['paciente_pontuacao']?>">
                             <br>
                             <label for="auto-avaliacao">Auto-Avaliação do Paciente</label><br>
                             <input class="inputresult" name="auto_avaliacao" type="number" value="<?php echo $rows_aval['autoavaliacao']?>">
@@ -282,3 +284,5 @@ $rows_tipo_user=mysqli_fetch_array($result_tipo_user);
                     </div>
                 </div>
             </div>
+</body>
+</html>

@@ -63,6 +63,7 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                         echo "<script>alert('O upload da imagem falhou ');</script>";
                     }
                 }
+                break;
             case "pag_terapeuta":
                 if (isset($_POST["update"])) {
                     echo "<script>console.log('lá' );</script>";
@@ -141,8 +142,9 @@ if((isset($_SESSION['authuser'])) AND ($_SESSION['authuser'] == 1)) {
                     else{
                         echo "<script>alert('Utilizador ou Paciente não existe na base de dados.');</script>";
                     }
-                    break;
+
                 }
+                break;
             case "clicar_consulta":
                 $id_ir_consulta2=$_POST['id_tc'];
                 $_SESSION['id_consulta']=$id_ir_consulta2;

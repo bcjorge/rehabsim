@@ -35,8 +35,8 @@ if(isset($_GET["action"])) {
                 $_SESSION['authuser'] = 0;
                 echo "<script>alert('Password ou Utilizador Incorretos. Utilizador pode estar desativado');</script>";
                 //echo'login incorreto. Password ou Utilizador Incorretos';
-                break;
             }
+            break;
                 //echo 'Welcome'.$_SESSION['username']
         case "logout":
             session_unset();
@@ -95,7 +95,6 @@ https://templatemo.com/tm-570-chain-app-dev
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li class="scroll-to-section"><a href="index.php" >Home</a></li>
-              <li class="scroll-to-section"><a href="index.php">About</a></li>
               <li><div class="gradient-button"><a href="login.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li>
             </ul>        
             <a class='menu-trigger'>
